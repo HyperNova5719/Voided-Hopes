@@ -56,6 +56,6 @@ public class MatrixVoidBlockRenderer implements BlockEntityRenderer<MatrixVoidBl
     }
 
     public RenderLayer getLayer() {
-        return VoidedShaders.end_decoration_shader_layer;
+        return VoidedShaders.PURE_VOID_LAYER;
     }
 }

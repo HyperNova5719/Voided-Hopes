@@ -1,6 +1,7 @@
 package hypernova.voidedhopes.block;
 
 import hypernova.voidedhopes.VoidedHopes;
+import hypernova.voidedhopes.block.custom.MatrixVoidBlock;
 import hypernova.voidedhopes.block.custom.MatrixVoidBlockEntity;
 import hypernova.voidedhopes.block.custom.PureVoidBlock;
 import hypernova.voidedhopes.block.custom.PureVoidBlockEntity;
@@ -21,9 +22,11 @@ public class ModBlocks {
     public static final Block PURE_VOID = registerBlock("pure_void",
             new PureVoidBlock(FabricBlockSettings.of(Material.BARRIER).strength(-1f)), ModItemGroup.VOIDEDHOPES_TAB);
     public static final BlockEntityType<? extends PureVoidBlockEntity> PURE_VOID_TYPE = registerType("pure_void", FabricBlockEntityTypeBuilder.create(PureVoidBlockEntity::new, ModBlocks.PURE_VOID).build());
-    public static final Block MATRIX_VOID = registerBlock("pure_void",
-            new PureVoidBlock(FabricBlockSettings.of(Material.BARRIER).strength(-1f)), ModItemGroup.VOIDEDHOPES_TAB);
-    public static final BlockEntityType<? extends MatrixVoidBlockEntity> MATRIX_VOID_TYPE = registerType("matrix_void",FabricBlockEntityTypeBuilder.create(MatrixVoidBlockEntity::new, ModBlocks.MATRIX_VOID).build());
+
+
+    public static final Block MATRIX_VOID = registerBlock("matrix_void",
+            new MatrixVoidBlock(FabricBlockSettings.of(Material.BARRIER).strength(-1f)), ModItemGroup.VOIDEDHOPES_TAB);
+    public static final BlockEntityType<? extends MatrixVoidBlockEntity> MATRIX_VOID_TYPE = registerType("matrix_void", FabricBlockEntityTypeBuilder.create(MatrixVoidBlockEntity::new, ModBlocks.MATRIX_VOID).build());
 
 
     // to add more blocks go to 9:32 in this video: https://www.youtube.com/watch?v=6DY372RYNfE&list=PLKGarocXCE1EeLZggaXPJaARxnAbUD8Y_&index=4

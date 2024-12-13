@@ -10,23 +10,25 @@ import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 
 public class VoidedShaders {
-    public static RenderLayer end_decoration_shader_layer;
+    public static RenderLayer PURE_VOID_LAYER;
+    protected static RenderPhase.Shader PURE_VOID_SHADER;
 
-    protected static RenderPhase.Shader END_DECORATION_SHADER;
+    public static RenderLayer MATRIX_VOID_LAYER;
+    protected static RenderPhase.Shader MATRIX_VOID_SHADER;
 
     public static void init() {
         CoreShaderRegistrationCallback.EVENT.register(ctx -> {
             ctx.register(VoidedHopes.id("rendertype_pure_void"), VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL, shaderProgram -> {
-                END_DECORATION_SHADER = new RenderPhase.Shader(() -> shaderProgram);
+                PURE_VOID_SHADER = new RenderPhase.Shader(() -> shaderProgram);
 
-                end_decoration_shader_layer = RenderLayer.of(
+                PURE_VOID_LAYER = RenderLayer.of(
                         "rendertype_pure_void",
                         VertexFormats.POSITION,
                         VertexFormat.DrawMode.QUADS,
                         256,
                         false,
                         false,
-                        RenderLayer.MultiPhaseParameters.builder().shader(END_DECORATION_SHADER)
+                        RenderLayer.MultiPhaseParameters.builder().shader(PURE_VOID_SHADER)
                                 .texture(
                                         (RenderPhase.TextureBase)RenderPhase.Textures.create()
                                                 .add(PureVoidBlockRenderer.SKY_TEXTURE, false, false)
@@ -34,7 +36,28 @@ public class VoidedShaders {
                                 ).build(false));
 
 
-                BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PURE_VOID, end_decoration_shader_layer);
+                BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PURE_VOID, PURE_VOID_LAYER);
+            });
+
+            ctx.register(VoidedHopes.id("rendertype_matrix_void"), VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL, shaderProgram -> {
+                MATRIX_VOID_SHADER = new RenderPhase.Shader(() -> shaderProgram);
+
+                MATRIX_VOID_LAYER = RenderLayer.of(
+                        "rendertype_matrix_void",
+                        VertexFormats.POSITION,
+                        VertexFormat.DrawMode.QUADS,
+                        256,
+                        false,
+                        false,
+                        RenderLayer.MultiPhaseParameters.builder().shader(MATRIX_VOID_SHADER)
+                                .texture(
+                                        (RenderPhase.TextureBase)RenderPhase.Textures.create()
+                                                .add(PureVoidBlockRenderer.SKY_TEXTURE, false, false)
+                                                .add(PureVoidBlockRenderer.PORTAL_TEXTURE, false, false).build()
+                                ).build(false));
+
+
+                BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MATRIX_VOID, MATRIX_VOID_LAYER);
             });
         });
     }
