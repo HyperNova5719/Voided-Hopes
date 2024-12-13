@@ -8,6 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
 public class ModItemGroup {
-    public static final ItemGroup PURE_VOID = FabricItemGroupBuilder.build(
-            new Identifier(VoidedHopes.MOD_ID, "pure_void"), () -> new ItemStack(ModBlocks.PURE_VOID));
+    public static final ItemGroup VOIDEDHOPES_TAB = FabricItemGroupBuilder.build(
+            new Identifier(VoidedHopes.MOD_ID, "voidedhopes_tab"), () -> new ItemStack(ModBlocks.PURE_VOID));
 }

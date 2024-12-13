@@ -1,5 +1,5 @@
 {
-  "block.voided-hopes.pure_void": "Pure Void",
-
-  "itemGroup.voided-hopes.pure_void":"Voided Hopes"
+  "block.voided_hopes.pure_void": "Pure Void",
+  "block.voided_hopes.matrix_void": "Matrix",
+  "itemGroup.voided_hopes.pure_void":"Voided Hopes"
 }

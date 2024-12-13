@@ -4,8 +4,8 @@
         "srcrgb": "srcalpha",
         "dstrgb": "1-srcalpha"
     },
-    "vertex": "voided_hopes:rendertype_pure_void",
-    "fragment": "voided_hopes:rendertype_pure_void",
+    "vertex": "voided_hopes:rendertype_matrix_void",
+    "fragment": "voided_hopes:rendertype_matrix_void",
     "attributes": [],
     "samplers": [
         { "name": "Sampler0" },
