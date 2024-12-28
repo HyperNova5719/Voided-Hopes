@@ -1,6 +1,7 @@
 package hypernova.voidedhopes;
 
 import hypernova.voidedhopes.block.ModBlocks;
+import hypernova.voidedhopes.renderers.EnderSkyBlockRenderer;
 import hypernova.voidedhopes.renderers.MatrixVoidBlockRenderer;
 import hypernova.voidedhopes.renderers.PureVoidBlockRenderer;
 import net.fabricmc.api.ClientModInitializer;
@@ -15,5 +16,6 @@ public class VoidedHopesClient implements ClientModInitializer {
 
 		BlockEntityRendererFactories.register(ModBlocks.PURE_VOID_TYPE, PureVoidBlockRenderer::new);
 		BlockEntityRendererFactories.register(ModBlocks.MATRIX_VOID_TYPE, MatrixVoidBlockRenderer::new);
+		BlockEntityRendererFactories.register(ModBlocks.ENDER_SKY_TYPE, EnderSkyBlockRenderer::new);
 	}
 }

@@ -1,6 +1,8 @@
 package hypernova.voidedhopes;
 
 import hypernova.voidedhopes.block.ModBlocks;
+import hypernova.voidedhopes.renderers.EnderSkyBlockRenderer;
+import hypernova.voidedhopes.renderers.MatrixVoidBlockRenderer;
 import hypernova.voidedhopes.renderers.PureVoidBlockRenderer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
@@ -15,6 +17,9 @@ public class VoidedShaders {
 
     public static RenderLayer MATRIX_VOID_LAYER;
     protected static RenderPhase.Shader MATRIX_VOID_SHADER;
+
+    public static RenderLayer ENDER_SKY_BLOCK_LAYER;
+    protected static RenderPhase.Shader ENDER_SKY_BLOCK_SHADER;
 
     public static void init() {
         CoreShaderRegistrationCallback.EVENT.register(ctx -> {
@@ -52,12 +57,32 @@ public class VoidedShaders {
                         RenderLayer.MultiPhaseParameters.builder().shader(MATRIX_VOID_SHADER)
                                 .texture(
                                         (RenderPhase.TextureBase)RenderPhase.Textures.create()
-                                                .add(PureVoidBlockRenderer.SKY_TEXTURE, false, false)
-                                                .add(PureVoidBlockRenderer.PORTAL_TEXTURE, false, false).build()
+                                                .add(MatrixVoidBlockRenderer.SKY_TEXTURE, false, false)
+                                                .add(MatrixVoidBlockRenderer.PORTAL_TEXTURE, false, false).build()
                                 ).build(false));
 
 
                 BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MATRIX_VOID, MATRIX_VOID_LAYER);
+            });
+
+            ctx.register(VoidedHopes.id("rendertype_ender_sky"), VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL, shaderProgram -> {
+                ENDER_SKY_BLOCK_SHADER = new RenderPhase.Shader(() -> shaderProgram);
+
+                ENDER_SKY_BLOCK_LAYER = RenderLayer.of(
+                        "rendertype_ender_sky",
+                        VertexFormats.POSITION,
+                        VertexFormat.DrawMode.QUADS,
+                        256,
+                        false,
+                        false,
+                        RenderLayer.MultiPhaseParameters.builder().shader(ENDER_SKY_BLOCK_SHADER)
+                                .texture(
+                                        (RenderPhase.TextureBase)RenderPhase.Textures.create()
+                                                .add(EnderSkyBlockRenderer.SKY_TEXTURE, false, false).build()
+                                ).build(false));
+
+
+                BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ENDER_SKY_BLOCK, ENDER_SKY_BLOCK_LAYER);
             });
         });
     }

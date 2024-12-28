@@ -1,15 +1,13 @@
 package hypernova.voidedhopes.block;
 
 import hypernova.voidedhopes.VoidedHopes;
-import hypernova.voidedhopes.block.custom.MatrixVoidBlock;
-import hypernova.voidedhopes.block.custom.MatrixVoidBlockEntity;
-import hypernova.voidedhopes.block.custom.PureVoidBlock;
-import hypernova.voidedhopes.block.custom.PureVoidBlockEntity;
+import hypernova.voidedhopes.block.custom.*;
 import hypernova.voidedhopes.item.ModItemGroup;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.BlockItem;
@@ -23,11 +21,13 @@ public class ModBlocks {
             new PureVoidBlock(FabricBlockSettings.of(Material.BARRIER).strength(-1f)), ModItemGroup.VOIDEDHOPES_TAB);
     public static final BlockEntityType<? extends PureVoidBlockEntity> PURE_VOID_TYPE = registerType("pure_void", FabricBlockEntityTypeBuilder.create(PureVoidBlockEntity::new, ModBlocks.PURE_VOID).build());
 
-
     public static final Block MATRIX_VOID = registerBlock("matrix_void",
             new MatrixVoidBlock(FabricBlockSettings.of(Material.BARRIER).strength(-1f)), ModItemGroup.VOIDEDHOPES_TAB);
     public static final BlockEntityType<? extends MatrixVoidBlockEntity> MATRIX_VOID_TYPE = registerType("matrix_void", FabricBlockEntityTypeBuilder.create(MatrixVoidBlockEntity::new, ModBlocks.MATRIX_VOID).build());
 
+    public static final Block ENDER_SKY_BLOCK = registerBlock("ender_sky_block",
+            new EnderSkyBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN)), ModItemGroup.VOIDEDHOPES_TAB);
+    public static final BlockEntityType<? extends EnderSkyBlockEntity> ENDER_SKY_TYPE = registerType("ender_sky_block_type", FabricBlockEntityTypeBuilder.create(EnderSkyBlockEntity::new, ModBlocks.ENDER_SKY_BLOCK).build());
 
     // to add more blocks go to 9:32 in this video: https://www.youtube.com/watch?v=6DY372RYNfE&list=PLKGarocXCE1EeLZggaXPJaARxnAbUD8Y_&index=4
 
