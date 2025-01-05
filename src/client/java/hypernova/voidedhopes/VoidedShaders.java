@@ -35,7 +35,7 @@ public class VoidedShaders {
                         false,
                         RenderLayer.MultiPhaseParameters.builder().shader(PURE_VOID_SHADER)
                                 .texture(
-                                        (RenderPhase.TextureBase)RenderPhase.Textures.create()
+                                        RenderPhase.Textures.create()
                                                 .add(PureVoidBlockRenderer.SKY_TEXTURE, false, false)
                                                 .add(PureVoidBlockRenderer.PORTAL_TEXTURE, false, false).build()
                                 ).build(false));
@@ -56,7 +56,7 @@ public class VoidedShaders {
                         false,
                         RenderLayer.MultiPhaseParameters.builder().shader(MATRIX_VOID_SHADER)
                                 .texture(
-                                        (RenderPhase.TextureBase)RenderPhase.Textures.create()
+                                        RenderPhase.Textures.create()
                                                 .add(MatrixVoidBlockRenderer.SKY_TEXTURE, false, false)
                                                 .add(MatrixVoidBlockRenderer.PORTAL_TEXTURE, false, false).build()
                                 ).build(false));
@@ -77,7 +77,7 @@ public class VoidedShaders {
                         false,
                         RenderLayer.MultiPhaseParameters.builder().shader(ENDER_SKY_BLOCK_SHADER)
                                 .texture(
-                                        (RenderPhase.TextureBase)RenderPhase.Textures.create()
+                                        RenderPhase.Textures.create()
                                                 .add(EnderSkyBlockRenderer.SKY_TEXTURE, false, false).build()
                                 ).build(false));
 
