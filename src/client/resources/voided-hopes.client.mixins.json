@@ -1,9 +1,8 @@
 {
 	"required": true,
-	"package": "hypernova.voidedhopes.mixin.client",
+	"package": "hypernova.voidedhopes.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"client": [
-		"ExampleClientMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

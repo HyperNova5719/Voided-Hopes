@@ -12,7 +12,6 @@
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/voided-hopes/icon.png",
 	"environment": "*",
 	"accessWidener" : "voided-hopes.accesswidener",
 	"entrypoints": {
@@ -21,6 +20,9 @@
 		],
 		"client": [
 			"hypernova.voidedhopes.VoidedHopesClient"
+		],
+		"fabric-datagen": [
+			"hypernova.voidedhopes.util.datagen.VoidedHopesDataGenerator"
 		]
 	},
 	"mixins": [
