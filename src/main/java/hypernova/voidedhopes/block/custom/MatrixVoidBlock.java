@@ -14,6 +14,6 @@ public class MatrixVoidBlock extends BlockWithEntity {
 
     @Override
     public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new PureVoidBlockEntity(pos, state);
+        return new MatrixVoidBlockEntity(pos, state);
     }
 }

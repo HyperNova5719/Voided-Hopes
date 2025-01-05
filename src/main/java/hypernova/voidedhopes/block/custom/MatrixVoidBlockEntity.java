@@ -7,6 +7,6 @@ import net.minecraft.util.math.BlockPos;
 
 public class MatrixVoidBlockEntity extends BlockEntity {
 
-    public MatrixVoidBlockEntity(BlockPos pos, BlockState state) {  super(ModBlocks.PURE_VOID_TYPE, pos, state); }
+    public MatrixVoidBlockEntity(BlockPos pos, BlockState state) {  super(ModBlocks.MATRIX_VOID_TYPE, pos, state); }
 
 }
