@@ -9,7 +9,6 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-// Very important comment
 public class VoidedHopes implements ModInitializer {
 	public static final String MOD_ID = "voided_hopes";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
@@ -19,7 +18,6 @@ public class VoidedHopes implements ModInitializer {
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
 		ModDimensions.register();
-
 	}
 
 	public static Identifier id(String name){

@@ -8,9 +8,8 @@ import net.minecraft.util.registry.Registry;
 
 public class ModItems {
 
-
     private static Item registerItem(String name, Item item) {
-        return Registry.register(Registry.ITEM, new Identifier(VoidedHopes.MOD_ID, name), item);
+        return Registry.register(Registry.ITEM, VoidedHopes.id(name), item);
     }
 
     public static void registerModItems() {
