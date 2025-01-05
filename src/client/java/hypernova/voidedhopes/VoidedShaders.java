@@ -44,27 +44,6 @@ public class VoidedShaders {
                 BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PURE_VOID, PURE_VOID_LAYER);
             });
 
-            ctx.register(VoidedHopes.id("rendertype_matrix_void"), VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL, shaderProgram -> {
-                MATRIX_VOID_SHADER = new RenderPhase.Shader(() -> shaderProgram);
-
-                MATRIX_VOID_LAYER = RenderLayer.of(
-                        "rendertype_matrix_void",
-                        VertexFormats.POSITION,
-                        VertexFormat.DrawMode.QUADS,
-                        256,
-                        false,
-                        false,
-                        RenderLayer.MultiPhaseParameters.builder().shader(MATRIX_VOID_SHADER)
-                                .texture(
-                                        (RenderPhase.TextureBase)RenderPhase.Textures.create()
-                                                .add(MatrixVoidBlockRenderer.SKY_TEXTURE, false, false)
-                                                .add(MatrixVoidBlockRenderer.PORTAL_TEXTURE, false, false).build()
-                                ).build(false));
-
-
-                BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MATRIX_VOID, MATRIX_VOID_LAYER);
-            });
-
             ctx.register(VoidedHopes.id("rendertype_ender_sky"), VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL, shaderProgram -> {
                 ENDER_SKY_BLOCK_SHADER = new RenderPhase.Shader(() -> shaderProgram);
 
@@ -72,7 +51,7 @@ public class VoidedShaders {
                         "rendertype_ender_sky",
                         VertexFormats.POSITION,
                         VertexFormat.DrawMode.QUADS,
-                        256,
+                        128,
                         false,
                         false,
                         RenderLayer.MultiPhaseParameters.builder().shader(ENDER_SKY_BLOCK_SHADER)

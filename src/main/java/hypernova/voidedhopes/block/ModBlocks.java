@@ -21,10 +21,6 @@ public class ModBlocks {
             new PureVoidBlock(FabricBlockSettings.of(Material.BARRIER).strength(-1f)), ModItemGroup.VOIDEDHOPES_TAB);
     public static final BlockEntityType<? extends PureVoidBlockEntity> PURE_VOID_TYPE = registerType("pure_void", FabricBlockEntityTypeBuilder.create(PureVoidBlockEntity::new, ModBlocks.PURE_VOID).build());
 
-    public static final Block MATRIX_VOID = registerBlock("matrix_void",
-            new MatrixVoidBlock(FabricBlockSettings.of(Material.BARRIER).strength(-1f)), ModItemGroup.VOIDEDHOPES_TAB);
-    public static final BlockEntityType<? extends MatrixVoidBlockEntity> MATRIX_VOID_TYPE = registerType("matrix_void", FabricBlockEntityTypeBuilder.create(MatrixVoidBlockEntity::new, ModBlocks.MATRIX_VOID).build());
-
     public static final Block ENDER_SKY_BLOCK = registerBlock("ender_sky_block",
             new EnderSkyBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN)), ModItemGroup.VOIDEDHOPES_TAB);
     public static final BlockEntityType<? extends EnderSkyBlockEntity> ENDER_SKY_TYPE = registerType("ender_sky_block_type", FabricBlockEntityTypeBuilder.create(EnderSkyBlockEntity::new, ModBlocks.ENDER_SKY_BLOCK).build());

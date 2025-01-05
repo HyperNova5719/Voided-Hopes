@@ -2,7 +2,7 @@ package hypernova.voidedhopes.renderers;
 
 import hypernova.voidedhopes.VoidedHopes;
 import hypernova.voidedhopes.VoidedShaders;
-import hypernova.voidedhopes.block.custom.MatrixVoidBlockEntity;
+import hypernova.voidedhopes.block.custom.PureVoidBlockEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Matrix4f;
 
-public class MatrixVoidBlockRenderer implements BlockEntityRenderer<MatrixVoidBlockEntity> {
+public class MatrixVoidBlockRenderer implements BlockEntityRenderer<PureVoidBlockEntity> {
     public static final Identifier SKY_TEXTURE = VoidedHopes.id("textures/environment/white_end_sky.png");
     public static final Identifier PORTAL_TEXTURE = VoidedHopes.id("textures/entity/pure_void.png");
 
@@ -22,12 +22,12 @@ public class MatrixVoidBlockRenderer implements BlockEntityRenderer<MatrixVoidBl
     }
 
     @Override
-    public void render(MatrixVoidBlockEntity entity, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+    public void render(PureVoidBlockEntity entity, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
         this.renderSides(entity, matrix4f, vertexConsumers.getBuffer(this.getLayer()));
     }
 
-    private void renderSides(MatrixVoidBlockEntity entity, Matrix4f matrix, VertexConsumer vertexConsumer) {
+    private void renderSides(PureVoidBlockEntity entity, Matrix4f matrix, VertexConsumer vertexConsumer) {
         float f = this.getBottomYOffset();
         float g = this.getTopYOffset();
         this.renderSide(entity, matrix, vertexConsumer, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, Direction.SOUTH);
@@ -38,7 +38,7 @@ public class MatrixVoidBlockRenderer implements BlockEntityRenderer<MatrixVoidBl
         this.renderSide(entity, matrix, vertexConsumer, 0.0f, 1.0f, g, g, 1.0f, 1.0f, 0.0f, 0.0f, Direction.UP);
     }
 
-    private void renderSide(MatrixVoidBlockEntity entity, Matrix4f model, VertexConsumer vertices, float x1, float x2, float y1, float y2, float z1, float z2, float z3, float z4, Direction side) {
+    private void renderSide(PureVoidBlockEntity entity, Matrix4f model, VertexConsumer vertices, float x1, float x2, float y1, float y2, float z1, float z2, float z3, float z4, Direction side) {
         if(true) {
             vertices.vertex(model, x1, y1, z1).next();
             vertices.vertex(model, x2, y1, z2).next();
@@ -56,6 +56,6 @@ public class MatrixVoidBlockRenderer implements BlockEntityRenderer<MatrixVoidBl
     }
 
     public RenderLayer getLayer() {
-        return VoidedShaders.MATRIX_VOID_LAYER;
+        return VoidedShaders.PURE_VOID_LAYER;
     }
 }
