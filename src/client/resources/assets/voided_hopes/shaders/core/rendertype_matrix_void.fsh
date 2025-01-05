@@ -11,7 +11,7 @@ uniform int EndPortalLayers;
 in vec4 texProj0;
 
 const vec3[] COLORS = vec3[](
-vec3(1.0, 1.0, 1.0),
+vec3(0.022087, 0.098399, 0.110818),
 vec3(0.011892, 0.095924, 0.089485),
 vec3(0.027636, 0.101689, 0.100326),
 vec3(0.046564, 0.109883, 0.114838),
@@ -37,9 +37,11 @@ const mat4 SCALE_TRANSLATE = mat4(
 );
 
 mat4 end_portal_layer(float layer) {
+    layer /= 2;
+
     mat4 translate = mat4(
     1.0, 0.0, 0.0, 17.0 / layer,
-    0.0, 1.0, 0.0, (2.0 + layer / 1.5) * (GameTime * 2),
+    0.0, 1.0, 0.0, (2.0 + layer / 1.5) * (GameTime * 1.5),
     0.0, 0.0, 1.0, 0.0,
     0.0, 0.0, 0.0, 1.0
     );
@@ -54,10 +56,10 @@ mat4 end_portal_layer(float layer) {
 out vec4 fragColor;
 
 void main() {
-    vec3 color = COLORS[0]; // Start with the white background
+    vec3 color = COLORS[-1]; // Start with the white background
     for (int i = 0; i < EndPortalLayers; i++) {
         vec3 starColor = textureProj(Sampler1, texProj0 * end_portal_layer(float(i + 1))).rgb;
-        color -= starColor * COLORS[i] * 0.5; // Subtract star layers for darker spots
+        color -= starColor * COLORS[i + 1]; // Subtract star layers for darker spots
     }
     fragColor = vec4(color, 1.0);
 }
