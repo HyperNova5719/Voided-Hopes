@@ -1,9 +1,9 @@
 package hypernova.voidedhopes;
 
 import hypernova.voidedhopes.block.ModBlocks;
-import hypernova.voidedhopes.renderers.EnderSkyBlockRenderer;
-import hypernova.voidedhopes.renderers.MatrixVoidBlockRenderer;
-import hypernova.voidedhopes.renderers.PureVoidBlockRenderer;
+import hypernova.voidedhopes.renderers.block.EnderSkyBlockRenderer;
+import hypernova.voidedhopes.renderers.block.MatrixVoidBlockRenderer;
+import hypernova.voidedhopes.renderers.block.PureVoidBlockRenderer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
 import net.minecraft.client.render.RenderLayer;

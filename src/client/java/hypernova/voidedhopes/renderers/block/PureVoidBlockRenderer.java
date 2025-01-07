@@ -1,4 +1,4 @@
-package hypernova.voidedhopes.renderers;
+package hypernova.voidedhopes.renderers.block;
 
 import hypernova.voidedhopes.VoidedHopes;
 import hypernova.voidedhopes.VoidedShaders;

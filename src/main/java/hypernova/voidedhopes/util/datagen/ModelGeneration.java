@@ -16,6 +16,7 @@ public class ModelGeneration extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.PURE_VOID);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.MATRIX_VOID);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ENDER_SKY_BLOCK);
+        // This does not seem to automatically generate the item models, which is odd, as it generally should.
     }
 
     @Override
