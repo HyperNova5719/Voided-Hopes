@@ -3,6 +3,7 @@ package hypernova.voidedhopes.renderers.block;
 import hypernova.voidedhopes.VoidedHopes;
 import hypernova.voidedhopes.VoidedShaders;
 import hypernova.voidedhopes.block.custom.MatrixVoidBlockEntity;
+import hypernova.voidedhopes.block.custom.PureVoidBlockEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -12,6 +13,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Matrix4f;
+import net.minecraft.util.math.Vec3d;
 
 public class MatrixVoidBlockRenderer implements BlockEntityRenderer<MatrixVoidBlockEntity> {
     public static final Identifier SKY_TEXTURE = VoidedHopes.id("textures/environment/white_end_sky.png");
@@ -55,5 +57,10 @@ public class MatrixVoidBlockRenderer implements BlockEntityRenderer<MatrixVoidBl
 
     public RenderLayer getLayer() {
         return VoidedShaders.MATRIX_VOID_LAYER;
+    }
+
+    @Override
+    public boolean isInRenderDistance(MatrixVoidBlockEntity blockEntity, Vec3d pos) {
+        return true;
     }
 }

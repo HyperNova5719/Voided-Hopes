@@ -12,6 +12,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Matrix4f;
+import net.minecraft.util.math.Vec3d;
 
 public class PureVoidBlockRenderer implements BlockEntityRenderer<PureVoidBlockEntity> {
     public static final Identifier SKY_TEXTURE = VoidedHopes.id("textures/environment/white_end_sky.png");
@@ -55,5 +56,10 @@ public class PureVoidBlockRenderer implements BlockEntityRenderer<PureVoidBlockE
 
     public RenderLayer getLayer() {
         return VoidedShaders.PURE_VOID_LAYER;
+    }
+
+    @Override
+    public boolean isInRenderDistance(PureVoidBlockEntity blockEntity, Vec3d pos) {
+        return true;
     }
 }

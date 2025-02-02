@@ -12,6 +12,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Matrix4f;
+import net.minecraft.util.math.Vec3d;
 
 public class EnderSkyBlockRenderer implements BlockEntityRenderer<EnderSkyBlockEntity> {
     public static final Identifier SKY_TEXTURE = Identifier.of("minecraft", "textures/environment/end_sky.png");
@@ -54,5 +55,10 @@ public class EnderSkyBlockRenderer implements BlockEntityRenderer<EnderSkyBlockE
 
     public RenderLayer getLayer() {
         return VoidedShaders.ENDER_SKY_BLOCK_LAYER;
+    }
+
+    @Override
+    public boolean isInRenderDistance(EnderSkyBlockEntity blockEntity, Vec3d pos) {
+        return true;
     }
 }
