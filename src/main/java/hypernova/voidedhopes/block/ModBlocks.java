@@ -27,6 +27,7 @@ public class ModBlocks {
     public static final BlockEntityType<MatrixVoidBlockEntity> MATRIX_VOID_TYPE;
 
     public static final Block PURE_VOID_GENERATING;
+    public static final Block REALITY_DETONATOR;
 
     // to add more blocks go to 9:32 in this video: https://www.youtube.com/watch?v=6DY372RYNfE&list=PLKGarocXCE1EeLZggaXPJaARxnAbUD8Y_&index=4
 
@@ -42,6 +43,7 @@ public class ModBlocks {
         MATRIX_VOID_TYPE = registerBlockEntity("matrix_void_entity", MatrixVoidBlockEntity::new, MATRIX_VOID);
 
         PURE_VOID_GENERATING = registerBlock("pure_void_generating", new PureVoidGeneratingBlock(AbstractBlock.Settings.copy(Blocks.BEDROCK)));
+        REALITY_DETONATOR = registerBlock("reality_detonator", new RealityDetonatorBlock(AbstractBlock.Settings.copy(Blocks.OBSIDIAN)));
     }
 
     private static Block registerBlock(String name, Block block) {
