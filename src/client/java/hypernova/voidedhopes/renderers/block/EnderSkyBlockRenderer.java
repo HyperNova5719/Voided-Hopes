@@ -11,8 +11,8 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3d;
+import org.joml.Matrix4f;
 
 public class EnderSkyBlockRenderer implements BlockEntityRenderer<EnderSkyBlockEntity> {
     public static final Identifier SKY_TEXTURE = Identifier.of("minecraft", "textures/environment/end_sky.png");

@@ -13,7 +13,7 @@ import net.minecraft.client.render.VertexFormats;
 
 public class VoidedShaders {
     public static RenderLayer PURE_VOID_LAYER;
-    protected static RenderPhase.Shader PURE_VOID_SHADER;
+    protected static RenderPhase PURE_VOID_SHADER;
 
     public static RenderLayer MATRIX_VOID_LAYER;
     protected static RenderPhase.Shader MATRIX_VOID_SHADER;

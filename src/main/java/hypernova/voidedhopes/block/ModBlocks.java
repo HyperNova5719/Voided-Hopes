@@ -9,18 +9,18 @@ import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityT
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public class ModBlocks {
     public static final Block PURE_VOID = registerBlock("pure_void", new PureVoidBlock(FabricBlockSettings
-            .of(Material.BARRIER)
+            .copyOf(Blocks.BARRIER)
             .strength(-1f)));
 
     public static final BlockEntityType<PureVoidBlockEntity> PURE_VOID_TYPE = registerBlockEntity("pure_void_entity", PureVoidBlockEntity::new, PURE_VOID);
@@ -56,16 +56,16 @@ public class ModBlocks {
 
     private static Block registerBlock(String name, Block block, ItemGroup tab) {
         registerBlockItem(name, block, tab);
-        return Registry.register(Registry.BLOCK, new Identifier(VoidedHopes.MOD_ID, name), block);
+        return Registry.register(Registries.BLOCK, new Identifier(VoidedHopes.MOD_ID, name), block);
     }
 
     private static void registerBlockItem(String name, Block block, ItemGroup tab) {
-        Registry.register(Registry.ITEM, VoidedHopes.id(name),
+        Registry.register(Registries.ITEM, VoidedHopes.id(name),
                 new BlockItem(block, new FabricItemSettings().group(tab)));
     }
 
     public static <T extends BlockEntity> BlockEntityType<T> registerBlockEntity(String id, FabricBlockEntityTypeBuilder.Factory<T> factory, Block... blocks) {
-        return Registry.register(Registry.BLOCK_ENTITY_TYPE, VoidedHopes.id(id),
+        return Registry.register(Registries.BLOCK_ENTITY_TYPE, VoidedHopes.id(id),
                 FabricBlockEntityTypeBuilder.create(factory, blocks).build());
     }
 
