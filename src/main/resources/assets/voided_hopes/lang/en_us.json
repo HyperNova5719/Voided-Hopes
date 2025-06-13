@@ -1,5 +1,10 @@
 {
   "block.voided_hopes.pure_void": "Pure Void",
   "block.voided_hopes.matrix_void": "Matrix",
-  "itemGroup.voided_hopes.voidedhopes_tab":"Voided Hopes"
+  "itemGroup.voided_hopes.voidedhopes_tab":"Voided Hopes",
+
+  "item.voided_hopes.wayfinder_open": "Wayfinder (Open)",
+  "item.voided_hopes.wayfinder_closed": "Wayfinder (Closed)",
+  "item.voided_hopes.soul_extractor": "Soul Extractor",
+  "item.voided_hopes.voided_shard": "Voided Shard"
 }
