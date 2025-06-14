@@ -16,10 +16,7 @@ public class ModItemGroup {
                     .displayName(Text.translatable("itemGroup.voided_hopes.voidedhopes_tab"))
                     .icon(() -> new ItemStack(ModBlocks.REALITY_DETONATOR.asItem()))
                     .entries((displayContext, entries) -> {
-                        entries.add(ModItems.SOUL_EXTRACTOR);
-                        entries.add(ModItems.WAYFINDER_CLOSED);
-                        entries.add(ModItems.WAYFINDER_OPEN);
-                        entries.add(ModItems.VOIDED_SHARD);
+
 
 
             }).build());
