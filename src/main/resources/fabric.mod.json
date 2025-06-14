@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "voided_hopes",
+	"version": "${version}",
+	"name": "Voided Hopes",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"HyperNova"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"environment": "*",
+	"accessWidener" : "voided-hopes.accesswidener",
+	"entrypoints": {
+		"main": [
+			"hypernova.voidedhopes.VoidedHopes"
+		],
+		"client": [
+			"hypernova.voidedhopes.client.VoidedHopesClient"
+		],
+		"fabric-datagen": [
+			"hypernova.voidedhopes.util.datagen.VoidedHopesDataGenerator"
+		]
+	},
+	"mixins": [
+		"voided-hopes.mixins.json",
+		{
+			"config": "voided-hopes.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.16.9",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}

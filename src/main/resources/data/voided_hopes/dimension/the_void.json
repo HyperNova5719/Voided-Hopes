@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:the_end",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "minecraft:the_void",
+      "lakes": false,
+      "features": true,
+      "layers": [{
+        "height": 5,
+        "block": "minecraft:air"
+      },
+        {
+          "height": 1,
+          "block": "voided_hopes:pure_void_generating"
+        }],
+      "structure_overrides": []
+    }
+  }
+}
