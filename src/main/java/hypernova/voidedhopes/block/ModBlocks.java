@@ -61,7 +61,7 @@ public class ModBlocks {
 
     private static void registerBlockItem(String name, Block block, ItemGroup tab) {
         Registry.register(Registries.ITEM, VoidedHopes.id(name),
-                new BlockItem(block, new FabricItemSettings().group(tab)));
+                new BlockItem(block, new FabricItemSettings()));
     }
 
     public static <T extends BlockEntity> BlockEntityType<T> registerBlockEntity(String id, FabricBlockEntityTypeBuilder.Factory<T> factory, Block... blocks) {
