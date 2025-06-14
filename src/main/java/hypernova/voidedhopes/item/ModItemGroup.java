@@ -16,5 +16,11 @@ public class ModItemGroup {
 
     public static final ItemGroup GROUP = Registry.register(Registries.ITEM_GROUP, VoidedHopes.id("voidedhopes_tab"), FabricItemGroup.builder()
             .displayName(Text.translatable("itemGroup.voided_hopes.voidedhopes_tab"))
-            .icon(() -> new ItemStack(ModBlocks.REALITY_DETONATOR.asItem())).build());
+            .icon(() -> new ItemStack(ModBlocks.REALITY_DETONATOR.asItem())).entries((displayContext, entries) -> {
+                entries.add(ModItems.WAYFINDER_OPEN);
+                entries.add(ModItems.WAYFINDER_CLOSED);
+                entries.add(ModItems.VOIDED_SHARD);
+                entries.add(ModItems.SOUL_EXTRACTOR);
+            }).build());
+
 }
