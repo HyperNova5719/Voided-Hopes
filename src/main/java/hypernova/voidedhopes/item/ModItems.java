@@ -20,7 +20,7 @@ public class ModItems {
 
 
     private static Item registerItem(String name, Item item) {
-        return Registry.register(Registries.ITEM, VoidedHopes.id(name), item);
+        return Registry.register(Registries.ITEM,VoidedHopes.id(name), item);
     }
 
     public static void registerModItems() {
