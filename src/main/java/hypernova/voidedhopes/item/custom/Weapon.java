@@ -1,4 +1,4 @@
-package com.shadowzecro.charmed.item;
+package hypernova.voidedhopes.item.custom;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.enchantment.EnchantmentHelper;
