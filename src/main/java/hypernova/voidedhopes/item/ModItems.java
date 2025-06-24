@@ -1,9 +1,10 @@
 package hypernova.voidedhopes.item;
 
-import hypernova.voidedhopes.VoidedHopes.item.custom.Weapon;
 import hypernova.voidedhopes.VoidedHopes;
+import hypernova.voidedhopes.item.custom.VoidSparkWeapon;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
+import net.minecraft.item.SwordItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
@@ -18,8 +19,8 @@ public class ModItems {
             new Item(new FabricItemSettings()));
     public static final Item WAYFINDER_OPEN = registerItem("wayfinder_open",
             new Item(new FabricItemSettings()));
-    public static final SwordItem WEAPONNAME = registerItem("weaponname",
-            new Weapon(new FabricItemSettings()));
+    public static final Item VOID_SPARK = registerItem("void_spark",
+            new VoidSparkWeapon(new FabricItemSettings()));
 
 
     private static Item registerItem(String name, Item item) {
