@@ -32,7 +32,7 @@ public class VoidSparkWeapon extends SwordItem {
             public void startDelay() {
                 ServerTickEvents.END_SERVER_TICK.register((server) -> {
                     this.ticks++;
-                    while (ticks != 40) {
+                    if (ticks <= 40) {
                         user.setVelocity(Vec3d.ZERO);
                         user.fallDistance = 0;
                     }
