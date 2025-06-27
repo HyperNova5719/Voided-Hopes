@@ -2,6 +2,7 @@ package hypernova.voidedhopes;
 
 import hypernova.voidedhopes.block.ModBlocks;
 import hypernova.voidedhopes.item.ModItems;
+import hypernova.voidedhopes.particle.ModParticles;
 import hypernova.voidedhopes.world.ModDimensions;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -18,6 +19,7 @@ public class VoidedHopes implements ModInitializer {
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
 		ModDimensions.register();
+		ModParticles.registerParticles();
 	}
 
 	public static Identifier id(String name){
