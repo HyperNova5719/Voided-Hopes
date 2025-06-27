@@ -1,15 +1,23 @@
 package hypernova.voidedhopes.item.custom;
 
+
+import com.lowdragmc.photon.client.fx.EntityEffect;
+import com.lowdragmc.photon.client.fx.FX;
+import com.lowdragmc.photon.client.fx.FXHelper;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.minecraft.client.render.entity.model.PlayerEntityModel;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.WitherSkeletonEntity;
+import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -20,14 +28,21 @@ import java.util.Random;
 public class VoidSparkWeapon extends SwordItem {
     private static final WeaponMaterial INSTANCE = new WeaponMaterial();
 
+
     public VoidSparkWeapon(Settings settings) {
-        super(INSTANCE, 1, -3.4F, settings);
+        super(INSTANCE, 1, -2.4F, settings);
     }
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        FX voidSparkUse = FXHelper.getFX(new Identifier("photon:voidsparkused_test2"));
+
+        if (!world.isClient) {
+            new EntityEffect(voidSparkUse, world, user, EntityEffect.AutoRotate.NONE).start();
+        }
         new Object() {
             private int ticks;
+
 
             public void startDelay() {
                 ServerTickEvents.END_SERVER_TICK.register((server) -> {
@@ -35,12 +50,18 @@ public class VoidSparkWeapon extends SwordItem {
                     if (ticks <= 40) {
                         user.setVelocity(Vec3d.ZERO);
                         user.fallDistance = 0;
+
                     }
+
                 });
             }
+
+
         }.startDelay();
 
-        int var = 1; // make this variable whatever you want
+
+
+        int var = 2; // make this variable whatever you want
         for (int i = 0; i < var; i++) {
             summonEntity(user);
         }
@@ -62,9 +83,11 @@ public class VoidSparkWeapon extends SwordItem {
 //            }
 //        }
         return super.postHit(stack, target, attacker);
+
     }
 
     public static void summonEntity(LivingEntity entity) {
+        FX VoidSparkSummon = FXHelper.getFX(new Identifier("photon:voidspark_summoned_mob"));
         World world = entity.getWorld();
         Random random = new Random();
 
@@ -72,8 +95,10 @@ public class VoidSparkWeapon extends SwordItem {
 
         WitherSkeletonEntity skele = EntityType.WITHER_SKELETON.create(world);
         skele.setPos(pos.getX(), pos.getY(), pos.getZ());
-        // add other bits of code here if you want
+
         world.spawnEntity(skele);
+        new EntityEffect(VoidSparkSummon, world, skele, EntityEffect.AutoRotate.LOOK).start();
+
     }
 
     private static class WeaponMaterial implements ToolMaterial {

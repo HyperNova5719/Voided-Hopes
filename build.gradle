@@ -19,6 +19,7 @@ repositories {
 			includeGroup("cn.chloeprime")
 		}
 	}
+	maven { url = "https://maven.firstdarkdev.xyz/snapshots" }
 }
 
 loom {
@@ -37,10 +38,11 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	modImplementation 'mod.chloeprime:aaa-particles-fabric:1.20.1-1.4.11'
+
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
+	modImplementation("com.lowdragmc.photon:photon-fabric-1.20.1:1.1.9") { transitive = false }
+	modImplementation("com.lowdragmc.ldlib:ldlib-fabric-1.20.1:1.0.40") { transitive = false }
 }
 
 processResources {
