@@ -25,6 +25,7 @@ public class ModItems {
     public static final Item HERALD = registerItem("yes",
             new TestItem(new FabricItemSettings().rarity(Rarity.EPIC)));
 
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM,VoidedHopes.id(name), item);
     }

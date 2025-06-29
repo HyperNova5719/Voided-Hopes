@@ -11,9 +11,13 @@ base {
 }
 
 repositories {
+	repositories {
+		maven { url = "https://maven.firstdarkdev.xyz/snapshots" }
+	}
 	maven {
 		url = "https://api.modrinth.com/maven"
 	}
+
 }
 
 loom {
@@ -34,6 +38,8 @@ dependencies {
 	modImplementation "maven.modrinth:aaa-particles:1.20.1-1.4.10-fabric"
 	modImplementation "maven.modrinth:architectury-api:9.2.14+fabric"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	modImplementation("com.lowdragmc.photon:photon-fabric-1.20.1:1.1.9") { transitive = false }
+	modImplementation("com.lowdragmc.ldlib:ldlib-fabric-1.20.1:1.0.40") { transitive = false }
 
 }
 
