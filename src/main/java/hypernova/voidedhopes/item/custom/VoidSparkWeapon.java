@@ -36,9 +36,9 @@ public class VoidSparkWeapon extends SwordItem {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        FX voidSparkUse = FXHelper.getFX(new Identifier("photon:voidsparkused_test2"));
+        FX voidSparkUse = FXHelper.getFX(new Identifier("voided_hopes:voidsparkused_test2"));
 
-        if (!world.isClient) {
+        if (world.isClient) {
             new EntityEffect(voidSparkUse, world, user, EntityEffect.AutoRotate.NONE).start();
         }
         new Object() {
@@ -94,7 +94,7 @@ public class VoidSparkWeapon extends SwordItem {
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if (!(entity instanceof PlayerEntity player)) return;
         if (player.getMainHandStack().isOf(ModItems.VOID_SPARK)) {
-            FX void_trail = FXHelper.getFX(new Identifier("photon:voided_trail_spark"));
+            FX void_trail = FXHelper.getFX(new Identifier("voided_hopes:voided_trail_spark"));
 
             if (!world.isClient) {
                 new EntityEffect(void_trail, world, entity, EntityEffect.AutoRotate.NONE).start();
