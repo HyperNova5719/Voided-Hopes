@@ -24,7 +24,8 @@ public class ModItems {
             new VoidSparkWeapon(new FabricItemSettings().rarity(Rarity.EPIC)));
     public static final Item HERALD = registerItem("yes",
             new TestItem(new FabricItemSettings().rarity(Rarity.EPIC)));
-
+    public static final Item REALITY_KEY = registerItem("reality_key",
+            new Item(new FabricItemSettings()));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM,VoidedHopes.id(name), item);
