@@ -10,7 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class TestItem extends Item {
-    public static final ParticleEmitterInfo HERALD = new ParticleEmitterInfo(new Identifier("voided_hopes", "herald"));
+    public static final ParticleEmitterInfo HERALD = new ParticleEmitterInfo(new Identifier("voided_hopes", "realites_end_remade"));
 
 
     public TestItem(Settings settings) {
