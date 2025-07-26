@@ -7,9 +7,9 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
 public class ModParticles {
-public static final DefaultParticleType HERALD = FabricParticleTypes.simple();
+    public static final DefaultParticleType HERALD = FabricParticleTypes.simple();
 
-public static void registerParticles() {
-    Registry.register(Registries.PARTICLE_TYPE, VoidedHopes.id("herald"), HERALD);
-}
+    public static void registerParticles() {
+        Registry.register(Registries.PARTICLE_TYPE, VoidedHopes.id("herald"), HERALD);
+    }
 }
