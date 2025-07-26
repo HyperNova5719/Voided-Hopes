@@ -1,6 +1,7 @@
 package hypernova.voidedhopes;
 
 import hypernova.voidedhopes.block.ModBlocks;
+import hypernova.voidedhopes.client.ModSound;
 import hypernova.voidedhopes.item.ModItems;
 import hypernova.voidedhopes.particle.ModParticles;
 import hypernova.voidedhopes.world.ModDimensions;
@@ -20,6 +21,7 @@ public class VoidedHopes implements ModInitializer {
 		ModBlocks.registerModBlocks();
 		ModDimensions.register();
 		ModParticles.registerParticles();
+		ModSound.register();
 	}
 
 	public static Identifier id(String name){

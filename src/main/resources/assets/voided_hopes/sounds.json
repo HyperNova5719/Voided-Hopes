@@ -1,0 +1,7 @@
+{
+  "block.voidedhopes.reality_detonator.detonate": {
+      "sounds": [
+        "voided_hopes:detonate"
+      ]
+  }
+}
