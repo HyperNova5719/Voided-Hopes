@@ -26,11 +26,7 @@
 		]
 	},
 	"mixins": [
-		"voided-hopes.mixins.json",
-		{
-			"config": "voided-hopes.client.mixins.json",
-			"environment": "client"
-		}
+		"voided-hopes.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.16.9",

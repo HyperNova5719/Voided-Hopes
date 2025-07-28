@@ -39,7 +39,6 @@ dependencies {
 	modImplementation("com.lowdragmc.photon:photon-fabric-1.20.1:1.1.9") { transitive = false }
 	modImplementation("com.lowdragmc.ldlib:ldlib-fabric-1.20.1:1.0.40") { transitive = false }
 	//Cool visuals make people go OOHHH!
-	modImplementation "com.github.AzuraNishio:Lazuli_lib:1.1.3-1.20"
 }
 
 processResources {

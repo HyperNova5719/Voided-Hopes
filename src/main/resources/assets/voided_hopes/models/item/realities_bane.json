@@ -1,3 +1,6 @@
 {
-  "parent": "voided_hopes:item/Roaring_Knight_Sword_but_smaller"
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "voided_hopes:item/roaring_knight_sword_but_even_smaller"
+  }
 }
