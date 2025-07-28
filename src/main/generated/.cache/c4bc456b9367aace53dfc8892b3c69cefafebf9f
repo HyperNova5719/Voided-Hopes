@@ -1,0 +1,10 @@
+// 1.20.1	2025-07-28T17:50:50.0921122	Voided Hopes/Model Definitions
+8c714f644e0656882a234a76aa80cd682452c615 assets\voided_hopes\models\item\matrix_void.json
+b8309ba7bed4a6dca8d8de0d122a481f756af9b0 assets\voided_hopes\models\item\ender_sky_block.json
+23a7a5049755d42ff72c633c0fb7e414e4c74e5d assets\voided_hopes\models\block\ender_sky_block.json
+7e2fd96b30eeba1d132e1bd9508ee5cb75c2ed5c assets\voided_hopes\models\block\matrix_void.json
+c612c5182dcd1a11f5f2cbbc15f1feab644a9d82 assets\voided_hopes\models\block\pure_void.json
+02e6fe018853623d5648483685f5fe24de179636 assets\voided_hopes\blockstates\matrix_void.json
+def7c761889c733d3c7683bdeefa2e666c7a0201 assets\voided_hopes\blockstates\pure_void.json
+679246b39a46e68f0eddbe2571ee5d47e0d52262 assets\voided_hopes\blockstates\ender_sky_block.json
+9f2bf73eab30d4e4cb9a2afd2fdfa2403ff2d2aa assets\voided_hopes\models\item\pure_void.json
