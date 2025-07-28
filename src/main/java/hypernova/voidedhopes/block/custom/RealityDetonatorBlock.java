@@ -9,7 +9,7 @@ import net.minecraft.world.BlockView;
 
 public class RealityDetonatorBlock extends Block implements BlockEntityProvider {
 
-    public static final VoxelShape SHAPE = Block.createCuboidShape(3, 0, 3, 13, 16, 13);
+    public static final VoxelShape SHAPE = Block.createCuboidShape(3, 0, 3, 13, 24, 13);
 
     public RealityDetonatorBlock(Settings settings) {
         super(settings);
