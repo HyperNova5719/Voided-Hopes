@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "voided_hopes:item/wayfinder_closed"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "open": 1
+      },
+      "model": "voided_hopes:item/wayfinder_open"
+    }
+  ]
+}

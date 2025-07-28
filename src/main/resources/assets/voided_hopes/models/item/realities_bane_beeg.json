@@ -1,0 +1,32 @@
+{
+	"credit": "Made by ShadowZecro",
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "voided_hopes:item/roaring_knight_sword_but_smaller"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [0, -90, 45],
+			"translation": [0, 11, 1],
+			"scale": [1.6, 1.6, 0.85]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [0, 90, -45],
+			"translation": [0, 11, 1],
+			"scale": [1.6, 1.6, 0.85]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, -90, 50],
+			"translation": [1.13, 8, 1.88],
+			"scale": [1, 1, 0.5]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 90, -50],
+			"translation": [1.13, 8, 1.88],
+			"scale": [1, 1, 0.5]
+		},
+		"ground": {
+			"scale": [1, 1, 0.5]
+		}
+	}
+}

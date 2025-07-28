@@ -45,7 +45,7 @@ public class DetonateItem extends Item {
 
                         if (ticks >= 73 && ticks <= 210) {
                             assert player != null;
-                            VoidedHopes.screenshake(player, 0.25f);
+                            VoidedHopes.screenshake(player, 0.125f);
                         } else if (ticks >= 210 && ticks <= 365) {
                             assert player != null;
                             VoidedHopes.screenshake(player, 0.1f);
