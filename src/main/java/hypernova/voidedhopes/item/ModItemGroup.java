@@ -22,6 +22,7 @@ public class ModItemGroup {
                 entries.add(ModItems.VOIDED_SHARD);
                 entries.add(ModItems.SOUL_EXTRACTOR);
                 entries.add(ModItems.REALITY_KEY);
+                entries.add(ModItems.REALITIES_BANE);
             }).build());
 
 }

@@ -1,6 +1,6 @@
 package hypernova.voidedhopes.particle.custom;
 
-import hypernova.voidedhopes.item.TestItem;
+import hypernova.voidedhopes.item.DetonateItem;
 import mod.chloeprime.aaaparticles.api.common.AAALevel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -19,7 +19,7 @@ public class HeraldParticle extends SpriteBillboardParticle {
     public void tick() {
         if (timer == 0) {
             timer++;
-            AAALevel.addParticle(world, true, TestItem.VFX.clone().position(this.x, this.y, this.z));
+            AAALevel.addParticle(world, true, DetonateItem.VFX.clone().position(this.x, this.y, this.z));
         }
     }
 

@@ -12,9 +12,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class TestItem extends Item {
+public class DetonateItem extends Item {
     public static final ParticleEmitterInfo VFX = new ParticleEmitterInfo(new Identifier("voided_hopes", "realites_end_remade"));
-    public TestItem(Settings settings) {
+    public DetonateItem(Settings settings) {
         super(settings);
     }
 
