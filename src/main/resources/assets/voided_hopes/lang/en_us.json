@@ -11,5 +11,12 @@
   "item.voided_hopes.void_spark": "Void Spark",
   "item.voided_hopes.reality_key": "§8Voided Artifact",
   "item.voided_hopes.realities_bane": "§8Realities Bane",
-  "item.voided_hopes.wraiths_gravestone": "§4Wraith's Gravestone"
+  "item.voided_hopes.wraiths_gravestone": "§4Wraith's Gravestone",
+  "item.voided_hopes.envy": "§5Envy",
+  "item.voided_hopes.gluttony": "§eGluttony",
+  "item.voided_hopes.greed": "§aGreed",
+  "item.voided_hopes.lust": "§1Lust",
+  "item.voided_hopes.pride": "§4Pride",
+  "item.voided_hopes.sloth": "§dSloth",
+  "item.voided_hopes.wrath": "§6Wrath"
 }

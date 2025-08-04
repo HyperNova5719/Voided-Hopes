@@ -29,6 +29,20 @@ public class ModItems {
             new DetonateItem(new FabricItemSettings().rarity(Rarity.EPIC)));;
     public static final Item WRAITHS_GRAVESTONE = registerItem("wraiths_gravestone",
             new WraithsGravestoneItem(new FabricItemSettings()));
+    public static final Item ENVY = registerItem("envy",
+            new Item(new FabricItemSettings()));
+    public static final Item GLUTTONY = registerItem("gluttony",
+            new Item(new FabricItemSettings()));
+    public static final Item GREED = registerItem("greed",
+            new Item(new FabricItemSettings()));
+    public static final Item LUST = registerItem("lust",
+            new Item(new FabricItemSettings()));
+    public static final Item PRIDE = registerItem("pride",
+            new Item(new FabricItemSettings()));
+    public static final Item SLOTH = registerItem("sloth",
+            new Item(new FabricItemSettings()));
+    public static final Item WRATH = registerItem("wrath",
+            new Item(new FabricItemSettings()));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM,VoidedHopes.id(name), item);
