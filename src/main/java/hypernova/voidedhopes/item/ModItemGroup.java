@@ -22,6 +22,7 @@ public class ModItemGroup {
                 entries.add(ModItems.SOUL_EXTRACTOR);
                 entries.add(ModItems.REALITY_KEY);
                 entries.add(ModItems.REALITIES_BANE);
+                entries.add(ModItems.WRAITHS_GRAVESTONE);
             }).build());
 
 }

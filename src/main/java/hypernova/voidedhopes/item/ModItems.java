@@ -4,6 +4,7 @@ import hypernova.voidedhopes.VoidedHopes;
 import hypernova.voidedhopes.item.custom.RealitiesBaneItem;
 import hypernova.voidedhopes.item.custom.VoidSparkWeapon;
 import hypernova.voidedhopes.item.custom.WayfinderItem;
+import hypernova.voidedhopes.item.custom.WraithsGravestoneItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
 import net.minecraft.item.SwordItem;
@@ -26,6 +27,8 @@ public class ModItems {
             new VoidSparkWeapon(new FabricItemSettings().rarity(Rarity.EPIC)));
     public static final Item REALITY_KEY = registerItem("reality_key",
             new DetonateItem(new FabricItemSettings().rarity(Rarity.EPIC)));;
+    public static final Item WRAITHS_GRAVESTONE = registerItem("wraiths_gravestone",
+            new WraithsGravestoneItem(new FabricItemSettings()));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM,VoidedHopes.id(name), item);

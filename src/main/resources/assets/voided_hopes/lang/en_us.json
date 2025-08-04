@@ -2,13 +2,14 @@
   "block.voided_hopes.pure_void": "Pure Void",
   "block.voided_hopes.matrix_void": "Matrix",
   "itemGroup.voided_hopes.voidedhopes_tab":"Voided Hopes",
-  "block.voided_hopes.reality_detonator": "Reality Detonator",
+  "block.voided_hopes.reality_detonator": "§8Reality §0Detonator",
   "block.voided_hopes.ender_sky_block": "End Sky",
 
   "item.voided_hopes.wayfinder": "Wayfinder",
   "item.voided_hopes.soul_extractor": "Soul Extractor",
   "item.voided_hopes.voided_shard": "Voided Shard",
   "item.voided_hopes.void_spark": "Void Spark",
-  "item.voided_hopes.reality_key": "Voided Artifact",
-  "item.voided_hopes.realities_bane": "Realities Bane"
+  "item.voided_hopes.reality_key": "§8Voided Artifact",
+  "item.voided_hopes.realities_bane": "§8Realities Bane",
+  "item.voided_hopes.wraiths_gravestone": "§4Wraith's Gravestone"
 }
