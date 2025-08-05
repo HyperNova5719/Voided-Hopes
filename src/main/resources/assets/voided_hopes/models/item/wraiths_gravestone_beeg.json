@@ -1,6 +1,6 @@
 {
 	"credit": "Made by ShadowZecro",
-	"parent": "item/handheld2",
+	"parent": "item/handheld",
 	"textures": {
 		"layer0": "voided_hopes:item/wraiths_gravestone"
 	},

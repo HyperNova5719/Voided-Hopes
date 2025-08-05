@@ -23,5 +23,6 @@ public abstract class ModelLoaderMixin
     void onAddModel(BlockColors blockColors, Profiler profiler, Map jsonUnbakedModels, Map blockStates, CallbackInfo ci)
     {
         addModel(new ModelIdentifier(VoidedHopes.MOD_ID, "realities_bane_beeg", "inventory"));
+        addModel(new ModelIdentifier(VoidedHopes.MOD_ID, "wraiths_gravestone_beeg", "inventory"));
     }
 }

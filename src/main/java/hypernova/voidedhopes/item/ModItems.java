@@ -29,6 +29,8 @@ public class ModItems {
             new DetonateItem(new FabricItemSettings().rarity(Rarity.EPIC)));;
     public static final Item WRAITHS_GRAVESTONE = registerItem("wraiths_gravestone",
             new RealitiesBaneItem(new FabricItemSettings()));
+    public static final Item REGRET_OF_FOOLS = registerItem("regret_of_fools",
+            new Item(new FabricItemSettings()));
     public static final Item ENVY = registerItem("envy",
             new Item(new FabricItemSettings()));
     public static final Item GLUTTONY = registerItem("gluttony",

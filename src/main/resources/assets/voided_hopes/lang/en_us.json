@@ -1,7 +1,6 @@
 {
   "block.voided_hopes.pure_void": "Pure Void",
   "block.voided_hopes.matrix_void": "Matrix",
-  "itemGroup.voided_hopes.voidedhopes_tab":"Voided Hopes",
   "block.voided_hopes.reality_detonator": "§8Reality §0Detonator",
   "block.voided_hopes.ender_sky_block": "End Sky",
 
@@ -12,11 +11,15 @@
   "item.voided_hopes.reality_key": "§8Voided Artifact",
   "item.voided_hopes.realities_bane": "§8Realities Bane",
   "item.voided_hopes.wraiths_gravestone": "§4Wraith's Gravestone",
-  "item.voided_hopes.envy": "§5Envy",
+  "item.voided_hopes.pride": "§4Pride",
+  "item.voided_hopes.wrath": "§6Wrath",
   "item.voided_hopes.gluttony": "§eGluttony",
   "item.voided_hopes.greed": "§aGreed",
   "item.voided_hopes.lust": "§1Lust",
-  "item.voided_hopes.pride": "§4Pride",
+  "item.voided_hopes.envy": "§5Envy",
   "item.voided_hopes.sloth": "§dSloth",
-  "item.voided_hopes.wrath": "§6Wrath"
+  "item.voided_hopes.regret_of_fools": "§8Regret",
+
+  "itemGroup.voided_hopes.voidedhopes_tab":"§jVoided Hopes",
+  "itemGroup.voided_hopes.weapons_and_sins":"§jWeapons and Sins"
 }

@@ -20,9 +20,23 @@ public class ModItemGroup {
                 entries.add(ModItems.WAYFINDER);
                 entries.add(ModItems.VOIDED_SHARD);
                 entries.add(ModItems.SOUL_EXTRACTOR);
-                entries.add(ModItems.REALITY_KEY);
-                entries.add(ModItems.REALITIES_BANE);
-                entries.add(ModItems.WRAITHS_GRAVESTONE);
-            }).build());
 
+            }).build());
+    public static final RegistryKey<ItemGroup> WEAPONS_AND_SINS = RegistryKey.of(RegistryKeys.ITEM_GROUP, VoidedHopes.id("weapons_and_sins"));
+
+    public static final ItemGroup ITEM_GROUP = Registry.register(Registries.ITEM_GROUP, VoidedHopes.id("weapons_and_sins"), FabricItemGroup.builder()
+            .displayName(Text.translatable("itemGroup.voided_hopes.weapons_and_sins"))
+            .icon(() -> new ItemStack(ModItems.WRAITHS_GRAVESTONE.asItem())).entries((displayContext, entries) -> {
+                entries.add(ModItems.WRAITHS_GRAVESTONE);
+                entries.add(ModItems.REALITIES_BANE);
+                entries.add(ModItems.REGRET_OF_FOOLS);
+                entries.add(ModItems.ENVY);
+                entries.add(ModItems.GLUTTONY);
+                entries.add(ModItems.GREED);
+                entries.add(ModItems.LUST);
+                entries.add(ModItems.PRIDE);
+                entries.add(ModItems.SLOTH);
+                entries.add(ModItems.WRATH);
+                entries.add(ModItems.REALITY_KEY);
+            }).build());
 }

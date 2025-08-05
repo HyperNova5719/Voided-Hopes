@@ -21,6 +21,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public abstract class ItemRendererMixin
 {
     private static final ModelIdentifier REALITIES_BANE_BEEG;
+    private static final ModelIdentifier WRAITHS_GRAVESTONE_BEEG;
 
     @Shadow
     @Final
@@ -33,10 +34,13 @@ public abstract class ItemRendererMixin
     {
         if(stack.isOf(ModItems.REALITIES_BANE) && !mode.equals(ModelTransformationMode.GUI))
             return models.getModelManager().getModel(REALITIES_BANE_BEEG);
+        if(stack.isOf(ModItems.WRAITHS_GRAVESTONE) && !mode.equals(ModelTransformationMode.GUI))
+            return models.getModelManager().getModel(WRAITHS_GRAVESTONE_BEEG);
         return value;
     }
 
     static {
         REALITIES_BANE_BEEG = new ModelIdentifier(VoidedHopes.id("realities_bane_beeg"), "inventory");
+        WRAITHS_GRAVESTONE_BEEG = new ModelIdentifier(VoidedHopes.id("wraiths_gravestone_beeg"), "inventory");
     }
 }

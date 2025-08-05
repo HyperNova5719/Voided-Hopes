@@ -49,13 +49,12 @@ public class ModBlocks {
             "reality_detonator_entity",
             RealityDetonatorBlockEntity::new, REALITY_DETONATOR);
 
-    public static final Block PURE_VOID_GENERATING = registerBlock("pure_void_generating",
-            new PureVoidGeneratingBlock(AbstractBlock.Settings.copy(Blocks.BEDROCK)));
     // to add more blocks go to 9:32 in this video: https://www.youtube.com/watch?v=6DY372RYNfE&list=PLKGarocXCE1EeLZggaXPJaARxnAbUD8Y_&index=4
 
     private static Block registerBlock(String name, Block block) {
         return registerBlock(name, block, ModItemGroup.VOIDEDHOPES_TAB);
     }
+
 
     private static Block registerBlock(String name, Block block, RegistryKey<ItemGroup> tab) {
         registerBlockItem(name, block, tab);
