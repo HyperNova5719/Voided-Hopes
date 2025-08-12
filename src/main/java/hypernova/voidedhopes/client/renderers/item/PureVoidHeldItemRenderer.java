@@ -13,6 +13,7 @@ public class PureVoidHeldItemRenderer implements BuiltinItemRendererRegistry.Dyn
         // TODO: I might want to use the shader for items instead of the plain textures we're using rn
         // yo nico i have no clue wtf you wanna do here so imma just leave this like this for now -crab
         // That was hyper by the way - Nico
+        // Not really this was Tiaz - Hyper
     }
 
     @Override

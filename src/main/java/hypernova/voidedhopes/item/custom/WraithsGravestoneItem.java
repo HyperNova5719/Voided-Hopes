@@ -8,7 +8,7 @@ public class WraithsGravestoneItem extends SwordItem {
     private static final WraithsGravestoneMaterial INSTANCE = new WraithsGravestoneMaterial();
 
     public WraithsGravestoneItem(Settings settings) {
-        super(INSTANCE, 3, -3.2f, settings);
+        super(INSTANCE, 5, -2.8f, settings);
     }
 
     public static class WraithsGravestoneMaterial implements ToolMaterial {
