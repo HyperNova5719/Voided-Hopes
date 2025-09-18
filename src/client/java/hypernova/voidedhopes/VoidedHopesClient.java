@@ -1,6 +1,7 @@
 package hypernova.voidedhopes;
 
 import hypernova.voidedhopes.block.ModBlocks;
+import hypernova.voidedhopes.renderers.RiftRenderer;
 import hypernova.voidedhopes.renderers.block.EnderSkyBlockRenderer;
 import hypernova.voidedhopes.renderers.block.MatrixVoidBlockRenderer;
 import hypernova.voidedhopes.renderers.block.PureVoidBlockRenderer;
@@ -16,7 +17,7 @@ public class VoidedHopesClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		VoidedShaders.init();
-
+		RiftRenderer.register();
 		BlockEntityRendererFactories.register(ModBlocks.PURE_VOID_TYPE, PureVoidBlockRenderer::new);
 		//BuiltinItemRendererRegistry.INSTANCE.register(ModBlocks.PURE_VOID.asItem(), new PureVoidHeldItemRenderer());
 		BlockEntityRendererFactories.register(ModBlocks.MATRIX_VOID_TYPE, MatrixVoidBlockRenderer::new);

@@ -1,5 +1,6 @@
 package hypernova.voidedhopes;
 
+import hypernova.voidedhopes.LazuliLib.LazuliShaderRegistry;
 import hypernova.voidedhopes.block.ModBlocks;
 import hypernova.voidedhopes.renderers.block.EnderSkyBlockRenderer;
 import hypernova.voidedhopes.renderers.block.MatrixVoidBlockRenderer;
@@ -13,15 +14,21 @@ import net.minecraft.client.render.VertexFormats;
 
 public class VoidedShaders {
     public static RenderLayer PURE_VOID_LAYER;
-    protected static RenderPhase.Shader PURE_VOID_SHADER;
+    public static RenderPhase.Shader PURE_VOID_SHADER;
 
     public static RenderLayer MATRIX_VOID_LAYER;
-    protected static RenderPhase.Shader MATRIX_VOID_SHADER;
+    public static RenderPhase.Shader MATRIX_VOID_SHADER;
 
     public static RenderLayer ENDER_SKY_BLOCK_LAYER;
-    protected static RenderPhase.Shader ENDER_SKY_BLOCK_SHADER;
+    public static RenderPhase.Shader ENDER_SKY_BLOCK_SHADER;
+
+    public static String MATRIX_VOID_LAZULI_SHADER = "rendertype_pure_void";
 
     public static void init() {
+        LazuliShaderRegistry.registerShader(MATRIX_VOID_LAZULI_SHADER, "voided_hopes", VertexFormats.POSITION);
+
+
+
         CoreShaderRegistrationCallback.EVENT.register(ctx -> {
             ctx.register(VoidedHopes.id("rendertype_pure_void"), VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL, shaderProgram -> {
                 PURE_VOID_SHADER = new RenderPhase.Shader(() -> shaderProgram);
