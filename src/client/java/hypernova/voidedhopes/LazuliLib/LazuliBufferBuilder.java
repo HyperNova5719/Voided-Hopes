@@ -1,10 +1,7 @@
 package hypernova.voidedhopes.LazuliLib;
 /** High level wrapper around BufferBuilder. */
 
-import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.*;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
 
@@ -115,8 +112,8 @@ public class LazuliBufferBuilder {
 
     public void drawAndReset() {
         if (!isEmpty) {
-            this.tessellator.draw();
             BufferBuilder.BuiltBuffer builtBuffer = buffer.end();
+            BufferRenderer.drawWithShader(builtBuffer);
             this.isEmpty = true;
             this.buffer = this.tessellator.getBuffer();
             BufferBuilder.DrawArrayParameters format = builtBuffer.getParameters();
