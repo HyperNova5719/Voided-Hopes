@@ -37,10 +37,10 @@ public class RiftRenderer {
 
         for (double dir = 0; dir < Math.PI * 2; dir+= Math.PI/6) {
             Vec3d head = Vec3d.ZERO;
-            for (double i = 0; i < 10; i++) {
-                pen.point(head, (9 - i));
+            for (double i = 0; i < 20; i++) {
+                pen.point(head, (20 - i));
                 Vec3d rVec = new Vec3d(random.nextDouble(), 0, random.nextDouble()).normalize().rotateY((float) dir);
-                head = head.add(rVec.multiply(40));
+                head = head.add(rVec.multiply(70));
             }
 
             pen.draw(bb, new Vec3d(0, 160, 0));
