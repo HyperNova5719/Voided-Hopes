@@ -1,4 +1,4 @@
-package hypernova.voidedhopes.LazuliLib;
+package hypernova.voidedhopes.AzuraThingies.LazuliLib;
 
 import net.minecraft.util.math.Vec3d;
 

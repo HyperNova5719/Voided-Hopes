@@ -1,21 +1,17 @@
-package hypernova.voidedhopes.LazuliLib;
+package hypernova.voidedhopes.AzuraThingies.LazuliLib;
 /** Convenience wrappers around RenderSystem. */
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
+import net.minecraft.client.gl.ShaderProgram;
 import net.minecraft.client.render.FogShape;
 import net.minecraft.client.render.RenderPhase;
-import net.minecraft.client.render.Shader;
 import net.minecraft.util.Identifier;
 
 import java.util.List;
 import java.util.function.Supplier;
 
 public class LapisRenderer {
-
-    public static void setShader(Supplier<Shader> shader) {
-        RenderSystem.setShader(shader);
-    }
 
     public static void setShaderTexture(int slot, Identifier texture) {
         RenderSystem.setShaderTexture(slot, texture);
@@ -66,7 +62,7 @@ public class LapisRenderer {
 
     public static void disableDepthTest() {RenderSystem.disableDepthTest();}
 
-    public static void setShader(Shader shader) {
+    public static void setShader(ShaderProgram shader) {
         RenderSystem.setShader(() -> shader);
     }
 

@@ -1,8 +1,6 @@
 package hypernova.voidedhopes.AzuraThingies;
 
-import hypernova.voidedhopes.LazuliLib.*;
-import hypernova.voidedhopes.VoidedShaders;
-import hypernova.voidedhopes.renderers.block.PureVoidBlockRenderer;
+import hypernova.voidedhopes.AzuraThingies.LazuliLib.*;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.render.*;
 import net.minecraft.util.math.Vec3d;

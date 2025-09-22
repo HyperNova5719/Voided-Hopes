@@ -1,11 +1,12 @@
-package hypernova.voidedhopes.LazuliLib;
+package hypernova.voidedhopes.AzuraThingies.LazuliLib;
 /** Handles registration of shaders and post processors. */
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.Framebuffer;
-import net.minecraft.client.render.Shader;
+
+import net.minecraft.client.gl.ShaderProgram;
 import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.util.Window;
 import net.minecraft.util.Identifier;
@@ -17,7 +18,7 @@ import java.util.Map;
 
 public class LazuliShaderRegistry {
 
-    private static final Map<String, Shader> SHADER_MAP = new HashMap<>();
+    private static final Map<String, ShaderProgram> SHADER_MAP = new HashMap<>();
 
     private static int resX ;
     private static int resY;
@@ -35,7 +36,7 @@ public class LazuliShaderRegistry {
             });
         });
     }
-    public static Shader getShader(String name) {
+    public static ShaderProgram getShader(String name) {
         return SHADER_MAP.get(name);
     }
 

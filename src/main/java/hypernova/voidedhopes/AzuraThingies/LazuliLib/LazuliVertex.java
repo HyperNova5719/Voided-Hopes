@@ -1,4 +1,4 @@
-package hypernova.voidedhopes.LazuliLib;
+package hypernova.voidedhopes.AzuraThingies.LazuliLib;
 /** Fluent vertex builder used by LazuliBufferBuilder. */
 
 import net.minecraft.util.math.Vec3d;

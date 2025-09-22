@@ -1,9 +1,10 @@
-package hypernova.voidedhopes.LazuliLib;
+package hypernova.voidedhopes.AzuraThingies.LazuliLib;
 /** High level wrapper around BufferBuilder. */
 
 import net.minecraft.client.render.*;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3f;
+
+import org.joml.Vector3f;
 
 
 public class LazuliBufferBuilder {
@@ -113,10 +114,10 @@ public class LazuliBufferBuilder {
     public void drawAndReset() {
         if (!isEmpty) {
             BufferBuilder.BuiltBuffer builtBuffer = buffer.end();
-            BufferRenderer.drawWithShader(builtBuffer);
+            BufferRenderer.drawWithGlobalProgram(builtBuffer);
             this.isEmpty = true;
             this.buffer = this.tessellator.getBuffer();
-            BufferBuilder.DrawArrayParameters format = builtBuffer.getParameters();
+            BufferBuilder.DrawParameters format = builtBuffer.getParameters();
             this.buffer = this.tessellator.getBuffer();
             this.buffer.begin(format.mode(), format.format());
         }
@@ -232,9 +233,9 @@ public class LazuliBufferBuilder {
         if (v.normalY != null) lastNormalY = v.normalY;
         if (v.normalZ != null) lastNormalZ = v.normalZ;
 
-        Vec3f normal = new Vec3f(lastNormalX, lastNormalY, lastNormalZ);
+        Vector3f normal = new Vector3f(lastNormalX, lastNormalY, lastNormalZ);
         normal.rotate(renderSpace.rotation);
-        normal(normal.getX(), normal.getY(), normal.getZ());
+        normal(normal.x, normal.y, normal.z);
 
         this.buffer.next();
 

@@ -18,7 +18,11 @@ public class VoidedHopesShaders {
     public static VoidedHopesShader MATRIX_VOID_SHADER;
     public static VoidedHopesShader ENDER_SKY_BLOCK_SHADER;
 
+    public static String PURE_VOID_LAZULI_SHADER = "rendertype_pure_void";
+
     public static void init() {
+        hypernova.voidedhopes.LazuliLib.LazuliShaderRegistry.registerShader(PURE_VOID_LAZULI_SHADER, "voided_hopes", VertexFormats.POSITION);
+
         PURE_VOID_SHADER = new VoidedHopesShader(VoidedHopes.id("rendertype_pure_void"), VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL)
                 .setRenderLayerFactory(() -> shaderProgram -> RenderLayer.of(
                         "rendertype_pure_void",

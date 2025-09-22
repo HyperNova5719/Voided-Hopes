@@ -1,46 +1,44 @@
-package hypernova.voidedhopes.LazuliLib;
+package hypernova.voidedhopes.AzuraThingies.LazuliLib;
 /** Simple position and rotation transform. */
 
-import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3f;
-
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 public class Transform3D {
     public Vec3d position;
-    public Quaternion rotation;
+    public Quaternionf rotation;
 
     public static final Transform3D ZERO = new Transform3D(
-            Vec3d.ZERO, Quaternion.IDENTITY
+            Vec3d.ZERO,
+            new Quaternionf() // Identity quaternion
     );
 
     public static Transform3D fromPosition(Vec3d pos) {
-        return new Transform3D(pos, Quaternion.IDENTITY);
+        return new Transform3D(pos, new Quaternionf()); // Identity quaternion
     }
 
-    public static Transform3D fromRotation(Quaternion rot) {
+    public static Transform3D fromRotation(Quaternionf rot) {
         return new Transform3D(Vec3d.ZERO, rot);
     }
 
-    public Transform3D(Vec3d position, Quaternion rotation) {
+    public Transform3D(Vec3d position, Quaternionf rotation) {
         this.position = position;
         this.rotation = rotation;
     }
 
     public Transform3D() {
         this.position = Vec3d.ZERO;
-        this.rotation = Quaternion.IDENTITY;
+        this.rotation = new Quaternionf(); // Identity quaternion
     }
 
     public Transform3D copy() {
-        return new Transform3D(position, rotation.copy());
+        return new Transform3D(position, new Quaternionf(rotation));
     }
-    
 
     public Vec3d transformPoint(Vec3d point) {
-        Vec3f p = new Vec3f((float) point.x, (float) point.y, (float) point.z);
+        Vector3f p = new Vector3f((float) point.x, (float) point.y, (float) point.z);
         p.rotate(rotation);
-        return position.add(p.getX(), p.getY(), p.getZ());
+        return position.add(p.x, p.y, p.z);
     }
-
 }
