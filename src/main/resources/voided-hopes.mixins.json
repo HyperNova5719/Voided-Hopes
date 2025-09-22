@@ -11,7 +11,8 @@
 		"client.OtherClientPlayerMixin",
 		"client.ItemRendererMixin",
 		"client.ModelLoaderMixin",
-		"client.PlayerEntityRendererMixin"
+		"client.PlayerEntityRendererMixin",
+		"client.LazuliParticleManagerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

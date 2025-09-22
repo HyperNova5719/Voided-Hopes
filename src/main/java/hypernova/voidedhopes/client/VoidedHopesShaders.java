@@ -1,5 +1,6 @@
 package hypernova.voidedhopes.client;
 
+import hypernova.voidedhopes.AzuraThingies.LazuliLib.LazuliShaderRegistry;
 import hypernova.voidedhopes.VoidedHopes;
 import hypernova.voidedhopes.block.ModBlocks;
 import hypernova.voidedhopes.client.renderers.block.EnderSkyBlockRenderer;
@@ -21,7 +22,7 @@ public class VoidedHopesShaders {
     public static String PURE_VOID_LAZULI_SHADER = "rendertype_pure_void";
 
     public static void init() {
-        hypernova.voidedhopes.LazuliLib.LazuliShaderRegistry.registerShader(PURE_VOID_LAZULI_SHADER, "voided_hopes", VertexFormats.POSITION);
+        LazuliShaderRegistry.registerShader(PURE_VOID_LAZULI_SHADER, "voided_hopes", VertexFormats.POSITION);
 
         PURE_VOID_SHADER = new VoidedHopesShader(VoidedHopes.id("rendertype_pure_void"), VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL)
                 .setRenderLayerFactory(() -> shaderProgram -> RenderLayer.of(

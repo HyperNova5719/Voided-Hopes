@@ -1,5 +1,7 @@
 package hypernova.voidedhopes.item;
 
+import hypernova.voidedhopes.AzuraThingies.RiftRenderer;
+import hypernova.voidedhopes.AzuraThingies.RiftRendererManager;
 import hypernova.voidedhopes.VoidedHopes;
 import hypernova.voidedhopes.block.ModBlocks;
 import hypernova.voidedhopes.client.ModSound;
@@ -54,7 +56,8 @@ public class DetonateItem extends Item {
                 }
             }.startShakes();
 
-            AAALevel.addParticle(world, 5000, playingVfx);
+            //AAALevel.addParticle(world, 5000, playingVfx);
+            RiftRendererManager.addRift(blockPos.toCenterPos().add(0,100,0), 0);
             System.out.println("Starting vfx");
             world.playSound(null, blockPos, ModSound.REALITY_DETONATE, SoundCategory.MASTER, 1, 1);
         }
