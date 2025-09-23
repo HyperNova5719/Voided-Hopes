@@ -47,17 +47,17 @@ public class DetonateItem extends Item {
 
                         if (ticks >= 73 && ticks <= 210) {
                             assert player != null;
-                            VoidedHopes.screenshake(player, 0.135f);
+                            //VoidedHopes.screenshake(player, 0.135f);
                         } else if (ticks >= 210 && ticks <= 365) {
                             assert player != null;
-                            VoidedHopes.screenshake(player, 0.1f);
+                            //VoidedHopes.screenshake(player, 0.1f);
                         }
                     });
                 }
             }.startShakes();
 
             //AAALevel.addParticle(world, 5000, playingVfx);
-            RiftRendererManager.addRift(blockPos.toCenterPos().add(0,100,0), 0);
+            RiftRendererManager.addRift(blockPos.toCenterPos().add(0,-0.5, 0), 0);
             System.out.println("Starting vfx");
             world.playSound(null, blockPos, ModSound.REALITY_DETONATE, SoundCategory.MASTER, 1, 1);
         }

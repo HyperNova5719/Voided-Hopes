@@ -45,5 +45,7 @@ public class RiftRendererManager {
             }
         }
 
+        alreadyRendered = true;
+
     }
 }

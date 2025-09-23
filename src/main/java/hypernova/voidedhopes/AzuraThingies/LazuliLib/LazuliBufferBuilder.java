@@ -128,7 +128,9 @@ public class LazuliBufferBuilder {
             this.tessellator.draw();
             this.isEmpty = true;
         } else {
-            this.buffer.end();
+            if (this.buffer.isBuilding()) {
+                this.buffer.end();
+            }
         }
     }
 

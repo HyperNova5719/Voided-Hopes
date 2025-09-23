@@ -68,11 +68,6 @@ public class LazuliPen {
         return this;
     }
 
-    public LazuliPen setMode(int mod) {
-        mode = mod;
-        return this;
-    }
-
     public LazuliPen screenPlaneMode() {
         mode = 0;
         return this;
@@ -132,9 +127,14 @@ public class LazuliPen {
 
     public LazuliPen draw(LazuliBufferBuilder bb, Vec3d displace){
         if (POINTS.size() < 2) return this;
-        for (int i = 0; i < POINTS.size() - 1; i++) {
+        for (int i = 0; i < POINTS.size(); i++) {
             Vec3d p0 = POINTS.get(i);
-            Vec3d p1 = POINTS.get(i + 1);
+            Vec3d p1;
+            if (i != POINTS.size() - 1) {
+                p1 = POINTS.get(i + 1);
+            } else {
+                p1 = p0.add(p0.subtract(POINTS.get(i - 1)));
+            }
             Vec3d segment = p1.subtract(p0).normalize();
             Vec3d thisDir = LazuliMathUtils.rotateAroundAxis(segment, screenNormal, 90);
             Vec3d dir = thisDir;
@@ -154,14 +154,15 @@ public class LazuliPen {
             Vec3d offset = dir.multiply(finalThick * 0.5);
             LazuliVertex modelCopy = MODELS.get(i).copy();
             if (i != 0) {
-                bb.addVertex(modelCopy.pos(p0.add(displace).add(offset)));
-                bb.addVertex(modelCopy.pos(p0.add(displace).subtract(offset)));
+                bb.addVertex(modelCopy.pos(p0.add(displace).add(offset)).uv(modelCopy.u, 1));
+                bb.addVertex(modelCopy.pos(p0.add(displace).subtract(offset)).uv(modelCopy.u, 0));
             }
 
             if (i != POINTS.size() - 1){
-                bb.addVertex(modelCopy.pos(p0.add(displace).subtract(offset)));
-                bb.addVertex(modelCopy.pos(p0.add(displace).add(offset)));
-            }}
+                bb.addVertex(modelCopy.pos(p0.add(displace).subtract(offset)).uv(modelCopy.u, 0));
+                bb.addVertex(modelCopy.pos(p0.add(displace).add(offset)).uv(modelCopy.u, 1));
+            }
+        }
         return this;
     }
 
