@@ -8,7 +8,6 @@ import hypernova.voidedhopes.client.renderers.block.MatrixVoidBlockRenderer;
 import hypernova.voidedhopes.client.renderers.block.PureVoidBlockRenderer;
 import hypernova.voidedhopes.client.shader.VoidedHopesShader;
 import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderPhase;
 import net.minecraft.client.render.VertexFormat;
@@ -20,9 +19,13 @@ public class VoidedHopesShaders {
     public static VoidedHopesShader ENDER_SKY_BLOCK_SHADER;
 
     public static String PURE_VOID_LAZULI_SHADER = "rendertype_pure_void";
+    public static final String IMPACT = "shaders/post/contrast.json";
+    public static final String POST1 = "shaders/post/rift_post_1.json";
 
     public static void init() {
         LazuliShaderRegistry.registerShader(PURE_VOID_LAZULI_SHADER, "voided_hopes", VertexFormats.POSITION);
+        LazuliShaderRegistry.registerPostProcessingShader(IMPACT, "voided_hopes");
+        LazuliShaderRegistry.registerPostProcessingShader(POST1, "voided_hopes");
 
         PURE_VOID_SHADER = new VoidedHopesShader(VoidedHopes.id("rendertype_pure_void"), VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL)
                 .setRenderLayerFactory(() -> shaderProgram -> RenderLayer.of(

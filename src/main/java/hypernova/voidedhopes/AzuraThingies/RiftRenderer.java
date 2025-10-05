@@ -23,6 +23,7 @@ public class RiftRenderer {
     public long seed;
     public Vec3d epicenter;
     private Random random;
+    private int freezeCount = 0;
 
 
     public RiftRenderer(float time, long Seed, Vec3d center){
@@ -30,6 +31,7 @@ public class RiftRenderer {
         seed = Seed;
         epicenter = center;
         random = new Random(seed);
+        freezeCount = 0;
     }
 
 
@@ -37,6 +39,7 @@ public class RiftRenderer {
     public void render(Tessellator tess, Camera camera, ShaderProgram pureVoidShader, float globalTime) {
         random.setSeed(seed);
         float time = globalTime - startTime;
+        time *= 0.6;
 
         LazuliBufferBuilder bb = new LazuliBufferBuilder(tess, VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR_TEXTURE);
         bb.setCamera(camera);
@@ -46,9 +49,10 @@ public class RiftRenderer {
 
         if (time < 20) {
             float size = (20 - time) * (20 - time) * (20 - time) * 0.1f;
+            size = max(0, size);
             double progress = time / 20f;
             int res = 20;
-
+            LapisRenderer.setShader(GameRenderer.getPositionColorProgram());
             LazuliVertex model = template.copy().color(1f,1f,1f, (float) (progress));
 
             for (int p = 0; p < res; p++) {
@@ -75,6 +79,13 @@ public class RiftRenderer {
             bb.draw();
         } else {
             float localTime = time - 20;
+
+            if (freezeCount < 1){
+                RiftRendererManager.impactFrame = true;
+                freezeCount++;
+                LazuliFreeze.freeze(2);
+            }
+
             float rot = time * 0.04f;
             //Shockwave
             float size = localTime * 5;
@@ -82,7 +93,7 @@ public class RiftRenderer {
             int res = 6;
 
             LazuliVertex model = template.copy().color(1f,1f, 0.5f, (float) (progress));
-
+            LapisRenderer.setShader(GameRenderer.getPositionColorProgram());
             for (int p = 0; p < res; p++) {
                 float angle1 = (float) (p * PI / res);
                 float angle2 = (float) ((p + 1) * PI / res);
@@ -108,8 +119,8 @@ public class RiftRenderer {
 
             //Ring
             float count = 1;
-            for (float offset = 0; offset < 0.7; offset += 0.07F) {
-                float ringTime = localTime / (count / 1.5f);
+            for (float offset = 0; offset < 0.71; offset += 0.06F) {
+                float ringTime = localTime / (0.6666f + (count / 3f));
                 double circleSize = 0.6 + ((15 * ringTime) / (ringTime + 6));
                 LapisRenderer.setShader(GameRenderer.getPositionColorTexProgram());
                 LapisRenderer.setShaderTexture(0, magicCircleThingie);

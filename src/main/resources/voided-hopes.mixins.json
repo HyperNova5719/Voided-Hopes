@@ -12,7 +12,9 @@
 		"client.ItemRendererMixin",
 		"client.ModelLoaderMixin",
 		"client.PlayerEntityRendererMixin",
-		"client.LazuliParticleManagerMixin"
+		"client.LazuliParticleManagerMixin",
+		"client.LazuliPostProcessingRegistryMixin",
+		"client.LazuliWorldRendererMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

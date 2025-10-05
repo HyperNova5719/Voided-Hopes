@@ -1,5 +1,6 @@
 package hypernova.voidedhopes.client;
 
+import hypernova.voidedhopes.AzuraThingies.LazuliLib.LazuliShaderRegistry;
 import hypernova.voidedhopes.AzuraThingies.RiftRenderer;
 import hypernova.voidedhopes.AzuraThingies.RiftRendererManager;
 import hypernova.voidedhopes.block.ModBlocks;
@@ -21,6 +22,7 @@ public class VoidedHopesClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		RiftRendererManager.register();
 		VoidedHopesShaders.init();
+		LazuliShaderRegistry.register();
 
 		BlockEntityRendererFactories.register(ModBlocks.PURE_VOID_TYPE, PureVoidBlockRenderer::new);
 		//BuiltinItemRendererRegistry.INSTANCE.register(ModBlocks.PURE_VOID.asItem(), new PureVoidHeldItemRenderer());
