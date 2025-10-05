@@ -22,8 +22,22 @@ def inject_uniform_to_vsh(shader_dir: Path, uniform_line: str, vec4_wrapper: str
                 print(f"  Skipped {vsh_file.name}: uniform already exists")
                 continue
 
-            # Add uniform at the beginning
-            content = uniform_line + '\n' + content
+            # Find the first "uniform" line
+            lines = content.splitlines()
+            inserted = False
+            for i, line in enumerate(lines):
+                if line.strip().startswith("uniform "):
+                    # Insert right after this line
+                    lines.insert(i + 1, uniform_line)
+                    inserted = True
+                    break
+
+            if not inserted:
+                # If no uniform found, fallback: put at top
+                lines.insert(0, uniform_line)
+
+            content = "\n".join(lines)
+
 
             # Find the first vec4(...) with balanced parentheses
             pattern = r'vec4\s*\('
@@ -81,9 +95,12 @@ def main():
     script_dir = Path(__file__).parent.resolve()
     shader_dir = script_dir
 
-    uniform_line = "//Meow yay"
+    uniform_line = """
+        uniform vec3 epicenter;
+        uniform vec2 state;
+    """
 
-    vec4_wrapper = "vec4(X.x, X.y + sin(length(X.xz)), X.zw)"
+    vec4_wrapper = "vec4(X.x, X.y + ((state.y + 1.0) * sin(state.x + distance(epicenter.xz, X.xz))), X.zw)"
 
     print("Shader Uniform Injector")
     print("=" * 50)
