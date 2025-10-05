@@ -100,7 +100,7 @@ def main():
         uniform vec2 state;
     """
 
-    vec4_wrapper = "vec4(X.x, X.y + ((state.y + 1.0) * sin(state.x + distance(epicenter.xz, X.xz))), X.zw)"
+    vec4_wrapper = "vec4(X.x, X.y + ((state.y + 1.0) * sin(state.x + (0.5 * distance(epicenter.xz, X.xz)))), X.zw)"
 
     print("Shader Uniform Injector")
     print("=" * 50)
