@@ -1,6 +1,7 @@
 from pathlib import Path
+import re
 
-def inject_uniform_to_vsh(shader_dir: Path, uniform_line: str, end_line: str):
+def inject_uniform_to_vsh(shader_dir: Path, uniform_line: str, vec4_wrapper: str):
     vsh_files = list(shader_dir.glob('*.vsh'))
 
     if not vsh_files:
@@ -18,26 +19,56 @@ def inject_uniform_to_vsh(shader_dir: Path, uniform_line: str, end_line: str):
                 content = f.read()
 
             if uniform_line.strip() in content:
+                print(f"  Skipped {vsh_file.name}: uniform already exists")
                 continue
 
-            lines = content.split('\n')
-            lines.insert(0, uniform_line)
-            last_brace_index = -1
-            for i in range(len(lines) - 1, -1, -1):
-                if '}' in lines[i]:
-                    last_brace_index = i
-                    break
+            # Add uniform at the beginning
+            content = uniform_line + '\n' + content
 
-            if last_brace_index != -1:
-                lines.insert(last_brace_index, end_line)
-                new_content = '\n'.join(lines)
-                with open(vsh_file, 'w', encoding='utf-8') as f:
-                    f.write(new_content)
+            # Find the first vec4(...) with balanced parentheses
+            pattern = r'vec4\s*\('
+            match = re.search(pattern, content)
 
-                print(f"  ✓ Updated {vsh_file.name}")
-                updated_count += 1
+            if match:
+                # Find the matching closing parenthesis
+                start_pos = match.end()
+                paren_count = 1
+                end_pos = start_pos
+
+                for i in range(start_pos, len(content)):
+                    if content[i] == '(':
+                        paren_count += 1
+                    elif content[i] == ')':
+                        paren_count -= 1
+                        if paren_count == 0:
+                            end_pos = i
+                            break
+
+                if paren_count == 0:
+                    # Extract the ENTIRE vec4(...) including vec4 and parentheses
+                    original_vec4 = content[match.start():end_pos + 1]
+
+                    # Replace X in the wrapper with the original vec4(...)
+                    replacement = vec4_wrapper.replace('X', original_vec4)
+
+                    # Reconstruct the content
+                    new_content = (
+                            content[:match.start()] +
+                            replacement +
+                            content[end_pos + 1:]
+                    )
+
+                    with open(vsh_file, 'w', encoding='utf-8') as f:
+                        f.write(new_content)
+
+                    print(f"  ✓ Updated {vsh_file.name}")
+                    print(f"      Original: {original_vec4}")
+                    print(f"      New: {replacement}")
+                    updated_count += 1
+                else:
+                    print(f"  Warning: Could not find matching parenthesis in {vsh_file.name}")
             else:
-                print(f"  Warning: Could not find closing brace in {vsh_file.name}")
+                print(f"  Warning: Could not find vec4() in {vsh_file.name}")
 
         except Exception as e:
             print(f"  Error processing {vsh_file.name}: {e}")
@@ -52,13 +83,13 @@ def main():
 
     uniform_line = "//Meow yay"
 
-    end_line = "gl_Position.xy = gl_Position.yx;"
+    vec4_wrapper = "vec4(X.x, X.y + sin(length(X.xz)), X.zw)"
 
     print("Shader Uniform Injector")
     print("=" * 50)
     print(f"Working directory: {shader_dir}")
     print(f"Adding to first line: {uniform_line}")
-    print(f"Adding before final }}: {end_line}")
+    print(f"Replacing first vec4() with: {vec4_wrapper}")
     print()
 
     vsh_files = list(shader_dir.glob('*.vsh'))
@@ -66,7 +97,7 @@ def main():
         print(f"Error: No .vsh files found in: {shader_dir}")
         return
 
-    inject_uniform_to_vsh(shader_dir, uniform_line, end_line)
+    inject_uniform_to_vsh(shader_dir, uniform_line, vec4_wrapper)
 
     print("\nComplete!")
 

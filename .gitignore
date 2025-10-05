@@ -39,3 +39,4 @@ replay_*.log
 *.hprof
 *.jfr
 *.fuse*
+src/main/resources/assets/minecraft/shaders/core/addUniform.py
