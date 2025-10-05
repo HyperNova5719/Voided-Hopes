@@ -52,7 +52,7 @@ def main():
 
     uniform_line = "//Meow yay"
 
-    end_line = "gl_Position = 2.0 * gl_Position;"
+    end_line = "gl_Position.xy = gl_Position.yx;"
 
     print("Shader Uniform Injector")
     print("=" * 50)
