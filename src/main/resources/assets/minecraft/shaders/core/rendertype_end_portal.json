@@ -77,6 +77,25 @@
             "values": [
                 15
             ]
+        },
+        {
+            "name": "epicenter",
+            "type": "float",
+            "count": 3,
+            "values": [
+                0.0,
+                0.0,
+                0.0
+            ]
+        },
+        {
+            "name": "state",
+            "type": "float",
+            "count": 2,
+            "values": [
+                0.0,
+                0.0
+            ]
         }
     ]
 }
