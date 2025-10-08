@@ -1,7 +1,7 @@
 from pathlib import Path
 import re
 
-def inject_uniform_to_vsh(shader_dir: Path, uniform_line: str, vec4_wrapper: str):
+def inject_uniform_to_vsh(shader_dir: Path, target_dir: Path, uniform_line: str, inserted_line: str, vec4_replacement: str):
     vsh_files = list(shader_dir.glob('*.vsh'))
 
     if not vsh_files:
@@ -13,6 +13,8 @@ def inject_uniform_to_vsh(shader_dir: Path, uniform_line: str, vec4_wrapper: str
 
     updated_count = 0
 
+    target_dir.mkdir(parents=True, exist_ok=True)
+
     for vsh_file in vsh_files:
         try:
             with open(vsh_file, 'r', encoding='utf-8') as f:
@@ -22,29 +24,25 @@ def inject_uniform_to_vsh(shader_dir: Path, uniform_line: str, vec4_wrapper: str
                 print(f"  Skipped {vsh_file.name}: uniform already exists")
                 continue
 
-            # Find the first "uniform" line
+            # Insert uniforms
             lines = content.splitlines()
             inserted = False
             for i, line in enumerate(lines):
                 if line.strip().startswith("uniform "):
-                    # Insert right after this line
                     lines.insert(i + 1, uniform_line)
                     inserted = True
                     break
-
             if not inserted:
-                # If no uniform found, fallback: put at top
                 lines.insert(0, uniform_line)
 
+            # Re-join for searching
             content = "\n".join(lines)
 
-
-            # Find the first vec4(...) with balanced parentheses
+            # Look for vec4(...)
             pattern = r'vec4\s*\('
             match = re.search(pattern, content)
 
             if match:
-                # Find the matching closing parenthesis
                 start_pos = match.end()
                 paren_count = 1
                 end_pos = start_pos
@@ -59,25 +57,24 @@ def inject_uniform_to_vsh(shader_dir: Path, uniform_line: str, vec4_wrapper: str
                             break
 
                 if paren_count == 0:
-                    # Extract the ENTIRE vec4(...) including vec4 and parentheses
                     original_vec4 = content[match.start():end_pos + 1]
+                    pos_line = inserted_line.replace("X", original_vec4)
 
-                    # Replace X in the wrapper with the original vec4(...)
-                    replacement = vec4_wrapper.replace('X', original_vec4)
+                    # Work line-by-line
+                    lines = content.splitlines()
+                    for idx, line in enumerate(lines):
+                        if "vec4(" in line:
+                            lines.insert(idx, pos_line)
+                            lines[idx + 1] = line.replace(original_vec4, vec4_replacement)
+                            break
 
-                    # Reconstruct the content
-                    new_content = (
-                            content[:match.start()] +
-                            replacement +
-                            content[end_pos + 1:]
-                    )
+                    new_content = "\n".join(lines)
 
-                    with open(vsh_file, 'w', encoding='utf-8') as f:
+                    target_file = target_dir / vsh_file.name
+                    with open(target_file, 'w', encoding='utf-8') as f:
                         f.write(new_content)
 
-                    print(f"  ✓ Updated {vsh_file.name}")
-                    print(f"      Original: {original_vec4}")
-                    print(f"      New: {replacement}")
+                    print(f"  ✓ Updated {vsh_file.name} -> {target_file}")
                     updated_count += 1
                 else:
                     print(f"  Warning: Could not find matching parenthesis in {vsh_file.name}")
@@ -89,24 +86,40 @@ def inject_uniform_to_vsh(shader_dir: Path, uniform_line: str, vec4_wrapper: str
 
     print()
     print("=" * 50)
-    print(f"Successfully updated {updated_count} .vsh files")
+    print(f"Successfully updated {updated_count} .vsh files in {target_dir}")
+
 
 def main():
     script_dir = Path(__file__).parent.resolve()
-    shader_dir = script_dir
+    shader_dir = script_dir.parent / "base"
+    target_dir = script_dir
 
-    uniform_line = """
-        uniform vec3 epicenter;
-        uniform vec2 state;
+    inserted_line = """
+    vec3 p = (X).xyz;
+    float dist = distance(p, epicenter);
+    float t = state.x;
+    float rad = t * 300.0;
+    float cameraCorrectionPhase = (length(epicenter) - rad) * 0.3;
+    float centerDis = sin(2.0 * cameraCorrectionPhase) / (cameraCorrectionPhase * max(1.0, cameraCorrectionPhase));
+    float phase = (dist - rad) * 0.3;
+    float displacement = (sin(2.0 * phase) / (phase * max(1.0, phase))) - centerDis;
+    vec3 disPos = p;
+    disPos.y += displacement * 10.0 * (1.0-t) * state.y;
     """
 
-    vec4_wrapper = "vec4(X.x, X.y + ((state.y + 1.0) * sin(state.x + (0.5 * distance(epicenter.xz, X.xz)))), X.zw)"
+    vec4_replacement = "vec4(disPos, 1.0)"
+
+    uniform_line = """
+uniform vec3 epicenter;
+uniform vec2 state;
+    """
 
     print("Shader Uniform Injector")
     print("=" * 50)
-    print(f"Working directory: {shader_dir}")
-    print(f"Adding to first line: {uniform_line}")
-    print(f"Replacing first vec4() with: {vec4_wrapper}")
+    print(f"Shader directory: {shader_dir}")
+    print(f"Target directory: {target_dir}")
+    print(f"Adding uniform:\n{uniform_line}")
+    print("Replacing first vec4() with pos wrapper logic")
     print()
 
     vsh_files = list(shader_dir.glob('*.vsh'))
@@ -114,9 +127,10 @@ def main():
         print(f"Error: No .vsh files found in: {shader_dir}")
         return
 
-    inject_uniform_to_vsh(shader_dir, uniform_line, vec4_wrapper)
+    inject_uniform_to_vsh(shader_dir, target_dir, uniform_line, inserted_line, vec4_replacement)
 
     print("\nComplete!")
+
 
 if __name__ == "__main__":
     main()

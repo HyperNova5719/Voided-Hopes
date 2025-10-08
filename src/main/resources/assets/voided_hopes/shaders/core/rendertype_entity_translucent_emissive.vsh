@@ -10,6 +10,10 @@ in ivec2 UV2;
 in vec3 Normal;
 
 uniform sampler2D Sampler1;
+
+uniform vec3 epicenter;
+uniform vec2 state;
+    
 uniform sampler2D Sampler2;
 
 uniform mat4 ModelViewMat;
@@ -25,7 +29,19 @@ out vec2 texCoord0;
 out vec4 normal;
 
 void main() {
-    gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
+
+    vec3 p = (vec4(Position, 1.0)).xyz;
+    float dist = distance(p, epicenter);
+    float t = state.x;
+    float rad = t * 300.0;
+    float cameraCorrectionPhase = (length(epicenter) - rad) * 0.3;
+    float centerDis = sin(2.0 * cameraCorrectionPhase) / (cameraCorrectionPhase * max(1.0, cameraCorrectionPhase));
+    float phase = (dist - rad) * 0.3;
+    float displacement = (sin(2.0 * phase) / (phase * max(1.0, phase))) - centerDis;
+    vec3 disPos = p;
+    disPos.y += displacement * 10.0 * (1.0-t) * state.y;
+    
+    gl_Position = ProjMat * ModelViewMat * vec4(disPos, 1.0);
 
     vertexDistance = length((ModelViewMat * vec4(Position, 1.0)).xyz);
     vertexColor = minecraft_mix_light(Light0_Direction, Light1_Direction, Normal, Color);

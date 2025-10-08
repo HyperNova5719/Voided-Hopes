@@ -48,7 +48,7 @@ public class RiftRenderer {
 
 
         if (time < 20) {
-            float size = (20 - time) * (20 - time) * (20 - time) * 0.1f;
+            float size = (20 - time) * (20 - time) * (20 - time) * 0.04f;
             size = max(0, size);
             double progress = time / 20f;
             int res = 20;
@@ -87,6 +87,38 @@ public class RiftRenderer {
             }
 
             float rot = time * 0.04f;
+
+
+            //Terrain wave
+            if (localTime < 250){
+                RiftRendererManager.epicenter = epicenter;
+                RiftRendererManager.waveForce = 1;
+                RiftRendererManager.t = localTime / 200;
+            }
+
+
+            //Sky rift
+            LapisRenderer.setShader(pureVoidShader);
+            LapisRenderer.setShaderTexture(0, PureVoidBlockRenderer.SKY_TEXTURE);
+            LapisRenderer.setShaderTexture(1, PureVoidBlockRenderer.PORTAL_TEXTURE);
+            pen.setModel(template);
+            for (double dir = 0; dir < Math.PI * 2; dir += Math.PI / 5) {
+                Vec3d head = Vec3d.ZERO;//new Vec3d(60,0,60).rotateY((float) dir);
+                Vec3d rVec = new Vec3d(1,0,1).rotateY((float) dir);
+                for (double i = 0; i < 20; i++) {
+                    double progress = max(0.0, min(1.0, (0.08 * localTime) - i));
+                    pen.setU((float) (i / 20));
+                    if (progress > 0) pen.point(head, (440 / (1 + i)) / (progress * progress));
+                    head = head.add(rVec.multiply(160 * progress));
+                    rVec = new Vec3d(random.nextDouble(), 0, random.nextDouble()).normalize().rotateY((float) dir);
+                }
+
+                pen.draw(bb, epicenter.add(0, 130 - (5.0 * dir), 0));
+                bb.drawAndReset();
+                pen.eraseAll();
+            }
+
+
             //Shockwave
             float size = localTime * 5;
             double progress = (60 - min(localTime, 60)) / 60;
@@ -117,6 +149,81 @@ public class RiftRenderer {
             }
             bb.drawAndReset();
 
+            //beam
+            model = template.copy().color(0.7f,1f, 0.7f, 1);
+            LapisRenderer.enableCull();
+
+            int beamRes = 10;
+            int layers = 6;
+            double beamRad = 0.5 * (1 - (1/(1 + (0.25 * localTime))));
+
+            for (int i = 0; i <= layers; i++) {
+                model = template.copy().color(0f, min(1f, (0.4f + ((float) i / layers))), 0f, 1f / (i + 1f));
+                beamRad += 0.3 * (1 - (1/(1 + (0.5 * localTime))));
+
+                for (int p = 0; p < beamRes; p++) {
+                    float angle1 = (float) (p * PI / beamRes) * -2f;
+                    float angle2 = (float) ((p + 1) * PI / beamRes) * -2f;
+
+                    double y1 = 0;
+                    double y2 = 100;
+
+                    float a = (float) (angle1 / (PI * 2));
+                    float b = (float) (angle2 / (PI * 2));
+
+                    Vec3d v1 = new Vec3d(sin(angle1) * beamRad, y1, cos(angle1) * beamRad);
+                    Vec3d v2 = new Vec3d(sin(angle1) * beamRad, y2, cos(angle1) * beamRad);
+                    Vec3d v3 = new Vec3d(sin(angle2) * beamRad, y2, cos(angle2) * beamRad);
+                    Vec3d v4 = new Vec3d(sin(angle2) * beamRad, y1, cos(angle2) * beamRad);
+
+                    bb.addVertex(model.pos(v1.add(epicenter)).uv(a, 0)).addVertex(model.pos(v2.add(epicenter)).uv(a, 1)).addVertex(model.pos(v3.add(epicenter)).uv(b, 1)).addVertex(model.pos(v4.add(epicenter)).uv(b, 0));
+                }
+                bb.drawAndReset();
+            }
+
+
+            //Vortex
+            ShaderProgram vortex = LazuliShaderRegistry.getShader(VoidedHopesShaders.VORTEX_LAZULI_SHADER);
+            vortex.getUniformOrDefault("GameTime").set(localTime);
+            LapisRenderer.setShader(vortex);
+
+            model = template.copy().color(0.7f,0.8f, 1f, 1f);
+            beamRad += 0.7 * (1 - (1/(1 + (0.5 * localTime))));
+
+            beamRes = 20;
+            float vortexRes2 = 10;
+
+            for (float n = 0; n < 1.0; n += 1f / vortexRes2) {
+                    float growth = 42 * n * n;
+                for (float p = 0; p < beamRes; p++) {
+                    float angle1 = (float) (p * PI / beamRes) * -2f;
+                    float angle2 = (float) ((p + 1) * PI / beamRes) * -2f;
+
+                    double y1 = n * 100;
+                    double y2 = (n + 1f / vortexRes2) * 100;
+
+                    float a = p / beamRes;
+                    float b = (p + 1) / beamRes;
+
+
+                    Vec3d p1 = new Vec3d(sin(angle1) * beamRad, y1, cos(angle1) * beamRad);
+                    Vec3d p2 = new Vec3d(sin(angle1) * (beamRad + growth), y2, cos(angle1) * (beamRad + growth));
+                    Vec3d p3 = new Vec3d(sin(angle2) * (beamRad + growth), y2, cos(angle2) * (beamRad + growth));
+                    Vec3d p4 = new Vec3d(sin(angle2) * beamRad, y1, cos(angle2) * beamRad);
+
+                    LazuliVertex v1 = model.copy().pos(p1.add(epicenter)).uv(a, n);
+                    LazuliVertex v2 = model.copy().pos(p2.add(epicenter)).uv(a, n + 1f / vortexRes2);
+                    LazuliVertex v3 = model.copy().pos(p3.add(epicenter)).uv(b, n + 1f / vortexRes2);
+                    LazuliVertex v4 = model.copy().pos(p4.add(epicenter)).uv(b, n);
+
+                    bb.addVertex(v1).addVertex(v2).addVertex(v3).addVertex(v4);
+
+                }
+                bb.drawAndReset();
+                beamRad += growth;
+            }
+
+
             //Ring
             float count = 1;
             for (float offset = 0; offset < 0.71; offset += 0.06F) {
@@ -131,28 +238,9 @@ public class RiftRenderer {
                 circleSize += 0.04;
                 count += 3;
             }
+
             bb.drawAndReset();
             pen.eraseAll();
-
-            if (time > 40) {
-                LapisRenderer.setShader(pureVoidShader);
-                LapisRenderer.setShaderTexture(0, PureVoidBlockRenderer.SKY_TEXTURE);
-                LapisRenderer.setShaderTexture(1, PureVoidBlockRenderer.PORTAL_TEXTURE);
-
-
-                for (double dir = 0; dir < Math.PI * 2; dir += Math.PI / 6) {
-                    Vec3d head = Vec3d.ZERO;
-                    for (double i = 0; i < 20; i++) {
-                        pen.point(head, (20 - i));
-                        Vec3d rVec = new Vec3d(random.nextDouble(), 0, random.nextDouble()).normalize().rotateY((float) dir);
-                        head = head.add(rVec.multiply(130));
-                    }
-
-                    pen.draw(bb, epicenter.add(0, 100, 0));
-                    bb.drawAndReset();
-                    pen.eraseAll();
-                }
-            }
         }
         bb.draw();
     }

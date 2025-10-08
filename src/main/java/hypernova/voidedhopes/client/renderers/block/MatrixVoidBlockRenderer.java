@@ -1,5 +1,7 @@
 package hypernova.voidedhopes.client.renderers.block;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import hypernova.voidedhopes.AzuraThingies.RiftRendererManager;
 import hypernova.voidedhopes.VoidedHopes;
 import hypernova.voidedhopes.block.custom.MatrixVoidBlockEntity;
 import hypernova.voidedhopes.client.VoidedHopesShaders;
@@ -25,6 +27,7 @@ public class MatrixVoidBlockRenderer implements BlockEntityRenderer<MatrixVoidBl
     @Override
     public void render(MatrixVoidBlockEntity entity, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
+        RiftRendererManager.set(RenderSystem.getShader());
         this.renderSides(entity, matrix4f, vertexConsumers.getBuffer(this.getLayer()));
     }
 

@@ -1,5 +1,7 @@
 package hypernova.voidedhopes.client.renderers.block;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import hypernova.voidedhopes.AzuraThingies.RiftRendererManager;
 import hypernova.voidedhopes.block.custom.EnderSkyBlockEntity;
 import hypernova.voidedhopes.client.VoidedHopesShaders;
 import net.minecraft.client.render.RenderLayer;
@@ -23,6 +25,7 @@ public class EnderSkyBlockRenderer implements BlockEntityRenderer<EnderSkyBlockE
     @Override
     public void render(EnderSkyBlockEntity entity, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
+        RiftRendererManager.set(RenderSystem.getShader());
         this.renderSides(entity, matrix4f, vertexConsumers.getBuffer(this.getLayer()));
     }
 

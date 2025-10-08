@@ -7,6 +7,10 @@ in vec4 Color;
 in vec3 Normal;
 
 uniform mat4 ModelViewMat;
+
+uniform vec3 epicenter;
+uniform vec2 state;
+    
 uniform mat4 ProjMat;
 uniform float LineWidth;
 uniform vec2 ScreenSize;
@@ -24,7 +28,19 @@ const mat4 VIEW_SCALE = mat4(
 );
 
 void main() {
-    vec4 linePosStart = ProjMat * VIEW_SCALE * ModelViewMat * vec4(Position, 1.0);
+
+    vec3 p = (vec4(Position, 1.0)).xyz;
+    float dist = distance(p, epicenter);
+    float t = state.x;
+    float rad = t * 300.0;
+    float cameraCorrectionPhase = (length(epicenter) - rad) * 0.3;
+    float centerDis = sin(2.0 * cameraCorrectionPhase) / (cameraCorrectionPhase * max(1.0, cameraCorrectionPhase));
+    float phase = (dist - rad) * 0.3;
+    float displacement = (sin(2.0 * phase) / (phase * max(1.0, phase))) - centerDis;
+    vec3 disPos = p;
+    disPos.y += displacement * 10.0 * (1.0-t) * state.y;
+    
+    vec4 linePosStart = ProjMat * VIEW_SCALE * ModelViewMat * vec4(disPos, 1.0);
     vec4 linePosEnd = ProjMat * VIEW_SCALE * ModelViewMat * vec4(Position + Normal, 1.0);
 
     vec3 ndc1 = linePosStart.xyz / linePosStart.w;

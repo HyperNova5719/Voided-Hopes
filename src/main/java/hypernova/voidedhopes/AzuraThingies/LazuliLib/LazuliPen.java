@@ -118,6 +118,11 @@ public class LazuliPen {
         return this;
     }
 
+    public LazuliPen setU(float u){
+        model = model.uv(u, model.v);
+        return this;
+    }
+
     public LazuliPen eraseAll(){
         MODELS.clear();
         POINTS.clear();

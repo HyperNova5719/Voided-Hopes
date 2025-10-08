@@ -18,12 +18,15 @@ public class VoidedHopesShaders {
     public static VoidedHopesShader MATRIX_VOID_SHADER;
     public static VoidedHopesShader ENDER_SKY_BLOCK_SHADER;
 
-    public static String PURE_VOID_LAZULI_SHADER = "rendertype_pure_void";
+    public static String RIFT_LAZULI_SHADER = "rendertype_rift";
+    public static String VORTEX_LAZULI_SHADER = "rendertype_vortex";
     public static final String IMPACT = "shaders/post/contrast.json";
     public static final String POST1 = "shaders/post/rift_post_1.json";
 
     public static void init() {
-        LazuliShaderRegistry.registerShader(PURE_VOID_LAZULI_SHADER, "voided_hopes", VertexFormats.POSITION);
+        LazuliShaderRegistry.registerShader(RIFT_LAZULI_SHADER, "voided_hopes", VertexFormats.POSITION);
+        LazuliShaderRegistry.registerShader(VORTEX_LAZULI_SHADER, "voided_hopes", VertexFormats.POSITION_COLOR_TEXTURE);
+
         LazuliShaderRegistry.registerPostProcessingShader(IMPACT, "voided_hopes");
         LazuliShaderRegistry.registerPostProcessingShader(POST1, "voided_hopes");
 
