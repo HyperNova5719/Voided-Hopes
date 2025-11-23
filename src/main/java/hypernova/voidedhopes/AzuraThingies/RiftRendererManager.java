@@ -26,6 +26,15 @@ public class RiftRendererManager {
     public static float t = 200;
     private static List<String> shadersToInjectUniforms = new ArrayList<>();
 
+    public static float trueTimeTicks(){
+        return (((float) (System.currentTimeMillis() % 86400000) / 1000f) * 20f);
+
+    }
+
+
+
+
+
     public static void register() {
         WorldRenderEvents.END.register(context -> {
             alreadyRendered = false;
@@ -33,8 +42,8 @@ public class RiftRendererManager {
                 LazuliShaderRegistry.getPostProcessor(VoidedHopesShaders.IMPACT).render(0);
             }
             wasImpact = impactFrame;
-            time += MinecraftClient.getInstance().getTickDelta();
-
+            //time = trueTimeTicks();
+            time += context.tickDelta();
 
             LazuliShaderRegistry.getPostProcessor(VoidedHopesShaders.POST1).render(0);
         });
@@ -62,6 +71,8 @@ public class RiftRendererManager {
                 iterator.remove();
             }
         }
+
+
         overrideMinecraftShaderUniforms(camera);
         alreadyRendered = true;
 
@@ -74,9 +85,6 @@ public class RiftRendererManager {
 
     private static void overrideMinecraftShaderUniforms(Camera camera){
         dis = camera.getPos().multiply(-1).add(epicenter);
-
-
-
 
         set(GameRenderer.getPositionProgram());
         set(GameRenderer.getPositionColorProgram());

@@ -31,14 +31,15 @@ void main() {
 
     vec3 p = (vec4(Position, 1.0)).xyz;
     float dist = distance(p, epicenter);
-    float t = state.x;
-    float rad = t * 300.0;
-    float cameraCorrectionPhase = (length(epicenter) - rad) * 0.3;
-    float centerDis = sin(2.0 * cameraCorrectionPhase) / (cameraCorrectionPhase * max(1.0, cameraCorrectionPhase));
-    float phase = (dist - rad) * 0.3;
-    float displacement = (sin(2.0 * phase) / (phase * max(1.0, phase))) - centerDis;
+    float t = abs(state.x - 1.0);
+    float pMultiplier = 2.0 - sign(state.x);
+    float rad = t * 400.0;
+    float cameraCorrectionPhase = (length(epicenter) - rad) * 0.3 * pMultiplier;
+    float centerDis = sin(1.0 * cameraCorrectionPhase) / (cameraCorrectionPhase * max(1.0, cameraCorrectionPhase));
+    float phase = (dist - rad) * 0.3 * pMultiplier;
+    float displacement = (sin(1.0 * phase) / (phase * max(1.0, phase))) - centerDis;
     vec3 disPos = p;
-    disPos.y += displacement * 10.0 * (1.0-t) * state.y;
+    disPos.y += displacement * 30.0 * (1.0 - t) * state.y;
     
     vec4 linePosStart = ProjMat * VIEW_SCALE * ModelViewMat * vec4(disPos, 1.0);
     vec4 linePosEnd = ProjMat * VIEW_SCALE * ModelViewMat * vec4(Position + Normal, 1.0);
