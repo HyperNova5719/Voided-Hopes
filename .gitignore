@@ -18,6 +18,10 @@ classes/
 
 # vscode
 
+
+*.fuse*
+
+
 .settings/
 .vscode/
 bin/

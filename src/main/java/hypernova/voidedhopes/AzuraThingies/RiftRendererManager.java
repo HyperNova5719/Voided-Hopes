@@ -3,6 +3,7 @@ package hypernova.voidedhopes.AzuraThingies;
 import hypernova.voidedhopes.AzuraThingies.LazuliLib.*;
 import hypernova.voidedhopes.client.VoidedHopesShaders;
 import hypernova.voidedhopes.client.renderers.block.PureVoidBlockRenderer;
+import hypernova.voidedhopes.client.shader.VoidedHopesShader;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderProgram;
@@ -27,7 +28,7 @@ public class RiftRendererManager {
     private static List<String> shadersToInjectUniforms = new ArrayList<>();
 
     public static float trueTimeTicks(){
-        return (((float) (System.currentTimeMillis() % 86400000) / 1000f) * 20f);
+        return (((float) (System.currentTimeMillis() % 86400000) / 1000f) * 30f);
 
     }
 
@@ -42,8 +43,8 @@ public class RiftRendererManager {
                 LazuliShaderRegistry.getPostProcessor(VoidedHopesShaders.IMPACT).render(0);
             }
             wasImpact = impactFrame;
-            //time = trueTimeTicks();
-            time += context.tickDelta();
+            time = trueTimeTicks();
+            //time += context.tickDelta();
 
             LazuliShaderRegistry.getPostProcessor(VoidedHopesShaders.POST1).render(0);
         });
@@ -63,6 +64,8 @@ public class RiftRendererManager {
 
         impactFrame = false;
 
+
+
         Iterator<RiftRenderer> iterator = rifts.iterator();
         while (iterator.hasNext()) {
             RiftRenderer rift = iterator.next();
@@ -71,20 +74,26 @@ public class RiftRendererManager {
                 iterator.remove();
             }
         }
-
-
         overrideMinecraftShaderUniforms(camera);
+
+
         alreadyRendered = true;
 
     }
 
-    public static void set(ShaderProgram p){
+    public static ShaderProgram set(ShaderProgram p){
         p.getUniformOrDefault("epicenter").set((float) dis.x, (float) dis.y, (float) dis.z);
         p.getUniformOrDefault("state").set(t, waveForce);
+        return p;
     }
 
-    private static void overrideMinecraftShaderUniforms(Camera camera){
+    public static void overrideMinecraftShaderUniforms(Camera camera){
         dis = camera.getPos().multiply(-1).add(epicenter);
+
+
+        set(LazuliShaderRegistry.getShader(VoidedHopesShaders.RIFT_LAZULI_SHADER));
+        set(LazuliShaderRegistry.getShader(VoidedHopesShaders.VORTEX_LAZULI_SHADER));
+        set(LazuliShaderRegistry.getShader(VoidedHopesShaders.VORTEX_LAZULI_SHADER));
 
         set(GameRenderer.getPositionProgram());
         set(GameRenderer.getPositionColorProgram());

@@ -4,8 +4,8 @@
         "srcrgb": "srcalpha",
         "dstrgb": "1-srcalpha"
     },
-    "vertex": "voided_hopes:position_color_tex",
-    "fragment": "position_color_tex",
+    "vertex": "voided_hopes:position_color",
+    "fragment": "position_color",
     "attributes": [
         "Position",
         "Color",

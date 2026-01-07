@@ -126,12 +126,12 @@ mat4 end_portal_layer(float layer) {
 }
 
 vec4 voidShader() {
-    vec3 color = COLORS[0];
+    vec3 color = WHITE_COLORS[0];
     for (int i = 0; i < EndPortalLayers; i++) {
-        vec3 starColor = textureProj(Sampler1, texProj0 * end_portal_layer(float(i + 1))).rgb;
-        color += starColor * COLORS[i + 1];
+        vec3 starColor = textureProj(Sampler1,0.4 * texProj0 * end_portal_layer(float(i + 1))).rgb;
+        color -= starColor * WHITE_COLORS[i + 1];
     }
-    return vec4(color, 1.0);
+    return vec4(1.0 - min(vec3(1.0), color) , 1.0);
 }
 
 vec4 voidShader2() {
