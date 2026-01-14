@@ -40,7 +40,7 @@ void main() {
     float phase = (dist - rad) * 0.3 * pMultiplier;
     float displacement = (sin(1.0 * phase) / (phase * max(1.0, phase))) - centerDis;
     vec3 disPos = p;
-    disPos.y += displacement * 30.0 * (1.0 - t) * state.y;
+    disPos.y += (displacement * 30.0 * (1.0 - t) * state.y) / (1.0 + (state.x * 0.1));
 
     vec3 bbPos = epicenter + vec3(0.0, 13.0, 0.0);
 
@@ -66,10 +66,10 @@ void main() {
         float viewFactor = lookingTowardBH * exp(-bhDist / 30.0); // Exponential falloff
 
         // Impact parameter: inverse square with smooth rolloff
-        float impactFactor = 1.0 / (1.0 + impactParam * impactParam / 100.0);
+        float impactFactor = 1.0 / (1.0 + pow(impactParam, 2.5) / 100.0);
 
         // Combined gravitational strength
-        float G = 0.4; // Overall strength multiplier
+        float G = 0.5; // Overall strength multiplier
         float totalLensing = G * viewFactor * impactFactor;
 
         vec3 toBlackHole = normalize(bbPos - closestPoint);

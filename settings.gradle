@@ -1,5 +1,21 @@
 pluginManagement {
 	repositories {
+		mavenLocal()
+
+		maven {
+			url 'https://repo1.maven.org/maven2/'
+			name 'Maven Central Direct'
+		}
+
+		maven {
+			url 'https://repo.huaweicloud.com/repository/maven/'
+			name 'Huawei Mirror'
+		}
+		maven {
+			url 'https://maven.aliyun.com/repository/central'
+			name 'Aliyun Central'
+		}
+
 		maven {
 			name = 'Fabric'
 			url = 'https://maven.fabricmc.net/'

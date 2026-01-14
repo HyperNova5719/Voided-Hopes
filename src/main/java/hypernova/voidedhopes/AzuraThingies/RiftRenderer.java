@@ -154,12 +154,12 @@ public class RiftRenderer {
 
             pen.setModel(template);
             for (double dir = 0; dir + 0.01 < Math.PI * 2; dir += Math.PI / 3) {
-                Vec3d head = new Vec3d(160,0,160).rotateY((float) dir).multiply(sizeMultiplier);
+                Vec3d head = new Vec3d(260,0,260).rotateY((float) dir).multiply(sizeMultiplier);
                 Vec3d rVec = new Vec3d(1,0,1).rotateY((float) dir);
                 for (double i = 0; i < 20; i++) {
                     double progress = max(0.0, min(1.0, (0.08 * localTime) - i));
                     pen.setU((float) (i / 20));
-                    double d = 30 / ((100 * i) + 1);
+                    double d = 100 / ((30 * i) + 1);
                     if (progress > 0) pen.point(head, (d + (440 / (1 + i))) * (progress * progress) * sizeMultiplier);
                     head = head.add(rVec.multiply(160 * progress * sizeMultiplier));
                     rVec = new Vec3d(random.nextDouble(), 0, random.nextDouble()).normalize().rotateY((float) dir);
@@ -185,7 +185,7 @@ public class RiftRenderer {
             pen.setModel(template);
 
 
-            float size = 8;
+            float size = 4;
             float res = 13;
             double ss = 1.0;
 
@@ -218,12 +218,20 @@ public class RiftRenderer {
             bb.drawAndReset();
 
             model = template.copy().color(1f,1f, 0.9f, 0.9f);
-            LapisRenderer.setShader(RiftRendererManager.set(GameRenderer.getPositionColorProgram()));
+            LapisRenderer.setShader(RiftRendererManager.set(LazuliShaderRegistry.getShader(VoidedHopesShaders.ACRESCION_LAZULI_SHADER)));
 
-            for (int ii = 0; ii < 12; ii++) {
+            res = 60;
+            int loops = 28;
+
+            for (int ii = 0; ii < loops; ii++) {
                 for (int i = 0; i < res * 2; i++) {
-                    double rad1 = 9 + (ii * 8);
-                    double rad2 = 16.5 + (ii * 8);
+                    double rad1 = 4 + (ii * 8);
+                    double rad2 = 12 + (ii * 8);
+
+                    float u1 = ii / (float) loops;
+                    float u2 = (ii + 1) / (float) loops;
+                    float v1 = i / res;
+                    float v2 = (i + 1) / res;
 
                     float theta = (float) (i * PI / res);
                     float nextTheta = (float) ((i + 1) * PI / res);
@@ -233,12 +241,19 @@ public class RiftRenderer {
                     Vec3d p3 = new Vec3d(sin(nextTheta) * rad2, 0, cos(nextTheta) * rad2).multiply(sizeMultiplier);
                     Vec3d p4 = new Vec3d(sin(nextTheta) * rad1, 0, cos(nextTheta) * rad1).multiply(sizeMultiplier);
 
-                    LazuliVertex v2 = model.copy().pos(p2.add(epicenter).add(0, 130 * sizeMultiplier, 0));
-                    LazuliVertex v1 = model.copy().pos(p1.add(epicenter).add(0, 130 * sizeMultiplier, 0));
-                    LazuliVertex v3 = model.copy().pos(p3.add(epicenter).add(0, 130 * sizeMultiplier, 0));
-                    LazuliVertex v4 = model.copy().pos(p4.add(epicenter).add(0, 130 * sizeMultiplier, 0));
+                    p1.rotateX((float) Math.toRadians(35));
+                    p2.rotateX((float) Math.toRadians(35));
+                    p3.rotateX((float) Math.toRadians(35));
+                    p4.rotateX((float) Math.toRadians(35));
 
-                    bb.addVertex(v1).addVertex(v2).addVertex(v3).addVertex(v4);
+
+
+                    LazuliVertex vt2 = model.copy().pos(p2.add(epicenter).add(0, 130 * sizeMultiplier, 0)).uv(u2, v1);
+                    LazuliVertex vt1 = model.copy().pos(p1.add(epicenter).add(0, 130 * sizeMultiplier, 0)).uv(u1, v1);
+                    LazuliVertex vt3 = model.copy().pos(p3.add(epicenter).add(0, 130 * sizeMultiplier, 0)).uv(u2, v2);
+                    LazuliVertex vt4 = model.copy().pos(p4.add(epicenter).add(0, 130 * sizeMultiplier, 0)).uv(u1, v2);
+
+                    bb.addVertex(vt1).addVertex(vt2).addVertex(vt3).addVertex(vt4);
                 }
                 bb.drawAndReset();
             }
