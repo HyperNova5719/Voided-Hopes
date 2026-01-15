@@ -47,7 +47,7 @@ public class RiftRenderer {
 
         //region ==== Config =====
         float activationSequenceLength = 285.2f;
-        double sizeMultiplier = 0.1;
+        double sizeMultiplier = 1;
         //endregion
 
         //region ==== rendering setup ====
@@ -135,7 +135,7 @@ public class RiftRenderer {
             //region ==== Detonation inward wave ====
             RiftRendererManager.epicenter = epicenter;
             RiftRendererManager.waveForce = 1;
-            RiftRendererManager.t = 1 + (localTime / 200);
+            RiftRendererManager.t = Math.min(1 + (localTime / 200), 8);
             //endregion
 
             //region ==== impact frame ====
@@ -213,6 +213,7 @@ public class RiftRenderer {
                     LazuliVertex v4 = model.copy().pos(p4.add(epicenter).add(0, 130 * sizeMultiplier, 0));
 
                     bb.addVertex(v1).addVertex(v2).addVertex(v3).addVertex(v4);
+
                 }
             }
             bb.drawAndReset();
@@ -221,12 +222,12 @@ public class RiftRenderer {
             LapisRenderer.setShader(RiftRendererManager.set(LazuliShaderRegistry.getShader(VoidedHopesShaders.ACRESCION_LAZULI_SHADER)));
 
             res = 60;
-            int loops = 28;
+            int loops = 56;
 
             for (int ii = 0; ii < loops; ii++) {
                 for (int i = 0; i < res * 2; i++) {
-                    double rad1 = 4 + (ii * 8);
-                    double rad2 = 12 + (ii * 8);
+                    double rad1 = 4 + (ii * 4);
+                    double rad2 = 8 + (ii * 4);
 
                     float u1 = ii / (float) loops;
                     float u2 = (ii + 1) / (float) loops;
@@ -241,18 +242,23 @@ public class RiftRenderer {
                     Vec3d p3 = new Vec3d(sin(nextTheta) * rad2, 0, cos(nextTheta) * rad2).multiply(sizeMultiplier);
                     Vec3d p4 = new Vec3d(sin(nextTheta) * rad1, 0, cos(nextTheta) * rad1).multiply(sizeMultiplier);
 
-                    p1.rotateX((float) Math.toRadians(35));
-                    p2.rotateX((float) Math.toRadians(35));
-                    p3.rotateX((float) Math.toRadians(35));
-                    p4.rotateX((float) Math.toRadians(35));
+                    p1 = p1.rotateX((float) Math.toRadians(35));
+                    p2 = p2.rotateX((float) Math.toRadians(35));
+                    p3 = p3.rotateX((float) Math.toRadians(35));
+                    p4 = p4.rotateX((float) Math.toRadians(35));
 
 
 
-                    LazuliVertex vt2 = model.copy().pos(p2.add(epicenter).add(0, 130 * sizeMultiplier, 0)).uv(u2, v1);
-                    LazuliVertex vt1 = model.copy().pos(p1.add(epicenter).add(0, 130 * sizeMultiplier, 0)).uv(u1, v1);
-                    LazuliVertex vt3 = model.copy().pos(p3.add(epicenter).add(0, 130 * sizeMultiplier, 0)).uv(u2, v2);
-                    LazuliVertex vt4 = model.copy().pos(p4.add(epicenter).add(0, 130 * sizeMultiplier, 0)).uv(u1, v2);
+                    LazuliVertex vt2 = model.copy().pos(p2.add(epicenter).add(0, 128 * sizeMultiplier, 0)).uv(u2, v1);
+                    LazuliVertex vt1 = model.copy().pos(p1.add(epicenter).add(0, 128 * sizeMultiplier, 0)).uv(u1, v1);
+                    LazuliVertex vt3 = model.copy().pos(p3.add(epicenter).add(0, 128 * sizeMultiplier, 0)).uv(u2, v2);
+                    LazuliVertex vt4 = model.copy().pos(p4.add(epicenter).add(0, 128 * sizeMultiplier, 0)).uv(u1, v2);
 
+                    bb.addVertex(vt1).addVertex(vt2).addVertex(vt3).addVertex(vt4);
+                    vt1.displacePos(new Vec3d(0, 4 * sizeMultiplier, 0));
+                    vt2.displacePos(new Vec3d(0, 4 * sizeMultiplier, 0));
+                    vt3.displacePos(new Vec3d(0, 4 * sizeMultiplier, 0));
+                    vt4.displacePos(new Vec3d(0, 4 * sizeMultiplier, 0));
                     bb.addVertex(vt1).addVertex(vt2).addVertex(vt3).addVertex(vt4);
                 }
                 bb.drawAndReset();
