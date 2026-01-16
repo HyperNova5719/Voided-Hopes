@@ -1,6 +1,7 @@
 package hypernova.voidedhopes.client;
 
 import hypernova.voidedhopes.AzuraThingies.LazuliLib.LazuliShaderRegistry;
+import hypernova.voidedhopes.AzuraThingies.LiveTweaker;
 import hypernova.voidedhopes.AzuraThingies.RiftRenderer;
 import hypernova.voidedhopes.AzuraThingies.RiftRendererManager;
 import hypernova.voidedhopes.block.ModBlocks;
@@ -20,6 +21,8 @@ import net.minecraft.util.Identifier;
 public class VoidedHopesClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
+		LiveTweaker.register();
+
 		RiftRendererManager.register();
 		VoidedHopesShaders.init();
 		LazuliShaderRegistry.register();

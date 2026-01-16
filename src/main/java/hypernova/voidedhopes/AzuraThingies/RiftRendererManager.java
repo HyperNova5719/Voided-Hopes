@@ -6,6 +6,8 @@ import hypernova.voidedhopes.client.renderers.block.PureVoidBlockRenderer;
 import hypernova.voidedhopes.client.shader.VoidedHopesShader;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.PostEffectPass;
+import net.minecraft.client.gl.PostEffectProcessor;
 import net.minecraft.client.gl.ShaderProgram;
 import net.minecraft.client.render.*;
 import net.minecraft.util.math.Vec3d;
@@ -22,6 +24,7 @@ public class RiftRendererManager {
     public static float Post1Force = 0;
     public static Vec3d epicenter = new Vec3d(0,0,0);
     public static float waveForce = 0;
+    public static float corruption = 0;
 
     private static Vec3d dis;
     public static float t = 200;
@@ -46,7 +49,11 @@ public class RiftRendererManager {
             time = trueTimeTicks();
             //time += context.tickDelta();
 
-            LazuliShaderRegistry.getPostProcessor(VoidedHopesShaders.POST1).render(0);
+
+            LazuliPostEffectShader bp = LazuliShaderRegistry.getPostProcessor(VoidedHopesShaders.POST1);
+            bp.passes.get(0).getProgram().getUniformByNameOrDummy("TT").set((float) (time / 1000f) % 1f);
+            bp.passes.get(0).getProgram().getUniformByNameOrDummy("Corruption").set((float) corruption);
+            bp.render(0);
         });
     }
 
@@ -55,6 +62,7 @@ public class RiftRendererManager {
     }
 
     public static void render(Tessellator tess, Camera camera, float tickDelta) {
+
         waveForce = 0;
         t = 200;
         if (alreadyRendered) return;
@@ -64,6 +72,7 @@ public class RiftRendererManager {
 
         impactFrame = false;
 
+        corruption = 0;
 
 
         Iterator<RiftRenderer> iterator = rifts.iterator();

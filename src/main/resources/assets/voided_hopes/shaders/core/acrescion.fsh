@@ -72,13 +72,17 @@ void main() {
         float v = 0.2 / abs(sin((uv.x * 60.0) + (uv.y * 3.1415 * 3.0)));
         vec4 color = vec4(.0);
 
-        float a = pow(1.0 - uv.x, 0.8);
+        float a = pow(1.0 - uv.x, 0.7);
 
-        vec3 col = 0.4 * vec3(3.0, 2.0, 1.0) * smoothHash3D(vec3(100.0 * uv * vec2(1.0, 0.1) + vec2(iTime, 20.0 * iTime), iTime));
+        float aa = pow(1.0 - uv.x, 0.8);
+
+
+
+        vec3 col = 0.4 * vec3(0.0, 1.0 - uv.x, 3.0 - uv.x)  * smoothHash3D(vec3(100.0 * uv * vec2(1.0 + (pow(1.0 - uv.x, 2.0) * 1.6), 0.1 + (pow(1.0 - uv.x, 2.0) * 1.6)) + vec2(iTime, 20.0 * iTime), iTime));
 
         color.a = a * length(col) * 2.5;
 
-        color.rgb = col + (a * a);
+        color.rgb = col + (aa * aa);
 
         fragColor = color;
 }

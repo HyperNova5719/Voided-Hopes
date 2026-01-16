@@ -67,10 +67,10 @@ vec3 smoothHash3D(vec3 p) {
 void main() {
     float dot = vertexColor.r * 2.0 - 1.0;
 
-    float v = 0.4 / (dot);
+    float v = 0.55 / (dot);
     v -= 0.8;
 
 
-    vec3 col = vec3(v) * vec3(4.0, 2.0, 1.0);
+    vec3 col = vec3(v) * vec3(0.9, 1.5, 2.0);
     fragColor = vec4(clamp(col, vec3(0.0), vec3(1.0)), 1.0);
 }

@@ -63,6 +63,9 @@ public class RiftRenderer {
         if (time < activationSequenceLength) {
             float localTime = time / activationSequenceLength;
 
+            //starting corruption
+            RiftRendererManager.corruption += 0.8 * localTime;
+
             //region ==== Pre-detonation inward wave ====
             RiftRendererManager.epicenter = epicenter;
             RiftRendererManager.waveForce = 0.2f;
@@ -176,7 +179,7 @@ public class RiftRenderer {
 
             //region ==== Blackhole rendering code ====
 
-            Vec3d blackHoleCenter = epicenter.add(0, 130 * sizeMultiplier, 0);
+            Vec3d blackHoleCenter = epicenter.add(0, 200 * sizeMultiplier, 0);
 
             LazuliVertex model = template.copy().color(0f,0f, 0f, 1f);
 
@@ -188,8 +191,9 @@ public class RiftRenderer {
             LapisRenderer.disableCull();
             pen.setModel(template);
 
+            float sss = 1.4f;
 
-            float size = 26;
+            float size = 26 * sss;
             float res = 13;
             double ss = 1.0;
 
@@ -230,8 +234,8 @@ public class RiftRenderer {
 
             for (int ii = 0; ii < loops; ii++) {
                 for (int i = 0; i < res * 2; i++) {
-                    double rad1 = 4 + (ii * 3);
-                    double rad2 = 7 + (ii * 3);
+                    double rad1 = 4 + (ii * 3 * sss);
+                    double rad2 = 4 + (3 * sss) + (ii * 3* sss);
 
                     float u1 = ii / (float) loops;
                     float u2 = (ii + 1) / (float) loops;
@@ -402,8 +406,11 @@ public class RiftRenderer {
 
             //endregion
 
+            RiftRendererManager.corruption += pow((390f - cameraPos.distanceTo(epicenter)) / 390f, 4.0);
         }
         bb.draw();
+
+
     }
 
     public boolean kill(float globalTime){

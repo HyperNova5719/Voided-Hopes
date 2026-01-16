@@ -21,12 +21,12 @@ void main() {
     float phase = (dist - rad) * 0.3 * pMultiplier;
     float displacement = (sin(1.0 * phase) / (phase * max(1.0, phase))) - centerDis;
     vec3 disPos = p;
-    disPos.y += (displacement * 30.0 * (1.0 - t) * state.y) * (1.0 - smoothstep(2.0, 8.0, state.x));
+    disPos.y += (displacement * 60.0 * (1.0 - t) * state.y) * (1.0 - smoothstep(2.0, 4.0, state.x));
 
 
     float s = 8.0;
     float s2 = 10.0;
-    vec3 bbPos = epicenter + vec3(0.0, 13.0 * s2, 0.0);
+    vec3 bbPos = epicenter + vec3(0.0, 20.0 * s2, 0.0);
     
     if (state.y != 0.0) {
         vec3 rayDir = normalize(disPos);
