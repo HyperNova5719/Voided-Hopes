@@ -123,9 +123,9 @@ void main() {
     color = (eventHash == 3.0 && co > 0.3)? color * normalize(color.bgr): color;
     color = (eventHash == 4.0 && co > 0.4)? normalize(color.bgr): color;
 
-    color = pow(color, vec3(vec2(1.0 + (0.6 * co)), 1.0 - (0.6 * co)))
+    color = pow(color, vec3(vec2(1.0 + (0.6 * co)), 1.0 - (0.6 * co)));
     color.b += 0.05 * co;
-    
+
 
 
 
