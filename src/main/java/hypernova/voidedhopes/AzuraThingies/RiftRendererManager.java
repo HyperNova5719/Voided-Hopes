@@ -87,6 +87,12 @@ public class RiftRendererManager {
         return p;
     }
 
+    public static ShaderProgram disable(ShaderProgram p){
+        p.getUniformOrDefault("epicenter").set((float) dis.x, (float) dis.y, (float) dis.z);
+        p.getUniformOrDefault("state").set(200f, 0f);
+        return p;
+    }
+
     public static void overrideMinecraftShaderUniforms(Camera camera){
         dis = camera.getPos().multiply(-1).add(epicenter);
 

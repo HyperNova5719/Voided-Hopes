@@ -56,6 +56,8 @@ public class RiftRenderer {
         LazuliPen pen = new LazuliPen(template);
         float time = globalTime - startTime;
         random.setSeed(seed);
+
+        Vec3d cameraPos = camera.getPos();
         //endregion
 
         if (time < activationSequenceLength) {
@@ -174,10 +176,12 @@ public class RiftRenderer {
 
             //region ==== Blackhole rendering code ====
 
+            Vec3d blackHoleCenter = epicenter.add(0, 130 * sizeMultiplier, 0);
+
             LazuliVertex model = template.copy().color(0f,0f, 0f, 1f);
 
             //LapisRenderer.setShader(pureVoidShader);
-            LapisRenderer.setShader(GameRenderer.getPositionColorProgram());
+            LapisRenderer.setShader(LazuliShaderRegistry.getShader(VoidedHopesShaders.HORIZON_LAZULI_SHADER));
 
             LapisRenderer.setShaderTexture(0, PureVoidBlockRenderer.SKY_TEXTURE);
             LapisRenderer.setShaderTexture(1, PureVoidBlockRenderer.PORTAL_TEXTURE);
@@ -185,7 +189,7 @@ public class RiftRenderer {
             pen.setModel(template);
 
 
-            float size = 4;
+            float size = 26;
             float res = 13;
             double ss = 1.0;
 
@@ -207,10 +211,10 @@ public class RiftRenderer {
                     Vec3d p3 = new Vec3d(sin(nextTheta) * rad2, y2 * ss, cos(nextTheta) * rad2).multiply(sizeMultiplier);
                     Vec3d p4 = new Vec3d(sin(nextTheta) * rad1, y1 * ss, cos(nextTheta) * rad1 ).multiply(sizeMultiplier);
 
-                    LazuliVertex v2 = model.copy().pos(p2.add(epicenter).add(0, 130 * sizeMultiplier, 0));
-                    LazuliVertex v1 = model.copy().pos(p1.add(epicenter).add(0, 130 * sizeMultiplier, 0));
-                    LazuliVertex v3 = model.copy().pos(p3.add(epicenter).add(0, 130 * sizeMultiplier, 0));
-                    LazuliVertex v4 = model.copy().pos(p4.add(epicenter).add(0, 130 * sizeMultiplier, 0));
+                    LazuliVertex v1 = model.copy().pos(p1.add(blackHoleCenter)).color((float) p1.normalize().dotProduct(cameraPos.subtract(p1.add(blackHoleCenter)).normalize()) * 0.5f + 0.5f, 0f, 0f, 0f);
+                    LazuliVertex v2 = model.copy().pos(p2.add(blackHoleCenter)).color((float) p2.normalize().dotProduct(cameraPos.subtract(p2.add(blackHoleCenter)).normalize()) * 0.5f + 0.5f, 0f, 0f, 0f);
+                    LazuliVertex v3 = model.copy().pos(p3.add(blackHoleCenter)).color((float) p3.normalize().dotProduct(cameraPos.subtract(p3.add(blackHoleCenter)).normalize()) * 0.5f + 0.5f, 0f, 0f, 0f);
+                    LazuliVertex v4 = model.copy().pos(p4.add(blackHoleCenter)).color((float) p4.normalize().dotProduct(cameraPos.subtract(p4.add(blackHoleCenter)).normalize()) * 0.5f + 0.5f, 0f, 0f, 0f);
 
                     bb.addVertex(v1).addVertex(v2).addVertex(v3).addVertex(v4);
 
@@ -226,8 +230,8 @@ public class RiftRenderer {
 
             for (int ii = 0; ii < loops; ii++) {
                 for (int i = 0; i < res * 2; i++) {
-                    double rad1 = 4 + (ii * 4);
-                    double rad2 = 8 + (ii * 4);
+                    double rad1 = 4 + (ii * 3);
+                    double rad2 = 7 + (ii * 3);
 
                     float u1 = ii / (float) loops;
                     float u2 = (ii + 1) / (float) loops;
@@ -249,10 +253,10 @@ public class RiftRenderer {
 
 
 
-                    LazuliVertex vt2 = model.copy().pos(p2.add(epicenter).add(0, 128 * sizeMultiplier, 0)).uv(u2, v1);
-                    LazuliVertex vt1 = model.copy().pos(p1.add(epicenter).add(0, 128 * sizeMultiplier, 0)).uv(u1, v1);
-                    LazuliVertex vt3 = model.copy().pos(p3.add(epicenter).add(0, 128 * sizeMultiplier, 0)).uv(u2, v2);
-                    LazuliVertex vt4 = model.copy().pos(p4.add(epicenter).add(0, 128 * sizeMultiplier, 0)).uv(u1, v2);
+                    LazuliVertex vt2 = model.copy().pos(p2.add(blackHoleCenter).add(0, -2 * sizeMultiplier, 0)).uv(u2, v1);
+                    LazuliVertex vt1 = model.copy().pos(p1.add(blackHoleCenter).add(0, -2 * sizeMultiplier, 0)).uv(u1, v1);
+                    LazuliVertex vt3 = model.copy().pos(p3.add(blackHoleCenter).add(0, -2 * sizeMultiplier, 0)).uv(u2, v2);
+                    LazuliVertex vt4 = model.copy().pos(p4.add(blackHoleCenter).add(0, -2 * sizeMultiplier, 0)).uv(u1, v2);
 
                     bb.addVertex(vt1).addVertex(vt2).addVertex(vt3).addVertex(vt4);
                     vt1.displacePos(new Vec3d(0, 4 * sizeMultiplier, 0));
@@ -333,9 +337,9 @@ public class RiftRenderer {
                     LazuliVertex v3 = model.copy().pos(p3.add(epicenter));
                     LazuliVertex v4 = model.copy().pos(p4.add(epicenter));
 
-                    bb.addVertex(v1).addVertex(v2).addVertex(v3).addVertex(v4);
+                    //bb.addVertex(v1).addVertex(v2).addVertex(v3).addVertex(v4);
                 }
-                bb.drawAndReset();
+                //bb.drawAndReset();
             }
 
             //endregion

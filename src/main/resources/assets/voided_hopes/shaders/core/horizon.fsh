@@ -11,7 +11,7 @@ uniform float GameTime;
 in vec4 texProj0;
 in vec4 vertexColor;
 in vec2 texCoord0;
-
+in vec3 Position;
 
 out vec4 fragColor;
 
@@ -65,20 +65,12 @@ vec3 smoothHash3D(vec3 p) {
 
 
 void main() {
-        float iTime = GameTime * 100.0;
+    float dot = vertexColor.r * 2.0 - 1.0;
 
-        vec2 uv = fract(texCoord0 + vec2(0.0,iTime + 7.0 * texCoord0.x));
+    float v = 0.4 / (dot);
+    v -= 0.8;
 
-        float v = 0.2 / abs(sin((uv.x * 60.0) + (uv.y * 3.1415 * 3.0)));
-        vec4 color = vec4(.0);
 
-        float a = pow(1.0 - uv.x, 0.8);
-
-        vec3 col = 0.4 * vec3(3.0, 2.0, 1.0) * smoothHash3D(vec3(100.0 * uv * vec2(1.0, 0.1) + vec2(iTime, 20.0 * iTime), iTime));
-
-        color.a = a * length(col) * 2.5;
-
-        color.rgb = col + (a * a);
-
-        fragColor = color;
+    vec3 col = vec3(v) * vec3(4.0, 2.0, 1.0);
+    fragColor = vec4(clamp(col, vec3(0.0), vec3(1.0)), 1.0);
 }

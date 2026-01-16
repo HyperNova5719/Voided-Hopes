@@ -29,7 +29,7 @@ void main() {
     disPos.y += (displacement * 30.0 * (1.0 - t) * state.y) * (1.0 - smoothstep(2.0, 8.0, state.x));
 
 
-    float s = 15.0;
+    float s = 8.0;
     float s2 = 10.0;
     vec3 bbPos = epicenter + vec3(0.0, 13.0 * s2, 0.0);
     
@@ -48,10 +48,10 @@ void main() {
 
         float viewFactor = lookingTowardBH * exp(-bhDist / (40.0 * s)); 
 
-        float impactFactor = 1.0 / (1.0 + pow(impactParam, 2.3) / 100.0);
+        float impactFactor = 1.0 / (1.0 + pow(impactParam, 2.4) / 100.0);
 
-        float G = 0.25;
-        float totalLensing = G * viewFactor * impactFactor;
+        float G = 0.28;
+        float totalLensing = G * viewFactor * impactFactor * (1.0 - smoothstep(100.0, 300.0, impactParam * s));
 
         vec3 toBlackHole = normalize(bbPos - closestPoint);
         vec3 bentRayDir = normalize(rayDir - totalLensing * toBlackHole);
