@@ -59,7 +59,7 @@ void main() {
         float impactFactor = 1.0 / (1.0 + pow(impactParam, 2.4) / 100.0);
 
         float G = 0.28;
-        float totalLensing = G * viewFactor * impactFactor * (1.0 - smoothstep(100.0, 300.0, impactParam * s));
+        float totalLensing = G * viewFactor * impactFactor * (1.0 - smoothstep(100.0 * 9.0, 300.0 * 9.0, impactParam * s));
 
         vec3 toBlackHole = normalize(bbPos - closestPoint);
         vec3 bentRayDir = normalize(rayDir - totalLensing * toBlackHole);
