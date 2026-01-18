@@ -37,7 +37,7 @@ void main() {
     disPos.y += (displacement * 60.0 * (1.0 - t) * state.y) * (1.0 - smoothstep(2.0, 4.0, state.x));
 
 
-    float s = 72.0;
+    float s = 8.0;
     float s2 = 10.0;
     vec3 bbPos = epicenter + vec3(0.0, 20.0 * s2, 0.0);
     
