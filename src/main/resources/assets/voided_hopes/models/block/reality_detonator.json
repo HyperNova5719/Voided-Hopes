@@ -1,10 +1,9 @@
 {
 	"format_version": "1.21.11",
-	"credit": "Made with Blockbench",
+	"credit": "HyperNova",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "block/Refined Reality Detonator",
-		"particle": "block/Refined Reality Detonator"
+		"0": "voided_hopes:block/reality_detonator"
 	},
 	"elements": [
 		{
