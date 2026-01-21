@@ -191,7 +191,7 @@ public class RiftRenderer {
             LapisRenderer.disableCull();
             pen.setModel(template);
 
-            float sss = 1.4f;
+            float sss = LiveTweaker.gv(0) * 9;
 
             float size = 26 * sss;
             float res = 13;
@@ -226,11 +226,11 @@ public class RiftRenderer {
             }
             bb.drawAndReset();
 
-            model = template.copy().color(1f,1f, 0.9f, 0.9f);
+            model = template.copy().color(2f,1f, 0.9f, 0.9f);
             LapisRenderer.setShader(RiftRendererManager.set(LazuliShaderRegistry.getShader(VoidedHopesShaders.ACRESCION_LAZULI_SHADER)));
 
             res = 60;
-            int loops = 56;
+            int loops = 60;
 
             for (int ii = 0; ii < loops; ii++) {
                 for (int i = 0; i < res * 2; i++) {
@@ -250,10 +250,10 @@ public class RiftRenderer {
                     Vec3d p3 = new Vec3d(sin(nextTheta) * rad2, 0, cos(nextTheta) * rad2).multiply(sizeMultiplier);
                     Vec3d p4 = new Vec3d(sin(nextTheta) * rad1, 0, cos(nextTheta) * rad1).multiply(sizeMultiplier);
 
-                    p1 = p1.rotateX((float) Math.toRadians(35));
-                    p2 = p2.rotateX((float) Math.toRadians(35));
-                    p3 = p3.rotateX((float) Math.toRadians(35));
-                    p4 = p4.rotateX((float) Math.toRadians(35));
+                    p1 = p1.rotateX((float) Math.toRadians(23.5));
+                    p2 = p2.rotateX((float) Math.toRadians(23.5));
+                    p3 = p3.rotateX((float) Math.toRadians(23.5));
+                    p4 = p4.rotateX((float) Math.toRadians(23.5));
 
 
 

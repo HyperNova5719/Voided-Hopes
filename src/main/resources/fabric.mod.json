@@ -5,7 +5,8 @@
 	"name": "Voided Hopes",
 	"description": "This is an example description! Tell everyone what your mod is about!",
 	"authors": [
-		"HyperNova"
+		"HyperNova: Idea maker, textures, block shaders, models",
+		"Azure: Made the code for all shaders and the blackhole with some visual guidance, realistic physics"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
