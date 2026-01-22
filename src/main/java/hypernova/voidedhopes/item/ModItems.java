@@ -27,7 +27,7 @@ public class ModItems {
             new VoidSparkWeapon(new FabricItemSettings().rarity(Rarity.EPIC)));
     public static final Item REALITY_KEY = registerItem("reality_key",
             new DetonateItem(new FabricItemSettings().rarity(Rarity.EPIC)));;
-    public static final Item WRAITHS_GRAVESTONE = registerItem("wraiths_gravestone",
+    public static final Item GODS_GRAVESTONE = registerItem("wraiths_gravestone",
             new RealitiesBaneItem(new FabricItemSettings()));
     public static final Item REGRET_OF_FOOLS = registerItem("regret_of_fools",
             new Item(new FabricItemSettings()));

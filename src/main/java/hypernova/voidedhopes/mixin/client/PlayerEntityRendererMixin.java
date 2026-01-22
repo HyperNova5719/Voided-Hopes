@@ -28,7 +28,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
     )
     private static void swordPoses(@NotNull AbstractClientPlayerEntity player, Hand hand, CallbackInfoReturnable<BipedEntityModel.ArmPose> cir) {
         ItemStack main = player.getMainHandStack();
-        if (main.isOf(ModItems.WRAITHS_GRAVESTONE)) {
+        if (main.isOf(ModItems.GODS_GRAVESTONE)) {
             if (hand != Hand.MAIN_HAND) {
                 cir.setReturnValue(BipedEntityModel.ArmPose.CROSSBOW_CHARGE);
             } else {

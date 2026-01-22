@@ -26,8 +26,8 @@ public class ModItemGroup {
 
     public static final ItemGroup ITEM_GROUP = Registry.register(Registries.ITEM_GROUP, VoidedHopes.id("weapons_and_sins"), FabricItemGroup.builder()
             .displayName(Text.translatable("itemGroup.voided_hopes.weapons_and_sins"))
-            .icon(() -> new ItemStack(ModItems.WRAITHS_GRAVESTONE.asItem())).entries((displayContext, entries) -> {
-                entries.add(ModItems.WRAITHS_GRAVESTONE);
+            .icon(() -> new ItemStack(ModItems.GODS_GRAVESTONE.asItem())).entries((displayContext, entries) -> {
+                entries.add(ModItems.GODS_GRAVESTONE);
                 entries.add(ModItems.REALITIES_BANE);
                 entries.add(ModItems.REGRET_OF_FOOLS);
                 entries.add(ModItems.ENVY);
