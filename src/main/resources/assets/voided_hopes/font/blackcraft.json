@@ -1,0 +1,10 @@
+{
+  "providers": [
+    {
+      "type": "ttf",
+      "file": "voided_hopes:blackcraft.ttf",
+      "size": 16,
+      "oversample": 3
+    }
+  ]
+}
