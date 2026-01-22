@@ -4,14 +4,14 @@ import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 
-public class WraithsGravestoneItem extends SwordItem {
-    private static final WraithsGravestoneMaterial INSTANCE = new WraithsGravestoneMaterial();
+public class GodsGravestoneItem extends SwordItem {
+    private static final GodsGravestoneMaterial INSTANCE = new GodsGravestoneMaterial();
 
-    public WraithsGravestoneItem(Settings settings) {
+    public GodsGravestoneItem(Settings settings) {
         super(INSTANCE, 5, -2.8f, settings);
     }
 
-    public static class WraithsGravestoneMaterial implements ToolMaterial {
+    public static class GodsGravestoneMaterial implements ToolMaterial {
         @Override
         public int getDurability() {
             return 0;

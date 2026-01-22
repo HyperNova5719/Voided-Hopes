@@ -4,7 +4,6 @@ import hypernova.voidedhopes.accessors.VoidedPlayerEntity;
 import hypernova.voidedhopes.block.ModBlocks;
 import hypernova.voidedhopes.client.ModSound;
 import hypernova.voidedhopes.item.ModItems;
-import hypernova.voidedhopes.particle.ModParticles;
 import hypernova.voidedhopes.registry.PacketRegistry;
 import hypernova.voidedhopes.world.ModDimensions;
 import io.netty.buffer.Unpooled;
@@ -27,7 +26,6 @@ public class VoidedHopes implements ModInitializer {
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
 		ModDimensions.register();
-		ModParticles.registerParticles();
 		ModSound.register();
 
 		PacketRegistry.registerC2S();

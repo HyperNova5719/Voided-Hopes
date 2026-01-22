@@ -5,8 +5,6 @@ import hypernova.voidedhopes.AzuraThingies.RiftRendererManager;
 import hypernova.voidedhopes.VoidedHopes;
 import hypernova.voidedhopes.block.ModBlocks;
 import hypernova.voidedhopes.client.ModSound;
-import mod.chloeprime.aaaparticles.api.common.AAALevel;
-import mod.chloeprime.aaaparticles.api.common.ParticleEmitterInfo;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,7 +18,6 @@ import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
 public class DetonateItem extends Item {
-    public static final ParticleEmitterInfo VFX = new ParticleEmitterInfo(new Identifier("voided_hopes", "realites_end_remade"));
     public DetonateItem(Settings settings) {
         super(settings);
     }

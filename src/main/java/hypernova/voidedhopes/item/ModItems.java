@@ -2,12 +2,9 @@ package hypernova.voidedhopes.item;
 
 import hypernova.voidedhopes.VoidedHopes;
 import hypernova.voidedhopes.item.custom.RealitiesBaneItem;
-import hypernova.voidedhopes.item.custom.VoidSparkWeapon;
 import hypernova.voidedhopes.item.custom.WayfinderItem;
-import hypernova.voidedhopes.item.custom.WraithsGravestoneItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
-import net.minecraft.item.SwordItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Rarity;
@@ -23,11 +20,9 @@ public class ModItems {
             new WayfinderItem(new FabricItemSettings()));
     public static final Item REALITIES_BANE = registerItem("realities_bane",
             new RealitiesBaneItem(new FabricItemSettings()));
-    public static final Item VOID_SPARK = registerItem("void_spark",
-            new VoidSparkWeapon(new FabricItemSettings().rarity(Rarity.EPIC)));
     public static final Item REALITY_KEY = registerItem("reality_key",
             new DetonateItem(new FabricItemSettings().rarity(Rarity.EPIC)));;
-    public static final Item GODS_GRAVESTONE = registerItem("wraiths_gravestone",
+    public static final Item GODS_GRAVESTONE = registerItem("gods_gravestone",
             new RealitiesBaneItem(new FabricItemSettings()));
     public static final Item REGRET_OF_FOOLS = registerItem("regret_of_fools",
             new Item(new FabricItemSettings()));
