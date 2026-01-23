@@ -116,7 +116,7 @@ void main() {
 
     color *= 1.0 + (co * pHash * bordering * 3.0 * colHash);
 
-    color += 0.7 * pow(co, 20.0) * colHash * pHash / (1.0 - sBordering);
+    color += pow(normalize(color), vec3(0.2)) * clamp(0.7 * pow(co, 20.0) * colHash * pHash / (1.0 - sBordering), -0.6, 0.6);
 
     color = (eventHash == 2.0 && co > 0.1)? color * color: color;
 

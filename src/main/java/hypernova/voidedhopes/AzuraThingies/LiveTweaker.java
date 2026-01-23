@@ -14,14 +14,14 @@ public class LiveTweaker {
     private static final KeyBinding INCREASE_KEY = KeyBindingHelper.registerKeyBinding(new KeyBinding(
             "key.tweaker.increase",
             InputUtil.Type.KEYSYM,
-            GLFW.GLFW_KEY_I,
+            GLFW.GLFW_KEY_O,
             "category.tweaker"
     ));
     
     private static final KeyBinding DECREASE_KEY = KeyBindingHelper.registerKeyBinding(new KeyBinding(
             "key.tweaker.decrease",
             InputUtil.Type.KEYSYM,
-            GLFW.GLFW_KEY_O,
+            GLFW.GLFW_KEY_I,
             "category.tweaker"
     ));
     
@@ -34,7 +34,7 @@ public class LiveTweaker {
     
     private static final List<Float> values = new ArrayList<>();
     private static int currentIndex = 0;
-    private static final float STEP = 0.025f;
+    private static final float STEP = 0.05f;
     static {
         values.add(0.5f);
     }
@@ -65,6 +65,15 @@ public class LiveTweaker {
             values.add(0.5f);
         }
         return values.get(index);
+    }
+
+    public static boolean gp(int index) {
+        while (index >= values.size()) {
+            values.add(0.5f);
+        }
+        boolean state = values.get(index) != 0.5;
+        values.set(index, 0.5F);
+        return state;
     }
     
     private static void changeValue(float delta) {

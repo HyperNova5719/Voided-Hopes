@@ -3,12 +3,10 @@ package hypernova.voidedhopes.AzuraThingies;
 import hypernova.voidedhopes.AzuraThingies.LazuliLib.*;
 import hypernova.voidedhopes.client.VoidedHopesShaders;
 import hypernova.voidedhopes.client.renderers.block.PureVoidBlockRenderer;
-import hypernova.voidedhopes.client.shader.VoidedHopesShader;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gl.PostEffectPass;
-import net.minecraft.client.gl.PostEffectProcessor;
 import net.minecraft.client.gl.ShaderProgram;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.*;
 import net.minecraft.util.math.Vec3d;
 
@@ -30,6 +28,8 @@ public class RiftRendererManager {
     public static float t = 200;
     private static List<String> shadersToInjectUniforms = new ArrayList<>();
 
+    public static boolean disable = false;
+
     public static float trueTimeTicks(){
         return (((float) (System.currentTimeMillis() % 86400000) / 1000f) * 30f);
 
@@ -40,20 +40,23 @@ public class RiftRendererManager {
 
 
     public static void register() {
-        WorldRenderEvents.END.register(context -> {
-            alreadyRendered = false;
-            if (impactFrame) {
-                LazuliShaderRegistry.getPostProcessor(VoidedHopesShaders.IMPACT).render(0);
+        HudRenderCallback.EVENT.register(new HudRenderCallback() {
+            @Override
+            public void onHudRender(DrawContext drawContext, float v) {
+                alreadyRendered = false;
+                if (impactFrame) {
+                    //LazuliShaderRegistry.getPostProcessor(VoidedHopesShaders.IMPACT).render(0);
+                }
+                wasImpact = impactFrame;
+                time = trueTimeTicks();
+                //time += context.tickDelta();
+
+
+                LazuliPostEffectShader bp = LazuliShaderRegistry.getPostProcessor(VoidedHopesShaders.POST1);
+                bp.passes.get(0).getProgram().getUniformByNameOrDummy("TT").set((float) (time / 1000f) % 1f);
+                bp.passes.get(0).getProgram().getUniformByNameOrDummy("Corruption").set((float) corruption);
+                //bp.render(0);
             }
-            wasImpact = impactFrame;
-            time = trueTimeTicks();
-            //time += context.tickDelta();
-
-
-            LazuliPostEffectShader bp = LazuliShaderRegistry.getPostProcessor(VoidedHopesShaders.POST1);
-            bp.passes.get(0).getProgram().getUniformByNameOrDummy("TT").set((float) (time / 1000f) % 1f);
-            bp.passes.get(0).getProgram().getUniformByNameOrDummy("Corruption").set((float) corruption);
-            bp.render(0);
         });
     }
 
@@ -62,11 +65,10 @@ public class RiftRendererManager {
     }
 
     public static void render(Tessellator tess, Camera camera, float tickDelta) {
-
+        disable = false;
         waveForce = 0;
         t = 200;
         if (alreadyRendered) return;
-        ShaderProgram PureVoid = LazuliShaderRegistry.getShader(VoidedHopesShaders.RIFT_LAZULI_SHADER);
         LapisRenderer.setShaderTexture(0, PureVoidBlockRenderer.SKY_TEXTURE);
         LapisRenderer.setShaderTexture(1, PureVoidBlockRenderer.PORTAL_TEXTURE);
 
@@ -78,7 +80,7 @@ public class RiftRendererManager {
         Iterator<RiftRenderer> iterator = rifts.iterator();
         while (iterator.hasNext()) {
             RiftRenderer rift = iterator.next();
-            rift.render(tess, camera, PureVoid, time);
+            rift.render(tess, camera, time);
             if (rift.kill(time)) {
                 iterator.remove();
             }
@@ -90,23 +92,29 @@ public class RiftRendererManager {
 
     }
 
-    public static ShaderProgram set(ShaderProgram p){
-        p.getUniformOrDefault("epicenter").set((float) dis.x, (float) dis.y, (float) dis.z);
-        p.getUniformOrDefault("state").set(t, waveForce);
-        return p;
-    }
-
     public static ShaderProgram disable(ShaderProgram p){
         p.getUniformOrDefault("epicenter").set((float) dis.x, (float) dis.y, (float) dis.z);
         p.getUniformOrDefault("state").set(200f, 0f);
         return p;
     }
 
+    public static ShaderProgram set(ShaderProgram p){
+        if (disable){
+            disable(p);
+        }
+
+        p.getUniformOrDefault("epicenter").set((float) dis.x, (float) dis.y, (float) dis.z);
+        p.getUniformOrDefault("state").set(t, waveForce);
+        return p;
+    }
+
+
+
     public static void overrideMinecraftShaderUniforms(Camera camera){
         dis = camera.getPos().multiply(-1).add(epicenter);
 
 
-        set(LazuliShaderRegistry.getShader(VoidedHopesShaders.RIFT_LAZULI_SHADER));
+        set(LazuliShaderRegistry.getShader(VoidedHopesShaders.RIFT_CRACK_LAZULI_SHADER));
         set(LazuliShaderRegistry.getShader(VoidedHopesShaders.VORTEX_LAZULI_SHADER));
         set(LazuliShaderRegistry.getShader(VoidedHopesShaders.VORTEX_LAZULI_SHADER));
 

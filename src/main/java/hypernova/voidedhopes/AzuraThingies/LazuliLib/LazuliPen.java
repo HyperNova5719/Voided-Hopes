@@ -13,6 +13,7 @@ public class LazuliPen {
     public List<Double> THICKNESS = new ArrayList<>();
     public List<LazuliVertex> MODELS = new ArrayList<>();
     public double lastThickness = 0;
+    public boolean loop = false;
 
     //Constructors
     public LazuliPen() {
@@ -79,6 +80,11 @@ public class LazuliPen {
         return this;
     }
 
+    public LazuliPen setLoop(boolean s) {
+        loop = s;
+        return this;
+    }
+
     //Now for the real logic!
     public LazuliPen point(Vec3d p, double Thickness, LazuliVertex model){
         lastThickness = Thickness;
@@ -138,21 +144,42 @@ public class LazuliPen {
             if (i != POINTS.size() - 1) {
                 p1 = POINTS.get(i + 1);
             } else {
-                p1 = p0.add(p0.subtract(POINTS.get(i - 1)));
+                if (loop){
+                    p1 = POINTS.get(0);
+                } else {
+                    p1 = p0.add(p0.subtract(POINTS.get(i - 1)));
+                }
             }
             Vec3d segment = p1.subtract(p0).normalize();
             Vec3d thisDir = LazuliMathUtils.rotateAroundAxis(segment, screenNormal, 90);
             Vec3d dir = thisDir;
+
             if (i > 0) {
-                Vec3d prevSegment = p0.subtract(POINTS.get(i - 1)).normalize();
-                Vec3d prevDir = LazuliMathUtils.rotateAroundAxis(prevSegment, screenNormal, 90);
-                dir = prevDir.add(thisDir).normalize();
+                if(loop) {
+                    Vec3d prevSegment = p0.subtract(POINTS.get(POINTS.size() - 1)).normalize();
+                    Vec3d prevDir = LazuliMathUtils.rotateAroundAxis(prevSegment, screenNormal, 90);
+                    dir = prevDir.add(thisDir).normalize();
+                } else {
+                    Vec3d prevSegment = p0.subtract(POINTS.get(i - 1)).normalize();
+                    Vec3d prevDir = LazuliMathUtils.rotateAroundAxis(prevSegment, screenNormal, 90);
+                    dir = prevDir.add(thisDir).normalize();
+                }
             }
+
             if (i < POINTS.size() - 2) {
                 Vec3d nextSegment = POINTS.get(i + 1).subtract(p1).normalize();
                 Vec3d nextDir = LazuliMathUtils.rotateAroundAxis(nextSegment, screenNormal, 90);
                 dir = dir.add(nextDir).normalize();
+            } else if (loop){
+                    Vec3d nextSegment = POINTS.get((i + 1) % POINTS.size()).subtract(p1).normalize();
+                    Vec3d nextDir = LazuliMathUtils.rotateAroundAxis(nextSegment, screenNormal, 90);
+                    dir = dir.add(nextDir).normalize();
             }
+
+
+
+
+
             double comp = LazuliMathUtils.getComponentAlongAxis(dir, thisDir);
             if (Math.abs(comp) < 1e-6) comp = 1e-6; // avoid collapse
             double finalThick = THICKNESS.get(i) / comp;

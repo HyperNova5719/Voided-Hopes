@@ -1,5 +1,6 @@
 package hypernova.voidedhopes.AzuraThingies;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import hypernova.voidedhopes.AzuraThingies.LazuliLib.*;
 import hypernova.voidedhopes.VoidedHopes;
 import hypernova.voidedhopes.client.ModSound;
@@ -34,27 +35,45 @@ public class RiftRenderer {
     public Vec3d epicenter;
     private Random random;
     private int freezeCount = 0;
+    public float testTime;
+    private float lastTime;
 
     public RiftRenderer(float time, long Seed, Vec3d center){
         startTime = time;
+        testTime = 0;
+        lastTime = time;
         seed = Seed;
         epicenter = center;
         random = new Random(seed);
         freezeCount = 0;
     }
 
-    public void render(Tessellator tess, Camera camera, ShaderProgram pureVoidShader, float globalTime) {
+    public void render(Tessellator tess, Camera camera, float globalTime) {
 
         //region ==== Config =====
         float activationSequenceLength = 285.2f;
         double sizeMultiplier = 1;
         //endregion
 
+        //region === liveTweaker time warp ===
+
+//        if (LiveTweaker.gp(0)) {
+//            testTime = 0;
+//        }
+        //testTime += (float)((LiveTweaker.gv(1) - 0.3) * 5.0) * (globalTime - lastTime);
+        testTime += (globalTime - lastTime);
+        lastTime = globalTime;
+        float tt = testTime;
+
+        //endregion
+
+
+
         //region ==== rendering setup ====
         LazuliBufferBuilder bb = new LazuliBufferBuilder(tess, VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR_TEXTURE);
         bb.setCamera(camera);
         LazuliPen pen = new LazuliPen(template);
-        float time = globalTime - startTime;
+        float time = tt;
         random.setSeed(seed);
 
         Vec3d cameraPos = camera.getPos();
@@ -151,49 +170,22 @@ public class RiftRenderer {
             }
             //endregion
 
-            //region ==== Rift rendering code ====
-            LapisRenderer.setShader(pureVoidShader);
-            LapisRenderer.setShaderTexture(0, PureVoidBlockRenderer.SKY_TEXTURE);
-            LapisRenderer.setShaderTexture(1, PureVoidBlockRenderer.PORTAL_TEXTURE);
-
-
-            pen.setModel(template);
-            for (double dir = 0; dir + 0.01 < Math.PI * 2; dir += Math.PI / 3) {
-                Vec3d head = new Vec3d(260,0,260).rotateY((float) dir).multiply(sizeMultiplier);
-                Vec3d rVec = new Vec3d(1,0,1).rotateY((float) dir);
-                for (double i = 0; i < 20; i++) {
-                    double progress = max(0.0, min(1.0, (0.08 * localTime) - i));
-                    pen.setU((float) (i / 20));
-                    double d = 100 / ((30 * i) + 1);
-                    if (progress > 0) pen.point(head, (d + (440 / (1 + i))) * (progress * progress) * sizeMultiplier);
-                    head = head.add(rVec.multiply(160 * progress * sizeMultiplier));
-                    rVec = new Vec3d(random.nextDouble(), 0, random.nextDouble()).normalize().rotateY((float) dir);
-                }
-
-                pen.draw(bb, epicenter.add(0, (130 - (dir)) * sizeMultiplier, 0));
-                bb.drawAndReset();
-                pen.eraseAll();
-            }
-
-            //endregion
-
             //region ==== Blackhole rendering code ====
 
-            Vec3d blackHoleCenter = epicenter.add(0, 200 * sizeMultiplier, 0);
+            Vec3d blackHoleCenter = epicenter.add(0, 250 * sizeMultiplier, 0);
 
             LazuliVertex model = template.copy().color(0f,0f, 0f, 1f);
 
-            //LapisRenderer.setShader(pureVoidShader);
-            LapisRenderer.setShader(LazuliShaderRegistry.getShader(VoidedHopesShaders.HORIZON_LAZULI_SHADER));
+            LapisRenderer.setShader(RiftRendererManager.set(LazuliShaderRegistry.getShader(VoidedHopesShaders.HORIZON_LAZULI_SHADER)));
 
             LapisRenderer.setShaderTexture(0, PureVoidBlockRenderer.SKY_TEXTURE);
             LapisRenderer.setShaderTexture(1, PureVoidBlockRenderer.PORTAL_TEXTURE);
             LapisRenderer.disableCull();
             pen.setModel(template);
 
-            float sss = 1.4f;
+            float sss = 3.6f;
 
-            float size = 26 * sss;
+            float size = 9 * sss;
             float res = 13;
             double ss = 1.0;
 
@@ -230,12 +222,12 @@ public class RiftRenderer {
             LapisRenderer.setShader(RiftRendererManager.set(LazuliShaderRegistry.getShader(VoidedHopesShaders.ACRESCION_LAZULI_SHADER)));
 
             res = 60;
-            int loops = 56;
+            int loops = 53;
 
             for (int ii = 0; ii < loops; ii++) {
                 for (int i = 0; i < res * 2; i++) {
-                    double rad1 = 4 + (ii * 3 * sss);
-                    double rad2 = 4 + (3 * sss) + (ii * 3* sss);
+                    double rad1 = size + (ii * 3 * sss);
+                    double rad2 = size + ((ii + 1) * 3 * sss);
 
                     float u1 = ii / (float) loops;
                     float u2 = (ii + 1) / (float) loops;
@@ -250,10 +242,10 @@ public class RiftRenderer {
                     Vec3d p3 = new Vec3d(sin(nextTheta) * rad2, 0, cos(nextTheta) * rad2).multiply(sizeMultiplier);
                     Vec3d p4 = new Vec3d(sin(nextTheta) * rad1, 0, cos(nextTheta) * rad1).multiply(sizeMultiplier);
 
-                    p1 = p1.rotateX((float) Math.toRadians(35));
-                    p2 = p2.rotateX((float) Math.toRadians(35));
-                    p3 = p3.rotateX((float) Math.toRadians(35));
-                    p4 = p4.rotateX((float) Math.toRadians(35));
+                    p1 = p1.rotateX((float) Math.toRadians(20));
+                    p2 = p2.rotateX((float) Math.toRadians(20));
+                    p3 = p3.rotateX((float) Math.toRadians(20));
+                    p4 = p4.rotateX((float) Math.toRadians(20));
 
 
 
@@ -272,6 +264,52 @@ public class RiftRenderer {
                 bb.drawAndReset();
             }
 
+
+            //endregion
+
+            //region ==== Rift rendering code ====
+            LapisRenderer.setShader(LazuliShaderRegistry.getShader(VoidedHopesShaders.RIFT_CRACK_LAZULI_SHADER));
+            LapisRenderer.setShaderTexture(0, PureVoidBlockRenderer.SKY_TEXTURE);
+            LapisRenderer.setShaderTexture(1, PureVoidBlockRenderer.PORTAL_TEXTURE);
+
+
+
+            pen.setModel(template);
+            pen.setLoop(false);
+            for (double dir = 0; dir + 0.01 < Math.PI * 2; dir += Math.PI / 3) {
+                Vec3d head = new Vec3d(260,0,260).rotateY((float) dir).multiply(sizeMultiplier);
+                Vec3d rVec = new Vec3d(1,0,1).rotateY((float) dir);
+                for (double i = 0; i < 20; i++) {
+                    double progress = max(0.0, min(1.0, (0.08 * localTime) - i));
+                    pen.setU((float) (i / 20));
+                    double d = 200 / ((15 * i) + 1);
+                    if (progress > 0) pen.point(head, (d + (440 / (1 + i))) * (progress * progress) * sizeMultiplier);
+                    head = head.add(rVec.multiply(160 * progress * sizeMultiplier));
+                    rVec = new Vec3d(random.nextDouble(), 0, random.nextDouble()).normalize().rotateY((float) dir);
+                }
+
+                pen.draw(bb, epicenter.add(0, (130) * sizeMultiplier, 0));
+                bb.drawAndReset();
+                pen.eraseAll();
+            }
+
+            LapisRenderer.setShader(LazuliShaderRegistry.getShader(VoidedHopesShaders.RIFT_RING_LAZULI_SHADER));
+            LapisRenderer.setShaderTexture(0, PureVoidBlockRenderer.SKY_TEXTURE);
+            LapisRenderer.setShaderTexture(1, PureVoidBlockRenderer.PORTAL_TEXTURE);
+
+
+            pen.setModel(template);
+            pen.setLoop(true);
+            for (double dir = 0; dir <= Math.PI * 2; dir += Math.PI / 3) {
+
+                Vec3d head = new Vec3d(300,1,300).rotateY((float) ((float) dir + PI / 6f)).multiply(sizeMultiplier);
+                pen.point(head, 160 * sizeMultiplier);
+
+            }
+
+            pen.draw(bb, epicenter.add(0, (130) * sizeMultiplier, 0));
+            bb.drawAndReset();
+            pen.eraseAll();
 
             //endregion
 
@@ -312,101 +350,101 @@ public class RiftRenderer {
 
             //endregion
 
-            //region ==== Beam render code ====
-            model = template.copy().color(1.0f,1f, 1.0f, 1);
-            LapisRenderer.enableCull();
+//            //region ==== Beam render code ====
+//            model = template.copy().color(1.0f,1f, 1.0f, 1);
+//            LapisRenderer.enableCull();
+//
+//            int beamRes = 10;
+//            int layers = 6;
+//            double beamRad = 0.5 * (1 - (1/(1 + (0.25 * localTime))));
+//
+//            for (int i = 0; i <= layers; i++) {
+//                model = template.copy().color(min(1f, (0.4f + ((float) i / layers))), min(1f, (0.4f + ((float) i / layers))), min(1f, (0.4f + ((float) i / layers))), 1f / (i + 1f));
+//                beamRad += 0.3 * (1 - (1/(1 + (0.5 * localTime))));
+//
+//                for (int p = 0; p < beamRes; p++) {
+//                    float angle1 = (float) (p * PI / beamRes) * -2f;
+//                    float angle2 = (float) ((p + 1) * PI / beamRes) * -2f;
+//
+//                    double y1 = 0 * sizeMultiplier;
+//                    double y2 = 10000 * sizeMultiplier;
+//
+//                    Vec3d p1 = new Vec3d(sin(angle1) * beamRad * sizeMultiplier, y1, cos(angle1) * beamRad * sizeMultiplier);
+//                    Vec3d p2 = new Vec3d(sin(angle1) * beamRad * sizeMultiplier, y2, cos(angle1) * beamRad * sizeMultiplier);
+//                    Vec3d p3 = new Vec3d(sin(angle2) * beamRad * sizeMultiplier, y2, cos(angle2) * beamRad * sizeMultiplier);
+//                    Vec3d p4 = new Vec3d(sin(angle2) * beamRad * sizeMultiplier, y1, cos(angle2) * beamRad * sizeMultiplier);
+//
+//                    LazuliVertex v1 = model.copy().pos(p1.add(epicenter));
+//                    LazuliVertex v2 = model.copy().pos(p2.add(epicenter));
+//                    LazuliVertex v3 = model.copy().pos(p3.add(epicenter));
+//                    LazuliVertex v4 = model.copy().pos(p4.add(epicenter));
+//
+//                    //bb.addVertex(v1).addVertex(v2).addVertex(v3).addVertex(v4);
+//                }
+//                //bb.drawAndReset();
+//            }
+//
+//            //endregion
 
-            int beamRes = 10;
-            int layers = 6;
-            double beamRad = 0.5 * (1 - (1/(1 + (0.25 * localTime))));
-
-            for (int i = 0; i <= layers; i++) {
-                model = template.copy().color(min(1f, (0.4f + ((float) i / layers))), min(1f, (0.4f + ((float) i / layers))), min(1f, (0.4f + ((float) i / layers))), 1f / (i + 1f));
-                beamRad += 0.3 * (1 - (1/(1 + (0.5 * localTime))));
-
-                for (int p = 0; p < beamRes; p++) {
-                    float angle1 = (float) (p * PI / beamRes) * -2f;
-                    float angle2 = (float) ((p + 1) * PI / beamRes) * -2f;
-
-                    double y1 = 0 * sizeMultiplier;
-                    double y2 = 10000 * sizeMultiplier;
-
-                    Vec3d p1 = new Vec3d(sin(angle1) * beamRad * sizeMultiplier, y1, cos(angle1) * beamRad * sizeMultiplier);
-                    Vec3d p2 = new Vec3d(sin(angle1) * beamRad * sizeMultiplier, y2, cos(angle1) * beamRad * sizeMultiplier);
-                    Vec3d p3 = new Vec3d(sin(angle2) * beamRad * sizeMultiplier, y2, cos(angle2) * beamRad * sizeMultiplier);
-                    Vec3d p4 = new Vec3d(sin(angle2) * beamRad * sizeMultiplier, y1, cos(angle2) * beamRad * sizeMultiplier);
-
-                    LazuliVertex v1 = model.copy().pos(p1.add(epicenter));
-                    LazuliVertex v2 = model.copy().pos(p2.add(epicenter));
-                    LazuliVertex v3 = model.copy().pos(p3.add(epicenter));
-                    LazuliVertex v4 = model.copy().pos(p4.add(epicenter));
-
-                    //bb.addVertex(v1).addVertex(v2).addVertex(v3).addVertex(v4);
-                }
-                //bb.drawAndReset();
-            }
+//            //region ==== Vortex render code ====
+//            ShaderProgram vortex = LazuliShaderRegistry.getShader(VoidedHopesShaders.VORTEX_LAZULI_SHADER);
+//            vortex.getUniformOrDefault("GameTime").set(localTime);
+//            LapisRenderer.setShader(vortex);
+//
+//            model = template.copy().color(0.7f,0.8f, 1f, 1f);
+//            beamRad += 0.7 * (1 - (1/(1 + (0.5 * localTime))));
+//
+//            beamRes = 20;
+//
+//            float recall = min(localTime / 400f, 1.0f);
+//
+//            float vortexRes2 = 10;
+//            float m = min(localTime / 40f, 1f);
+//
+//            float totalGrowth = 0;
+//
+//            for (float n = 0; n < m; n += (m / vortexRes2)) {
+//                totalGrowth = 50 + (42 * n * n);
+//            }
+//
+//            for (float n = 0; n < m; n += (m / vortexRes2)) {
+//                    float growth = 42 * n * n;
+//
+//                double y1 = ((n * 100) * (1 - recall)) + (recall * totalGrowth);
+//                double y2 = (((n + 1f / vortexRes2) * 100) * (1 - recall)) + (recall * totalGrowth);
+//
+//                float pr = n / m; // Progress
+//
+//                for (float p = 0; p < beamRes; p++) {
+//                    float angle1 = (float) (p * PI / beamRes) * -2f;
+//                    float angle2 = (float) ((p + 1) * PI / beamRes) * -2f;
+//
+//                    float a = p / beamRes;
+//                    float b = (p + 1) / beamRes;
+//
+//
+//                    Vec3d p1 = new Vec3d(sin(angle1) * beamRad, y1, cos(angle1) * beamRad).multiply(sizeMultiplier);
+//                    Vec3d p2 = new Vec3d(sin(angle1) * (beamRad + growth), y2, cos(angle1) * (beamRad + growth)).multiply(sizeMultiplier);
+//                    Vec3d p3 = new Vec3d(sin(angle2) * (beamRad + growth), y2, cos(angle2) * (beamRad + growth)).multiply(sizeMultiplier);
+//                    Vec3d p4 = new Vec3d(sin(angle2) * beamRad, y1, cos(angle2) * beamRad).multiply(sizeMultiplier);
+//
+//                    float alpha = min(max(0f, (pr + 1f) - (2.0f * recall)), 1f);
+//
+//                    LazuliVertex v1 = model.copy().pos(p1.add(epicenter)).uv(a, n).color(0f, 0f, 0f, alpha);
+//                    LazuliVertex v2 = model.copy().pos(p2.add(epicenter)).uv(a, n + 1f / vortexRes2).color(0f, 0f, 0f, alpha);
+//                    LazuliVertex v3 = model.copy().pos(p3.add(epicenter)).uv(b, n + 1f / vortexRes2).color(0f, 0f, 0f, alpha);
+//                    LazuliVertex v4 = model.copy().pos(p4.add(epicenter)).uv(b, n).color(0f, 0f, 0f, alpha);
+//
+//                    bb.addVertex(v1).addVertex(v2).addVertex(v3).addVertex(v4);
+//
+//                }
+//                bb.drawAndReset();
+//                beamRad += growth;
+//            }
 
             //endregion
 
-            //region ==== Vortex render code ====
-            ShaderProgram vortex = LazuliShaderRegistry.getShader(VoidedHopesShaders.VORTEX_LAZULI_SHADER);
-            vortex.getUniformOrDefault("GameTime").set(localTime);
-            LapisRenderer.setShader(vortex);
-
-            model = template.copy().color(0.7f,0.8f, 1f, 1f);
-            beamRad += 0.7 * (1 - (1/(1 + (0.5 * localTime))));
-
-            beamRes = 20;
-
-            float recall = min(localTime / 400f, 1.0f);
-
-            float vortexRes2 = 10;
-            float m = min(localTime / 40f, 1f);
-
-            float totalGrowth = 0;
-
-            for (float n = 0; n < m; n += (m / vortexRes2)) {
-                totalGrowth = 50 + (42 * n * n);
-            }
-
-            for (float n = 0; n < m; n += (m / vortexRes2)) {
-                    float growth = 42 * n * n;
-
-                double y1 = ((n * 100) * (1 - recall)) + (recall * totalGrowth);
-                double y2 = (((n + 1f / vortexRes2) * 100) * (1 - recall)) + (recall * totalGrowth);
-
-                float pr = n / m; // Progress
-
-                for (float p = 0; p < beamRes; p++) {
-                    float angle1 = (float) (p * PI / beamRes) * -2f;
-                    float angle2 = (float) ((p + 1) * PI / beamRes) * -2f;
-
-                    float a = p / beamRes;
-                    float b = (p + 1) / beamRes;
-
-
-                    Vec3d p1 = new Vec3d(sin(angle1) * beamRad, y1, cos(angle1) * beamRad).multiply(sizeMultiplier);
-                    Vec3d p2 = new Vec3d(sin(angle1) * (beamRad + growth), y2, cos(angle1) * (beamRad + growth)).multiply(sizeMultiplier);
-                    Vec3d p3 = new Vec3d(sin(angle2) * (beamRad + growth), y2, cos(angle2) * (beamRad + growth)).multiply(sizeMultiplier);
-                    Vec3d p4 = new Vec3d(sin(angle2) * beamRad, y1, cos(angle2) * beamRad).multiply(sizeMultiplier);
-
-                    float alpha = min(max(0f, (pr + 1f) - (2.0f * recall)), 1f);
-
-                    LazuliVertex v1 = model.copy().pos(p1.add(epicenter)).uv(a, n).color(0f, 0f, 0f, alpha);
-                    LazuliVertex v2 = model.copy().pos(p2.add(epicenter)).uv(a, n + 1f / vortexRes2).color(0f, 0f, 0f, alpha);
-                    LazuliVertex v3 = model.copy().pos(p3.add(epicenter)).uv(b, n + 1f / vortexRes2).color(0f, 0f, 0f, alpha);
-                    LazuliVertex v4 = model.copy().pos(p4.add(epicenter)).uv(b, n).color(0f, 0f, 0f, alpha);
-
-                    bb.addVertex(v1).addVertex(v2).addVertex(v3).addVertex(v4);
-
-                }
-                bb.drawAndReset();
-                beamRad += growth;
-            }
-
-            //endregion
-
-            RiftRendererManager.corruption += pow((390f - cameraPos.distanceTo(epicenter)) / 390f, 4.0);
+            RiftRendererManager.corruption += (float) pow((max(390f - cameraPos.distanceTo(epicenter), 0.0)) / 390f, 4.0);
         }
         bb.draw();
 

@@ -148,12 +148,12 @@ void main() {
 
     vec2 uv = texCoord0;
 
+
     float h =  smoothHash(vec2(uv.x * 140, GameTime * 150.0)) - 0.5;
     h += 0.4 * (smoothHash(vec2(uv.x * 400, GameTime * 100.0)) - 0.5);
 
-    float border = abs(uv.y - 0.5) * 3.0;
-    border -= 0.5 * (1.0 - smoothstep(0.0, 0.02, uv.x));
-    border += h * 0.7 * smoothstep(0.0, 0.01, uv.x);
+    float border = abs(uv.y - 0.5) * 4.0;
+    //border += h * 0.7;
 
     float d = border;
 
