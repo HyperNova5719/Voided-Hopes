@@ -56,10 +56,15 @@ mat4 end_portal_layer(float layer) {
 out vec4 fragColor;
 
 void main() {
-    vec3 color = COLORS[-1]; // Start with the white background
-    for (int i = 0; i < EndPortalLayers; i++) {
-        vec3 starColor = textureProj(Sampler1, texProj0 * end_portal_layer(float(i + 1))).rgb;
-        color -= starColor * COLORS[i + 1]; // Subtract star layers for darker spots
+    vec3 color = vec3(0);
+    for (int i = 0; i < 15; i++) {
+        vec3 starColor = textureProj(Sampler1, 0.6 * texProj0 * end_portal_layer(float(i + 1))).rgb;
+        color += 2.0 * starColor * COLORS[i + 1]; // Subtract star layers for darker spots
     }
+    float a = texProj0.w * 0.03;
+    a += texProj0.z * 0.03;
+
+    color *= abs(vec3(sin(a), sin(a + 1.05), sin(a + 2.1)));
+
     fragColor = vec4(color, 1.0);
 }
