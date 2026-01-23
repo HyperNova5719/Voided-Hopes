@@ -12,4 +12,3 @@ public class RealityDetonatorBlockEntity extends BlockEntity {
         super(ModBlocks.REALITY_DETONATOR_TYPE, pos, state);
     }
 }
-

@@ -8,7 +8,6 @@ import hypernova.voidedhopes.registry.PacketRegistry;
 import hypernova.voidedhopes.world.ModDimensions;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
@@ -20,6 +19,9 @@ import org.slf4j.LoggerFactory;
 public class VoidedHopes implements ModInitializer {
 	public static final String MOD_ID = "voided_hopes";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
+	public static final Identifier FONT_2 = id("blackcraft");
+	public static final Identifier FONT = id("weapon");
 
 	@Override
 	public void onInitialize() {
