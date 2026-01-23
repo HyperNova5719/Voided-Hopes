@@ -1,4 +1,4 @@
-package hypernova.voidedhopes.mixin.client;
+package hypernova.voidedhopes.mixin;
 
 import hypernova.voidedhopes.VoidedHopes;
 import net.minecraft.client.color.block.BlockColors;
@@ -22,8 +22,6 @@ public abstract class ModelLoaderMixin
     @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/model/ModelLoader;addModel(Lnet/minecraft/client/util/ModelIdentifier;)V", ordinal = 2))
     void onAddModel(BlockColors blockColors, Profiler profiler, Map jsonUnbakedModels, Map blockStates, CallbackInfo ci)
     {
-        addModel(new ModelIdentifier(VoidedHopes.MOD_ID, "realities_bane_beeg", "inventory"));
         addModel(new ModelIdentifier(VoidedHopes.MOD_ID, "gods_gravestone_beeg", "inventory"));
-
     }
 }
