@@ -48,8 +48,8 @@ public class RiftRendererManager {
                     //LazuliShaderRegistry.getPostProcessor(VoidedHopesShaders.IMPACT).render(0);
                 }
                 wasImpact = impactFrame;
-                time = trueTimeTicks();
-                //time += context.tickDelta();
+
+
 
 
                 LazuliPostEffectShader bp = LazuliShaderRegistry.getPostProcessor(VoidedHopesShaders.POST1);
@@ -57,6 +57,12 @@ public class RiftRendererManager {
                 bp.passes.get(0).getProgram().getUniformByNameOrDummy("Corruption").set((float) corruption);
                 //bp.render(0);
             }
+        });
+
+        WorldRenderEvents.LAST.register(context -> {
+
+            time += context.tickDelta();
+
         });
     }
 

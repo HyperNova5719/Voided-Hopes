@@ -1,5 +1,6 @@
 package hypernova.voidedhopes;
 
+import hypernova.voidedhopes.AzuraThingies.Weapons.ModEffects;
 import hypernova.voidedhopes.accessors.VoidedPlayerEntity;
 import hypernova.voidedhopes.block.ModBlocks;
 import hypernova.voidedhopes.client.ModSound;
@@ -29,6 +30,7 @@ public class VoidedHopes implements ModInitializer {
 		ModBlocks.registerModBlocks();
 		ModDimensions.register();
 		ModSound.register();
+		ModEffects.registerEffects();
 
 		PacketRegistry.registerC2S();
 	}

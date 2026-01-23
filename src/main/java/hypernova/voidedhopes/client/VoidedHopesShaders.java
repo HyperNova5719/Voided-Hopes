@@ -25,6 +25,7 @@ public class VoidedHopesShaders {
     public static String HORIZON_LAZULI_SHADER = "rendertype_horizon";
     public static final String IMPACT = "shaders/post/contrast.json";
     public static final String POST1 = "shaders/post/rift_post_1.json";
+    public static final String POST2 = "shaders/post/reality_bane_post_1.json";
 
     public static void init() {
         LazuliShaderRegistry.registerShader(RIFT_CRACK_LAZULI_SHADER, "voided_hopes", VertexFormats.POSITION);
@@ -35,6 +36,7 @@ public class VoidedHopesShaders {
 
         LazuliShaderRegistry.registerPostProcessingShader(IMPACT, "voided_hopes");
         LazuliShaderRegistry.registerPostProcessingShader(POST1, "voided_hopes");
+        LazuliShaderRegistry.registerPostProcessingShader(POST2, "voided_hopes");
 
         PURE_VOID_SHADER = new VoidedHopesShader(VoidedHopes.id("rendertype_pure_void"), VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL)
                 .setRenderLayerFactory(() -> shaderProgram -> RenderLayer.of(

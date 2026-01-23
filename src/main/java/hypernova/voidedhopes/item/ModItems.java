@@ -21,8 +21,16 @@ public class ModItems {
             new Item(new FabricItemSettings()));
     public static final Item WAYFINDER = registerItem("wayfinder",
             new WayfinderItem(new FabricItemSettings()));
+
+
+
     public static final Item REALITIES_BANE = registerItem("realities_bane",
             new RealitiesBaneItem(new FabricItemSettings()));
+
+
+
+
+
     public static final Item REALITY_KEY = registerItem("reality_key",
             new DetonateItem(new FabricItemSettings()));
     public static final Item GODS_GRAVESTONE = registerItem("gods_gravestone",

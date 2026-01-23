@@ -1,0 +1,20 @@
+{
+    "targets": [
+        "swap"
+    ],
+    "passes": [
+        {
+            "name": "reality_bane_post_1",
+            "intarget": "minecraft:main",
+            "outtarget": "swap",
+            "uniforms": [
+
+            ]
+        },
+        {
+            "name": "blit",
+            "intarget": "swap",
+            "outtarget": "minecraft:main"
+        }
+    ]
+}
