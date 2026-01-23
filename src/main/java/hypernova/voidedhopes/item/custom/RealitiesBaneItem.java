@@ -1,14 +1,23 @@
 package hypernova.voidedhopes.item.custom;
 
+import hypernova.voidedhopes.VoidedHopes;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.text.Text;
 
 public class RealitiesBaneItem extends SwordItem {
     private static final RealitiesBaneMaterial INSTANCE = new RealitiesBaneMaterial();
 
     public RealitiesBaneItem(Settings settings) {
-        super(INSTANCE, 1, -2.4f, settings);
+        super(INSTANCE, 3, -2.4f, settings);
+    }
+
+    @Override
+    public Text getName(ItemStack stack) {
+        Text name = super.getName(stack);
+        return Text.literal("").append(name).setStyle(name.getStyle().withFont((VoidedHopes.FONT_2)));
     }
 
     public static class RealitiesBaneMaterial implements ToolMaterial {

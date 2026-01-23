@@ -8,13 +8,13 @@
 	"client": [
 		"client.CameraMixin",
 		"client.ClientPlayerEntityMixin",
-		"client.OtherClientPlayerMixin",
 		"client.ItemRendererMixin",
-		"client.ModelLoaderMixin",
-		"client.PlayerEntityRendererMixin",
 		"client.LazuliParticleManagerMixin",
 		"client.LazuliPostProcessingRegistryMixin",
-		"client.LazuliWorldRendererMixin"
+		"client.LazuliWorldRendererMixin",
+		"client.ModelLoaderMixin",
+		"client.OtherClientPlayerMixin",
+		"client.PlayerEntityRendererMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

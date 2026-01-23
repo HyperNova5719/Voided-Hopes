@@ -7,8 +7,6 @@ import hypernova.voidedhopes.AzuraThingies.RiftRendererManager;
 import hypernova.voidedhopes.block.ModBlocks;
 import hypernova.voidedhopes.client.renderers.block.*;
 import hypernova.voidedhopes.item.ModItems;
-import hypernova.voidedhopes.particle.ModParticles;
-import hypernova.voidedhopes.particle.custom.HeraldParticle;
 import hypernova.voidedhopes.registry.ClientPacketRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -33,8 +31,6 @@ public class VoidedHopesClient implements ClientModInitializer {
 		BlockEntityRendererFactories.register(ModBlocks.ENDER_SKY_TYPE, EnderSkyBlockRenderer::new);
 
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.REALITY_DETONATOR, RenderLayer.getCutout());
-
-		ParticleFactoryRegistry.getInstance().register(ModParticles.HERALD, HeraldParticle.HeraldParticleFactory::new);
 
 		ClientPacketRegistry.registerS2C();
 

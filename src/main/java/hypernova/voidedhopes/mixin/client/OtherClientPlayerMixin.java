@@ -15,7 +15,7 @@ public abstract class OtherClientPlayerMixin extends PlayerEntity implements Voi
     }
 
     @Override
-    public void addScreenshake(float val)
+    public void addScreenShake(float val)
     {
 
     }

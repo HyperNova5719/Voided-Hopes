@@ -1,6 +1,0 @@
-{
-  "parent": "item/handheld",
-  "textures": {
-    "layer0": "voided_hopes:item/wraiths_gravestone_smol"
-  }
-}

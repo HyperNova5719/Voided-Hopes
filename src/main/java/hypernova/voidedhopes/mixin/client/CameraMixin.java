@@ -61,7 +61,7 @@ public abstract class CameraMixin {
                 if(shakeTime == 0)
                     shakeTime = focusedEntity.getWorld().getRandom().nextFloat() * 6f;
                 applyScreenShake(tickDelta, winged.getScreenShake());
-                winged.addScreenshake(-tickDelta * winged.getScreenShake() / 5f);
+                winged.addScreenShake(-tickDelta * winged.getScreenShake() / 5f);
             }
             else
                 shakeTime = 0f;
