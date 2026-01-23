@@ -15,7 +15,7 @@ public class ClientPacketRegistry {
             float strength = buf.readFloat();
             client.execute(() -> {
                 if(client.player instanceof VoidedPlayerEntity winged)
-                    winged.addScreenshake(strength);
+                    winged.addScreenShake(strength);
             });
         })));
     }

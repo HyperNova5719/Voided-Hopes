@@ -24,5 +24,7 @@ public abstract class ModelLoaderMixin
     {
         addModel(new ModelIdentifier(VoidedHopes.MOD_ID, "realities_bane_beeg", "inventory"));
         addModel(new ModelIdentifier(VoidedHopes.MOD_ID, "wraiths_gravestone_beeg", "inventory"));
+        addModel(new ModelIdentifier(VoidedHopes.MOD_ID, "gods_gravestone_beeg", "inventory"));
+
     }
 }

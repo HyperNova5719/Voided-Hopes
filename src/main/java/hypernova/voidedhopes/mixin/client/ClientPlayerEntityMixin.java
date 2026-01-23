@@ -22,7 +22,7 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
     }
 
     @Override
-    public void addScreenshake(float val)
+    public void addScreenShake(float val)
     {
         screenshake += val;
     }

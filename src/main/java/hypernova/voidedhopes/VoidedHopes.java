@@ -40,7 +40,7 @@ public class VoidedHopes implements ModInitializer {
 	public static void screenshake(PlayerEntity player, float strength)
 	{
 		if(player.getWorld().isClient && player instanceof VoidedPlayerEntity winged)
-			winged.addScreenshake(strength);
+			winged.addScreenShake(strength);
 		else if(player instanceof ServerPlayerEntity serverPlayer)
 		{
 			PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
