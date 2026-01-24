@@ -23,7 +23,7 @@ public class RealitiesBaneItem extends SwordItem {
     public float instability;
 
     public RealitiesBaneItem(Settings settings) {
-        super(INSTANCE, 3, -2.4f, settings);
+        super(INSTANCE, 4, -2.55f, settings);
         instability = 0;
     }
 

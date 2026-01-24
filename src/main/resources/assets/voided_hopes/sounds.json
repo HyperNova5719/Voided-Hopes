@@ -1,7 +1,14 @@
 {
   "block.voidedhopes.reality_detonator.detonate": {
       "sounds": [
-        "voided_hopes:detonate"
+        "voided_hopes:detonate",
+        "voided_hopes:glitch_1",
+        "voided_hopes:glitch_2",
+        "voided_hopes:glitch_3",
+        "voided_hopes:glitch_4",
+        "voided_hopes:glitch_5",
+        "voided_hopes:glitch_6"
+
       ]
   }
 }
