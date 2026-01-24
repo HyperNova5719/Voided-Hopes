@@ -23,17 +23,19 @@ public class Corruption extends StatusEffect {
 		if (entity.isPlayer() && entity.getWorld().isClient) {
 
 
-			RealityBaneCorruptionManager.Corruption = remainingDuration * 0.04f;
+			RealityBaneCorruptionManager.Corruption = remainingDuration * 0.03f;
 
 		}
 
 		RealityBaneCorruptionManager.addCorrupted(entity.getUuid(), remainingDuration);
 
+		float speedEffect = (float) (remainingDuration * 0.025);
+
 		Vec3d speed = entity.getVelocity();
 		if (!entity.isOnGround()){
-			speed = speed.add(0,0.04,0);
+			speed = speed.add(0,0.04 * speedEffect,0);
 		}
-        speed = speed.multiply(1.1, 1.0, 1.1);
+        speed = speed.multiply(1 + (speedEffect * 0.1), 1.0, 1.0 + (speedEffect * 0.1));
 		entity.setVelocity(speed);
 		entity.disablesShield();
 

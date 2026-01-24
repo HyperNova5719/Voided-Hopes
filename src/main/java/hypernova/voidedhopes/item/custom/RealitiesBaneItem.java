@@ -16,6 +16,7 @@ import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class RealitiesBaneItem extends SwordItem {
@@ -40,7 +41,7 @@ public class RealitiesBaneItem extends SwordItem {
 
     @Override
     public float getAttackDamage() {
-        return 0.5f + (instability * 5f);
+        return 0.5f + (instability * 7f);
     }
 
 
@@ -49,12 +50,27 @@ public class RealitiesBaneItem extends SwordItem {
 
         instability += 0.6F;
 
+        Vec3d boost = target.getPos().subtract(attacker.getPos()).normalize();
+
+
         target.addStatusEffect(new StatusEffectInstance(ModEffects.CORRUPTION, (int) (60f * instability), 1, false, false));
         attacker.addStatusEffect(new StatusEffectInstance(ModEffects.CORRUPTION, (int) (40f * instability), 1, false, false));
 
+        Vec3d speed = target.getVelocity();
+
+        speed = speed.add(boost.multiply(instability * 0.12));
+        target.setVelocity(speed);
+
+        speed = attacker.getVelocity();
+
+        speed = speed.add(boost.multiply(instability * 0.06));
+        attacker.setVelocity(speed);
 
 
-        if(instability > 2.4f){
+        target.velocityDirty = true;
+        target.velocityModified = true;
+
+        if(instability > 2.0f){
             attacker.damage(attacker.getDamageSources().outOfWorld(), instability);
         }
 
