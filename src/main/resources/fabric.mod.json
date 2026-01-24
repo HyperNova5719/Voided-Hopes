@@ -3,12 +3,13 @@
 	"id": "voided_hopes",
 	"version": "${version}",
 	"name": "Voided Hopes",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "This is a mod built on nothing but hopes and dreams and kept together with ductape",
 	"authors": [
         "HyperNova: Idea maker, textures, block shaders, models, dimensions",
-        "Azure: Made the code for all shaders and the blackhole with some visual guidance, realistic physics",
+        "Azure: Made the code for all shaders and the blackhole with some visual guidance, realistic physics, weapon effects, and matrix block shader",
         "ShadowZecro: Item and model render code",
-        "Nightmare: Emissive rendering code and gekolib model render code"
+        "Nightmare: Emissive rendering code and gekolib model render code",
+		"Nico_44: helping with pure void and end sky shader blocks"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",

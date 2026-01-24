@@ -3,6 +3,7 @@ package hypernova.voidedhopes.item;
 import hypernova.voidedhopes.VoidedHopes;
 import hypernova.voidedhopes.item.custom.GodsGravestoneItem;
 import hypernova.voidedhopes.item.custom.RealitiesBaneItem;
+import hypernova.voidedhopes.item.custom.VoidItem;
 import hypernova.voidedhopes.item.custom.WayfinderItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
@@ -36,21 +37,21 @@ public class ModItems {
     public static final Item GODS_GRAVESTONE = registerItem("gods_gravestone",
             new GodsGravestoneItem(new FabricItemSettings()));
     public static final Item REGRET_OF_FOOLS = registerItem("regret_of_fools",
-            new Item(new FabricItemSettings()));
+            new VoidItem(new FabricItemSettings()));
     public static final Item ENVY = registerItem("envy",
-            new Item(new FabricItemSettings()));
+            new VoidItem(new FabricItemSettings()));
     public static final Item GLUTTONY = registerItem("gluttony",
-            new Item(new FabricItemSettings()));
+            new VoidItem(new FabricItemSettings()));
     public static final Item GREED = registerItem("greed",
-            new Item(new FabricItemSettings()));
+            new VoidItem(new FabricItemSettings()));
     public static final Item LUST = registerItem("lust",
-            new Item(new FabricItemSettings()));
+            new VoidItem(new FabricItemSettings()));
     public static final Item PRIDE = registerItem("pride",
-            new Item(new FabricItemSettings()));
+            new VoidItem(new FabricItemSettings()));
     public static final Item SLOTH = registerItem("sloth",
-            new Item(new FabricItemSettings()));
+            new VoidItem(new FabricItemSettings()));
     public static final Item WRATH = registerItem("wrath",
-            new Item(new FabricItemSettings()));
+            new VoidItem(new FabricItemSettings()));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM,VoidedHopes.id(name), item);
