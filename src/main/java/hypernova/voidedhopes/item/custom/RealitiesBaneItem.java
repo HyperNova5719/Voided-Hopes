@@ -6,6 +6,8 @@ import hypernova.voidedhopes.AzuraThingies.Weapons.RealityBaneCorruptionManager;
 import hypernova.voidedhopes.VoidedHopes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageSources;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
@@ -33,28 +35,26 @@ public class RealitiesBaneItem extends SwordItem {
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        instability *= 0.97f;
+        instability *= 0.98f;
     }
 
     @Override
     public float getAttackDamage() {
-        return 2 + (instability * 3.0f);
+        return 0.5f + (instability * 5f);
     }
 
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 
-        instability += 0.3F;
+        target.addStatusEffect(new StatusEffectInstance(ModEffects.CORRUPTION, (int) (60f * instability), 1, false, false));
+        attacker.addStatusEffect(new StatusEffectInstance(ModEffects.CORRUPTION, (int) (40f * instability), 1, false, false));
 
-        target.addStatusEffect(new StatusEffectInstance(ModEffects.CORRUPTION, (int) (40f * instability), 1, false, false));
-        attacker.addStatusEffect(new StatusEffectInstance(ModEffects.CORRUPTION, (int) (30f * instability), 1, false, false));
+        instability += 0.6F;
 
-
-
-        System.out.println("Meoow");
-
-
+        if(instability > 2.4f){
+            attacker.damage(attacker.getDamageSources().outOfWorld(), instability);
+        }
 
         return true;
     }

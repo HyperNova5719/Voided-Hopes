@@ -169,6 +169,15 @@
                 0.0,
                 0.0
             ]
+        },
+        {
+            "name": "corruptionState",
+            "type": "float",
+            "count": 2,
+            "values": [
+                0.0,
+                0.0
+            ]
         }
     ]
 }

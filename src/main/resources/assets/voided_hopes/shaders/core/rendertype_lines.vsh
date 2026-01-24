@@ -10,6 +10,7 @@ uniform mat4 ModelViewMat;
 
 uniform vec3 epicenter;
 uniform vec2 state;
+uniform vec2 corruptionState;
     
 uniform mat4 ProjMat;
 uniform float LineWidth;
@@ -39,6 +40,7 @@ void main() {
     float phase = (dist - rad) * 0.3 * pMultiplier;
     float displacement = (sin(1.0 * phase) / (phase * max(1.0, phase))) - centerDis;
     vec3 disPos = p;
+    disPos += sin(p * 100.0) * corruptionState.x;
     disPos.y += (displacement * 60.0 * (1.0 - t) * state.y) * (1.0 - smoothstep(2.0, 4.0, state.x));
 
 

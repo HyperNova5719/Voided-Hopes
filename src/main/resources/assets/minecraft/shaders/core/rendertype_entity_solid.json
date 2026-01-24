@@ -4,7 +4,7 @@
         "srcrgb": "srcalpha",
         "dstrgb": "1-srcalpha"
     },
-    "vertex": "voided_hopes:rendertype_entity_cutout",
+    "vertex": "voided_hopes:rendertype_entity_solid",
     "fragment": "rendertype_entity_solid",
     "attributes": [
         "Position",
@@ -166,6 +166,15 @@
         },
         {
             "name": "state",
+            "type": "float",
+            "count": 2,
+            "values": [
+                0.0,
+                0.0
+            ]
+        },
+        {
+            "name": "corruptionState",
             "type": "float",
             "count": 2,
             "values": [

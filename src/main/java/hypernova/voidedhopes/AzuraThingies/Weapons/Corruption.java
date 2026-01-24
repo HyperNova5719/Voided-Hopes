@@ -18,12 +18,16 @@ public class Corruption extends StatusEffect {
 
 	@Override
 	public void applyUpdateEffect(LivingEntity entity, int amplifier) {
+		int remainingDuration = entity.getStatusEffect(this).getDuration();
+
 		if (entity.isPlayer() && entity.getWorld().isClient) {
 
-			int remainingDuration = entity.getStatusEffect(this).getDuration();
+
 			RealityBaneCorruptionManager.Corruption = remainingDuration * 0.04f;
 
 		}
+
+		RealityBaneCorruptionManager.addCorrupted(entity.getUuid(), remainingDuration);
 
 		Vec3d speed = entity.getVelocity();
 		if (!entity.isOnGround()){
@@ -35,6 +39,7 @@ public class Corruption extends StatusEffect {
 
 		entity.velocityDirty = true;
 		entity.velocityModified = true;
+
 
 
 

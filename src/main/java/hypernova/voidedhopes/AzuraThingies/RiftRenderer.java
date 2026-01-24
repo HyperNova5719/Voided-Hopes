@@ -139,7 +139,7 @@ public class RiftRenderer {
                 float ringTime = localTime / (0.6666f + (count / 3f));
                 double circleSize = 0.6 + ((60 * ringTime) / (ringTime + 6));
                 LapisRenderer.setShader(GameRenderer.getPositionColorTexProgram());
-                LapisRenderer.setShaderTexture(0, magicCircleThingie);
+                //LapisRenderer.setShaderTexture(0, magicCircleThingie);
                 pen.point(new Vec3d(-0.5 * circleSize * sizeMultiplier, 0, 0).rotateY(rot), circleSize * sizeMultiplier, template.copy().uv(0, 0).color(1f, 1f, 1f, 1 / count));
                 pen.point(new Vec3d(0.5 * circleSize * sizeMultiplier, 0, 0).rotateY(rot), circleSize * sizeMultiplier, template.copy().uv(1, 0).color(1f, 1f, 1f, 1 / count));
                 pen.draw(bb, epicenter.add(0, 0.25 + offset, 0));

@@ -105,6 +105,7 @@ def main():
     float phase = (dist - rad) * 0.3 * pMultiplier;
     float displacement = (sin(1.0 * phase) / (phase * max(1.0, phase))) - centerDis;
     vec3 disPos = p;
+    disPos += sin((p + uv.y) * 300.0) * corruptionState.x;
     disPos.y += (displacement * 60.0 * (1.0 - t) * state.y) * (1.0 - smoothstep(2.0, 4.0, state.x));
 
 
@@ -144,6 +145,7 @@ def main():
     uniform_line = """
 uniform vec3 epicenter;
 uniform vec2 state;
+uniform vec2 corruptionState;
     """
 
     print("Shader Uniform Injector")

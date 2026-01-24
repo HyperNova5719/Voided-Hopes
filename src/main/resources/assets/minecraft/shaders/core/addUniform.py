@@ -29,7 +29,15 @@ for filename in os.listdir(folder):
                 "values": [0.0, 0.0]
             })
 
-        # overwrite file
+        if not any(u.get("name") == "corruptionState" for u in data["uniforms"]):
+            data["uniforms"].append({
+                "name": "corruptionState",
+                "type": "float",
+                "count": 2,
+                "values": [0.0, 0.0]
+            })
+
+    # overwrite file
         with open(path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4)
 

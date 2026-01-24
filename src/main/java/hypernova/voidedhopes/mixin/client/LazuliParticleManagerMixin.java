@@ -3,6 +3,7 @@ package hypernova.voidedhopes.mixin.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import hypernova.voidedhopes.AzuraThingies.RiftRenderer;
 import hypernova.voidedhopes.AzuraThingies.RiftRendererManager;
+import hypernova.voidedhopes.AzuraThingies.Weapons.RealityBaneCorruptionManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.client.render.*;
@@ -39,5 +40,6 @@ public abstract class LazuliParticleManagerMixin {
         Tessellator tessellator = Tessellator.getInstance();
 
         RiftRendererManager.render(tessellator, camera, MinecraftClient.getInstance().getTickDelta());
+        RealityBaneCorruptionManager.render(tessellator, camera, MinecraftClient.getInstance().getTickDelta());
     }
 }
