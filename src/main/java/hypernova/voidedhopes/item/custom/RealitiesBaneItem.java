@@ -47,10 +47,12 @@ public class RealitiesBaneItem extends SwordItem {
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 
+        instability += 0.6F;
+
         target.addStatusEffect(new StatusEffectInstance(ModEffects.CORRUPTION, (int) (60f * instability), 1, false, false));
         attacker.addStatusEffect(new StatusEffectInstance(ModEffects.CORRUPTION, (int) (40f * instability), 1, false, false));
 
-        instability += 0.6F;
+
 
         if(instability > 2.4f){
             attacker.damage(attacker.getDamageSources().outOfWorld(), instability);
