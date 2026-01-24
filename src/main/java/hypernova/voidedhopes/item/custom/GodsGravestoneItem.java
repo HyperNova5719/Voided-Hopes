@@ -17,7 +17,7 @@ public class GodsGravestoneItem extends SwordItem {
     }
 
     public GodsGravestoneItem(Settings settings) {
-        super(INSTANCE, 6, -3.05f, settings);
+        super(INSTANCE, 6, -2.95f, settings);
     }
 
     public static class GodsGravestoneMaterial implements ToolMaterial {

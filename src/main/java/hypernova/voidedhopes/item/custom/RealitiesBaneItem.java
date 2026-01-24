@@ -24,7 +24,7 @@ public class RealitiesBaneItem extends SwordItem {
     public float instability;
 
     public RealitiesBaneItem(Settings settings) {
-        super(INSTANCE, 4, -2.55f, settings);
+        super(INSTANCE, 5, -2.55f, settings);
         instability = 0;
     }
 
@@ -70,7 +70,7 @@ public class RealitiesBaneItem extends SwordItem {
         target.velocityDirty = true;
         target.velocityModified = true;
 
-        if(instability > 2.0f){
+        if(instability > 1.65f){
             attacker.damage(attacker.getDamageSources().outOfWorld(), instability);
         }
 

@@ -124,7 +124,7 @@ public class RealityBaneCorruptionManager {
                                        bb.drawAndReset();
                                    }
 
-                                   Vec3d offset = LazuliMathUtils.ramdomVec3d(r).multiply(0.7, 1.1, 0.7);
+                                   Vec3d offset = LazuliMathUtils.ramdomVec3d(r).multiply(1, 1.005, 1);
 
                                    double t = (r.nextFloat() * 0.6) + 0.1;
                                    double l = (r.nextFloat() - 0.5) * 2.0;

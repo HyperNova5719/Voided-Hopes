@@ -33,9 +33,9 @@ public class Corruption extends StatusEffect {
 
 		Vec3d speed = entity.getVelocity();
 		if (!entity.isOnGround()){
-			speed = speed.add(0,0.04 * speedEffect,0);
+			speed = speed.add(0,0.005 * speedEffect,0);
 		}
-        speed = speed.multiply(1 + (speedEffect * 0.1), 1.0, 1.0 + (speedEffect * 0.1));
+        speed = speed.multiply(1 + (speedEffect * 0.005), 0.995, 1.0 + (speedEffect * 0.005));
 		entity.setVelocity(speed);
 		entity.disablesShield();
 

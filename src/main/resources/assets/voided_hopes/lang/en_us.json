@@ -19,6 +19,8 @@
   "item.voided_hopes.sloth": "§3Sloth",
   "item.voided_hopes.regret_of_fools": "§5Regret",
 
+  "effect.voided_hopes.corruption": "Corruption",
+
   "itemGroup.voided_hopes.voidedhopes_tab":"§jVoided Hopes",
   "itemGroup.voided_hopes.weapons_and_sins":"§jWeapons and Sins"
 }
