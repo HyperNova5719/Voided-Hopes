@@ -33,7 +33,7 @@ public class Corruption extends StatusEffect {
 		if (!entity.isOnGround()){
 			speed = speed.add(0,-0.04,0);
 		}
-        speed = speed.multiply(1.1, 1.0, 1.1);
+        speed = speed.multiply(1.1, 1.1, 1.1);
 		entity.setVelocity(speed);
 		entity.disablesShield();
 
